@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: var(--color-neutral-50);
+  --color-primary-100: var(--color-neutral-100);
+  --color-primary-200: var(--color-neutral-200);
+  --color-primary-300: var(--color-neutral-300);
+  --color-primary-400: var(--color-neutral-400);
+  --color-primary-500: var(--color-neutral-500);
+  --color-primary-600: var(--color-neutral-600);
+  --color-primary-700: var(--color-neutral-700);
+  --color-primary-800: var(--color-neutral-800);
+  --color-primary-900: var(--color-neutral-900);
+  --color-primary-950: var(--color-neutral-950);
+
+  --color-ascend-purple: #ac63e6;
+  --color-ascend-purple-dark: #7c3aed;
+}
+
+* {
+  @apply box-border;
+}
+
+body {
+  @apply bg-primary-900 text-white;
+  font-family: Geist, sans-serif;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  @apply size-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-600 rounded-full hover:bg-primary-500;
+}
+
+@layer utilities {
+  .text--gradient {
+    @apply bg-linear-to-r from-violet-800 to-orange-600 inline-block text-transparent bg-clip-text;
+  }
+  .link--default {
+    @apply text-base text-primary-300 hover:text-primary-50 transition;
+  }
+  .link--active {
+    @apply text-cyan-400!;
+  }
+  .text--secondary {
+    @apply text-primary-400 text-sm;
+  }
+  .button--default {
+    @apply flex items-center gap-2 font-semibold text-sm justify-center w-full bg-linear-to-r from-violet-800 to-orange-600 hover:from-violet-700 hover:to-orange-500 text-white py-3 px-7 rounded-lg text-center transition duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-violet-500;
+  }
+  .button--secondary {
+    @apply flex items-center gap-2 font-semibold text-sm justify-center w-full bg-linear-to-r text-primary-950 from-primary-50 to-primary-100 hover:from-primary-100 hover:to-primary-200 py-3 px-7 rounded-lg text-center transition duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500;
+  }
+  .button--default-outline {
+    @apply flex items-center gap-2 font-semibold text-sm justify-center w-full text-white border border-white hover:bg-white hover:text-primary-950 py-3 px-7 rounded-lg text-center transition duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500;
+  }
+  .button--option {
+    @apply bg-primary-700 w-full font-medium py-2 rounded-lg border border-primary-600 hover:bg-primary-600 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500;
+  }
+  .button--option-selected {
+    @apply border-emerald-500! bg-emerald-500/10! text-emerald-500!;
+  }
+  .button--loading {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  .alert--info {
+    @apply text-xs border border-blue-500/50 bg-blue-500/15 py-2 px-4 rounded-lg;
+  }
+  .spacing--default {
+    @apply space-y-4;
+  }
+  .spacing--small {
+    @apply space-y-2;
+  }
+  .card--main {
+    @apply bg-linear-to-t from-primary-800 to-primary-800/75 rounded-lg shadow-2xl shadow-primary-900/50 p-8 outline outline-primary-700/50;
+  }
+  .card--secondary {
+    @apply bg-primary-700 rounded-lg p-4;
+  }
+  .form--container {
+    @apply space-y-4;
+  }
+  .input--box {
+    @apply flex flex-col gap-2;
+  }
+  .input--label {
+    @apply block text-sm font-bold text-primary-300;
+  }
+  .input--text {
+    @apply w-full px-4 py-2 bg-primary-700 border border-primary-600 rounded-lg text-white placeholder-primary-500 focus:outline-none focus:border-primary-500;
+  }
+}
