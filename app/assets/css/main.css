@@ -59,6 +59,9 @@ html {
   .button--default {
     @apply flex items-center gap-2 font-semibold text-sm justify-center w-full bg-linear-to-r from-violet-800 to-orange-600 hover:from-violet-700 hover:to-orange-500 text-white py-3 px-7 rounded-lg text-center transition duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-violet-500;
   }
+  .button--primary {
+    @apply flex items-center gap-2 font-semibold text-sm justify-center w-full bg-primary-950 hover:bg-primary-900 border border-primary-700 text-white py-3 px-7 rounded-lg text-center transition duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-violet-500;
+  }
   .button--secondary {
     @apply flex items-center gap-2 font-semibold text-sm justify-center w-full bg-linear-to-r text-primary-950 from-primary-50 to-primary-100 hover:from-primary-100 hover:to-primary-200 py-3 px-7 rounded-lg text-center transition duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500;
   }
