@@ -4,7 +4,7 @@
       <h3 class="font-bold text-2xl">Top Players</h3>
       <p class="text--secondary">Players with the highest scores in your quizzes.</p>
     </div>
-    <ul class="space-y-2">
+    <ul class="space-y-4">
       <li v-for="(player, index) in topPlayers" :key="player.name" class="flex items-center gap-4">
         <div
           class="size-8 rounded-full bg-primary-800 flex items-center justify-center text-center text-sm"

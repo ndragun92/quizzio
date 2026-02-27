@@ -4,11 +4,12 @@
       <h3 class="font-bold text-2xl">Recent Events</h3>
       <p class="text--secondary">Manage your recent events and activities here.</p>
     </div>
-    <div>
+    <div class="space-y-4">
       <UiCard
         v-for="event in recentEvents"
         :key="event.title"
         class="flex items-center justify-between gap-4"
+        :level="2"
       >
         <div class="text-sm flex items-center gap-2">
           <div>

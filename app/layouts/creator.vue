@@ -37,20 +37,63 @@
         </div>
         <input type="text" class="input--text pl-10!" placeholder="Search..." />
       </div>
-      <ul>
+      <ul class="space-y-1">
         <li>
-          <NuxtLink class="flex items-center gap-3 text-primary-300">
+          <NuxtLink
+            to="/@creator"
+            class="flex items-center hover:text-white hover:pl-6 transition-all gap-3 text-primary-300 py-2 px-3 rounded"
+            exact-active-class="bg-ascend-purple-dark text-white"
+          >
             <Icon name="lucide:home" size="20" />
             <span>Dashboard</span>
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink class="flex items-center gap-3 text-primary-300">
+          <NuxtLink
+            to="/@creator/quizzes"
+            class="flex items-center hover:text-white hover:pl-6 transition-all duration-200 gap-3 text-primary-300 py-2 px-3 rounded"
+            exact-active-class="bg-ascend-purple-dark text-white"
+          >
             <Icon name="lucide:book-open" size="20" />
             <span>Quizzes</span>
           </NuxtLink>
         </li>
+        <li>
+          <NuxtLink
+            to="/@creator/events"
+            class="flex items-center hover:text-white hover:pl-6 transition-all duration-200 gap-3 text-primary-300 py-2 px-3 rounded"
+            exact-active-class="bg-ascend-purple-dark text-white"
+          >
+            <Icon name="lucide:calendar" size="20" />
+            <span>Events</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            to="/@creator/players"
+            class="flex items-center hover:text-white hover:pl-6 transition-all duration-200 gap-3 text-primary-300 py-2 px-3 rounded"
+            exact-active-class="bg-ascend-purple-dark text-white"
+          >
+            <Icon name="lucide:users" size="20" />
+            <span>Players</span>
+          </NuxtLink>
+        </li>
       </ul>
+      <div class="space-y-2">
+        <div class="font-semibold text-sm">Manage</div>
+        <ul class="space-y-1">
+          <li>
+            <NuxtLink
+              to="/@creator/settings"
+              class="flex items-center hover:text-white hover:pl-6 transition-all gap-3 text-primary-300 py-2 px-3 rounded"
+              exact-active-class="bg-ascend-purple-dark text-white"
+            >
+              <Icon name="lucide:settings" size="20" />
+              <span>Settings</span>
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
     </aside>
     <div id="content" class="bg-primary-950 p-8 relative">
       <NuxtImg

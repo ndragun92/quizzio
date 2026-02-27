@@ -17,5 +17,6 @@
       <UiDashboardRecentEvents />
       <UiDashboardTopPlayers />
     </section>
+    <UiDashboardRecentQuizzes />
   </div>
 </template>
