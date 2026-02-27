@@ -1,82 +1,87 @@
 <template>
-  <div class="min-h-dvh flex items-center justify-center px-4">
-    <div
-      class="bg-linear-to-t from-slate-800 to-slate-800/75 rounded-lg shadow-2xl p-6 max-w-md w-full space-y-6"
-    >
-      <div class="text-center">
-        <h1
-          class="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mb-2"
-        >
-          Sign In to Your Account
-        </h1>
-        <p class="text-gray-400 mt-1">Play with more features available</p>
-      </div>
-      <form class="space-y-4" @submit.prevent="onSubmit">
-        <div class="form--container">
-          <div class="input--box">
-            <label class="input--label" for="username">Username</label>
-            <input
-              id="username"
-              v-model.trim="username"
-              type="text"
-              name="username"
-              placeholder="Enter your username"
-              autocomplete="username"
-              aria-describedby="username-help-text"
-              class="input--text"
-            />
-            <small id="username-help-text" class="text-xs text-gray-400 sr-only">
-              We'll never share your email with anyone else.
-            </small>
-            <span class="text-red-500 text-sm">{{ errors.username }} </span>
-          </div>
-          <div>
-            <label class="input--label" for="password">Password</label>
-            <input
-              id="password"
-              v-model.trim="password"
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-              aria-describedby="password-help-text"
-              class="input--text"
-            />
-            <small id="password-help-text" class="text-xs text-gray-400 sr-only">
-              We'll never share your password with anyone else.'
-            </small>
-            <span class="text-red-500 text-sm">{{ errors.password }} </span>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <NuxtLink
-            :to="{
-              name: 'index',
-            }"
-            class="w-full text-center bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-2 rounded-lg transition disabled:opacity-50 focus:outline-none focus:border-cyan-500"
-          >
-            Back
-          </NuxtLink>
-          <button
-            type="submit"
-            :disabled="isSubmitting"
-            class="w-full bg-linear-to-r flex items-center gap-2 justify-center from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold py-2 rounded-lg transition disabled:opacity-50"
-          >
-            {{ isSubmitting ? "Loading..." : "Sign in" }}
-            <Icon name="material-symbols:arrow-forward-rounded" size="18" />
-          </button>
-        </div>
-      </form>
-      <div class="text-md text-gray-400 text-center mt-4">
-        <div>Don't have an account?</div>
+  <div class="w-full min-h-dvh grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_768px]">
+    <div class="items-center text-center justify-center relative hidden lg:flex">
+      <NuxtImg
+        src="/images/homepage_hero_pattern_top.png"
+        class="w-full absolute top-0 left-0 right-0 h-96"
+        alt="Homepage hero pattern top"
+      />
+      <NuxtImg
+        src="/images/homepage_hero_pattern_bottom.png"
+        class="w-full absolute bottom-0 left-0 right-0 h-96"
+        alt="Homepage hero pattern bottom"
+      />
+      <h1 class="text-6xl font-semibold text--gradient">Quizzio</h1>
+    </div>
+    <div class="bg-white text-primary-950 flex justify-center items-center py-12 px-6">
+      <div class="w-full max-w-lg space-y-4">
+        <h2 class="font-semibold text-2xl">Sign In</h2>
+        <p class="font-medium text-sm text-primary-500">
+          Enter your credentials to access your account.
+        </p>
         <div>
-          <NuxtLink
-            :to="{
-              name: 'auth-register',
-            }"
-            class="font-semibold text-cyan-400 hover:text-cyan-500 hover:underline focus:outline-none focus:underline"
-            >Create one here!</NuxtLink
-          >
+          <form class="space-y-4" @submit.prevent="onSubmit">
+            <div class="form--container">
+              <div class="input--box">
+                <label class="input--label text-primary-950!" for="username">Username</label>
+                <input
+                  id="username"
+                  v-model.trim="username"
+                  type="text"
+                  name="username"
+                  placeholder="Enter your username"
+                  autocomplete="username"
+                  aria-describedby="username-help-text"
+                  class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
+                />
+                <small id="username-help-text" class="text-xs text-gray-400 sr-only">
+                  We'll never share your email with anyone else.
+                </small>
+                <span class="text-red-500 text-sm">{{ errors.username }} </span>
+              </div>
+              <div>
+                <label class="input--label text-primary-950!" for="password">Password</label>
+                <input
+                  id="password"
+                  v-model.trim="password"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  autocomplete="current-password"
+                  aria-describedby="password-help-text"
+                  class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
+                />
+                <small id="password-help-text" class="text-xs text-gray-400 sr-only">
+                  We'll never share your password with anyone else.'
+                </small>
+                <span class="text-red-500 text-sm">{{ errors.password }} </span>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <NuxtLink
+                :to="{
+                  name: 'index',
+                }"
+                class="button--secondary"
+              >
+                Back
+              </NuxtLink>
+              <button type="submit" :disabled="isSubmitting" class="button--default">
+                {{ isSubmitting ? "Loading..." : "Sign In" }}
+                <Icon name="material-symbols:arrow-forward-rounded" size="18" />
+              </button>
+            </div>
+          </form>
+          <p class="text-sm mt-6 text-center">
+            Do not have an account?
+            <NuxtLink
+              :to="{
+                name: 'auth-register',
+              }"
+              class="text-ascend-purple font-semibold hover:text-ascend-purple-dark hover:underline focus:outline-none focus:underline"
+              >Sign up here!</NuxtLink
+            >
+          </p>
         </div>
       </div>
     </div>

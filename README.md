@@ -1,5 +1,7 @@
 # Nuxt 4 Starter Template
 
+Figma: https://www.figma.com/design/wSVSWFnnpsM5Z4fwl3hhwk/Quizzy-%E2%80%93-Modern-Web-UI--Community-?node-id=1-322&t=lLjsSibQSh2qc28t-0
+
 Look at the [Nuxt 4 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 Live preview version [Template](https://template-nuxt3-ndragun92.vercel.app)

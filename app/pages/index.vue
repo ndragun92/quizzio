@@ -22,15 +22,17 @@
         </ul>
       </nav>
       <div class="flex items-center gap-4 justify-end col-span-2 lg:col-span-1">
-        <button class="button--secondary w-auto!">Sign In</button>
-        <button class="button--default w-auto!">Register</button>
+        <NuxtLink :to="{ name: 'auth-login' }" class="button--secondary w-auto!">Sign In</NuxtLink>
+        <NuxtLink :to="{ name: 'auth-register' }" class="button--default w-auto!"
+          >Register</NuxtLink
+        >
       </div>
     </div>
   </header>
   <section class="relative overflow-hidden">
     <NuxtImg
       src="/images/homepage_hero_pattern_top.png"
-      class="w-full absolute top-0 left-0 right-0"
+      class="w-full absolute top-0 left-0 right-0 2xl:hidden"
       alt="Homepage hero pattern top"
     />
     <NuxtImg
@@ -40,7 +42,7 @@
     />
     <NuxtImg
       src="/images/homepage_hero_pattern_bottom.png"
-      class="w-full absolute bottom-0 left-0 right-0"
+      class="w-full absolute bottom-0 left-0 right-0 2xl:hidden"
       alt="Homepage hero pattern bottom"
     />
     <NuxtImg
