@@ -97,8 +97,8 @@
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" class="button--primary py-2! px-6!">View</button>
-            <button type="button" class="button--default-outline border-primary-700! py-2! px-2!">
+            <button type="button" class="button--primary button--compact">View</button>
+            <button type="button" class="button--default-outline border-primary-700! button--icon">
               <Icon name="mi:options-vertical" size="20" />
               <span class="sr-only">Edit</span>
             </button>
@@ -107,6 +107,7 @@
       </div>
     </UiCard>
   </div>
+  <UiDashboardManageQuizModal />
 </template>
 
 <script lang="ts" setup>
