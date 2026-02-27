@@ -1,114 +1,97 @@
 <template>
-  <div class="w-full min-h-dvh grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_768px]">
-    <div class="items-center text-center justify-center relative hidden lg:flex">
-      <NuxtImg
-        src="/images/homepage_hero_pattern_top.png"
-        class="w-full absolute top-0 left-0 right-0 h-96"
-        alt="Homepage hero pattern top"
-      />
-      <NuxtImg
-        src="/images/homepage_hero_pattern_bottom.png"
-        class="w-full absolute bottom-0 left-0 right-0 h-96"
-        alt="Homepage hero pattern bottom"
-      />
-      <h1 class="text-6xl font-semibold text--gradient">Quizzio</h1>
-    </div>
-    <div class="bg-white text-primary-950 flex justify-center items-center py-12 px-6">
-      <div class="w-full max-w-lg space-y-4">
-        <h2 class="font-semibold text-2xl">Create Account</h2>
-        <p class="font-medium text-sm text-primary-500">
-          Choose your account type and start your quiz journey with us.
-        </p>
-        <div>
-          <div class="grid grid-cols-2 gap-4">
-            <div
-              v-for="item in types"
-              :key="item.value"
-              class="border border-primary-300 transition duration-200 hover:border-ascend-purple-dark hover:bg-ascend-purple/10 rounded-lg text-center py-8 px-4"
-              :class="{
-                'border-ascend-purple-dark! bg-ascend-purple/10': item.value === type,
-              }"
-              @click="type = item.value"
-            >
-              <div class="text-center">
-                <div>
-                  <Icon :name="item.icon" size="28" />
-                </div>
-                <div class="space-y-2">
-                  <h3 class="font-semibold text-base text-primary-500">{{ item.label }}</h3>
-                  <p class="text-xs text-primary-500">
-                    {{ item.description }}
-                  </p>
-                </div>
-              </div>
+  <div class="w-full max-w-lg space-y-4">
+    <h2 class="font-semibold text-2xl">Create Account</h2>
+    <p class="font-medium text-sm text-primary-500">
+      Choose your account type and start your quiz journey with us.
+    </p>
+    <div>
+      <div class="grid grid-cols-2 gap-4">
+        <div
+          v-for="item in types"
+          :key="item.value"
+          class="border border-primary-300 transition duration-200 hover:border-ascend-purple-dark hover:bg-ascend-purple/10 rounded-lg text-center py-8 px-4"
+          :class="{
+            'border-ascend-purple-dark! bg-ascend-purple/10': item.value === type,
+          }"
+          @click="type = item.value"
+        >
+          <div class="text-center">
+            <div>
+              <Icon :name="item.icon" size="28" />
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-semibold text-base text-primary-500">{{ item.label }}</h3>
+              <p class="text-xs text-primary-500">
+                {{ item.description }}
+              </p>
             </div>
           </div>
         </div>
-        <div>
-          <form class="space-y-4" @submit.prevent="onSubmit">
-            <div class="form--container">
-              <div class="input--box">
-                <label class="input--label text-primary-950!" for="username">Username</label>
-                <input
-                  id="username"
-                  v-model.trim="username"
-                  type="text"
-                  name="username"
-                  placeholder="Enter your username"
-                  autocomplete="username"
-                  aria-describedby="username-help-text"
-                  class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
-                />
-                <small id="username-help-text" class="text-xs text-gray-400 sr-only">
-                  We'll never share your email with anyone else.
-                </small>
-                <span class="text-red-500 text-sm">{{ errors.username }} </span>
-              </div>
-              <div>
-                <label class="input--label text-primary-950!" for="password">Password</label>
-                <input
-                  id="password"
-                  v-model.trim="password"
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  autocomplete="current-password"
-                  aria-describedby="password-help-text"
-                  class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
-                />
-                <small id="password-help-text" class="text-xs text-gray-400 sr-only">
-                  We'll never share your password with anyone else.'
-                </small>
-                <span class="text-red-500 text-sm">{{ errors.password }} </span>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <NuxtLink
-                :to="{
-                  name: 'index',
-                }"
-                class="button--secondary"
-              >
-                Back
-              </NuxtLink>
-              <button type="submit" :disabled="isSubmitting" class="button--default">
-                {{ isSubmitting ? "Loading..." : "Sign Up" }}
-                <Icon name="material-symbols:arrow-forward-rounded" size="18" />
-              </button>
-            </div>
-          </form>
-          <p class="text-sm mt-6 text-center">
-            Already have an account?
-            <NuxtLink
-              :to="{
-                name: 'auth-login',
-              }"
-              class="text-ascend-purple font-semibold hover:text-ascend-purple-dark hover:underline focus:outline-none focus:underline"
-              >Sign in here!</NuxtLink
-            >
-          </p>
-        </div>
       </div>
+    </div>
+    <div>
+      <form class="space-y-4" @submit.prevent="onSubmit">
+        <div class="form--container">
+          <div class="input--box">
+            <label class="input--label text-primary-950!" for="username">Username</label>
+            <input
+              id="username"
+              v-model.trim="username"
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              autocomplete="username"
+              aria-describedby="username-help-text"
+              class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
+            />
+            <small id="username-help-text" class="text-xs text-gray-400 sr-only">
+              We'll never share your email with anyone else.
+            </small>
+            <span class="text-red-500 text-sm">{{ errors.username }} </span>
+          </div>
+          <div>
+            <label class="input--label text-primary-950!" for="password">Password</label>
+            <input
+              id="password"
+              v-model.trim="password"
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              aria-describedby="password-help-text"
+              class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
+            />
+            <small id="password-help-text" class="text-xs text-gray-400 sr-only">
+              We'll never share your password with anyone else.'
+            </small>
+            <span class="text-red-500 text-sm">{{ errors.password }} </span>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <NuxtLink
+            :to="{
+              name: 'index',
+            }"
+            class="button--secondary"
+          >
+            Back
+          </NuxtLink>
+          <button type="submit" :disabled="isSubmitting" class="button--default">
+            {{ isSubmitting ? "Loading..." : "Sign Up" }}
+            <Icon name="material-symbols:arrow-forward-rounded" size="18" />
+          </button>
+        </div>
+      </form>
+      <p class="text-sm mt-6 text-center">
+        Already have an account?
+        <NuxtLink
+          :to="{
+            name: 'auth-login',
+          }"
+          class="text-ascend-purple font-semibold hover:text-ascend-purple-dark hover:underline focus:outline-none focus:underline"
+          >Sign in here!</NuxtLink
+        >
+      </p>
     </div>
   </div>
 </template>
@@ -119,6 +102,7 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 
 definePageMeta({
+  layout: "auth",
   middleware: () => {
     const userStore = useUserStore();
     if (userStore.data?.id) {
