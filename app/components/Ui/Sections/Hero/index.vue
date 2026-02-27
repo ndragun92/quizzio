@@ -2,22 +2,22 @@
   <section class="relative overflow-hidden">
     <NuxtImg
       src="/images/homepage_hero_pattern_top.png"
-      class="w-full absolute top-0 left-0 right-0 2xl:hidden"
+      class="w-full absolute top-0 left-0 right-0 2xl:hidden pointer-events-none"
       alt="Homepage hero pattern top"
     />
     <NuxtImg
       src="/images/homepage_hero_eclipse_left.png"
-      class="absolute left-0 top-0 opacity-75"
+      class="absolute left-0 top-0 opacity-75 pointer-events-none"
       alt="Homepage hero eclipse left"
     />
     <NuxtImg
       src="/images/homepage_hero_pattern_bottom.png"
-      class="w-full absolute bottom-0 left-0 right-0 2xl:hidden"
+      class="w-full absolute bottom-0 left-0 right-0 2xl:hidden pointer-events-none"
       alt="Homepage hero pattern bottom"
     />
     <NuxtImg
       src="/images/homepage_hero_eclipse_right.png"
-      class="absolute right-0 top-0 opacity-75"
+      class="absolute right-0 top-0 opacity-75 pointer-events-none"
       alt="Homepage hero eclipse right"
     />
     <div class="absolute inset-0 bg-primary-950 opacity-25" />
