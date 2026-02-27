@@ -15,7 +15,7 @@
     </div>
     <div class="bg-white text-primary-950 flex justify-center items-center py-12 px-6">
       <div class="w-full max-w-lg space-y-4">
-        <h2 class="font-semibold text-2xl">Sign In</h2>
+        <h2 class="font-semibold text-2xl">Welcome Back</h2>
         <p class="font-medium text-sm text-primary-500">
           Enter your credentials to access your account.
         </p>
