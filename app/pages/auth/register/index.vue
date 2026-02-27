@@ -22,21 +22,22 @@
         <div>
           <div class="grid grid-cols-2 gap-4">
             <div
-              v-for="n in 2"
-              :key="n"
+              v-for="item in types"
+              :key="item.value"
               class="border border-primary-300 transition duration-200 hover:border-ascend-purple-dark hover:bg-ascend-purple/10 rounded-lg text-center py-8 px-4"
               :class="{
-                'border-ascend-purple-dark! bg-ascend-purple/10': n === 1,
+                'border-ascend-purple-dark! bg-ascend-purple/10': item.value === type,
               }"
+              @click="type = item.value"
             >
               <div class="text-center">
                 <div>
-                  <Icon name="mdi:users" size="28" />
+                  <Icon :name="item.icon" size="28" />
                 </div>
                 <div class="space-y-2">
-                  <h3 class="font-semibold text-base text-primary-500">Player</h3>
+                  <h3 class="font-semibold text-base text-primary-500">{{ item.label }}</h3>
                   <p class="text-xs text-primary-500">
-                    Join as a player and challenge yourself with exciting quizzes.
+                    {{ item.description }}
                   </p>
                 </div>
               </div>
@@ -128,8 +129,26 @@ definePageMeta({
   },
 });
 
+const types = [
+  {
+    label: "Player",
+    value: "player",
+    description: "Join as a player and challenge yourself with exciting quizzes.",
+    icon: "mdi:users",
+  },
+  {
+    label: "Quiz Creator",
+    value: "quiz_creator",
+    description: "Create and share your own quizzes with the community.",
+    icon: "mdi:account-tie",
+  },
+];
+
 const validationSchema = toTypedSchema(
   z.object({
+    type: z.enum(["player", "quiz_creator"], {
+      errorMap: () => ({ message: "Please select an account type" }),
+    }),
     username: z.string().min(1, "Username is required"),
     password: z.string().min(6, "Password must be at least 6 characters"),
   })
@@ -138,6 +157,15 @@ const validationSchema = toTypedSchema(
 const { handleSubmit, errors, isSubmitting } = useForm({
   validationSchema,
 });
+
+const { value: type } = useField(
+  "type",
+  {},
+  {
+    initialValue: "player",
+  }
+);
+
 const { value: username } = useField(
   "username",
   {},
