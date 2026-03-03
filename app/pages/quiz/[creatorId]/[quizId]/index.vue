@@ -160,6 +160,37 @@ const routeParams = computed(() => route.params as { creatorId: string; quizId: 
 const creatorId = computed(() => routeParams.value.creatorId);
 const quizId = computed(() => routeParams.value.quizId);
 
+const { onJoinQuiz } = useQuiz();
+const socketStore = useSocketStore();
+const isConnected = computed(() => socketStore.isConnected);
+// const error = computed(() => socketStore.error);
+const joinedQuiz = ref(false);
+
+watch(
+  isConnected,
+  (connected) => {
+    if (connected) {
+      console.info("WebSocket connected, joining quiz...");
+      if (!joinedQuiz.value) {
+        onJoinQuiz({
+          nickname: `TestUser${Math.floor(Math.random() * 1000)}`,
+          guestDisplayName: `Guest${Math.floor(Math.random() * 1000)}`,
+          creatorId: parseInt(creatorId.value),
+          quizId: parseInt(quizId.value),
+        });
+        joinedQuiz.value = true;
+      } else {
+        console.warn("Already joined quiz, not sending joinQuiz message again.");
+      }
+    } else {
+      console.warn("WebSocket disconnected.");
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+
 const { data: quiz, status } = useFetch<TQuiz>(`/api/quizzes/${creatorId.value}/${quizId.value}`, {
   key: `quiz-${creatorId.value}-${quizId.value}`,
 });

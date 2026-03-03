@@ -13,6 +13,8 @@ export type TWebSocketMessageType =
   | "startGame"
   | "submitProgress"
   | "submitResult"
+  | "joinQuiz"
+  | "leaveQuiz"
   | "error";
 
 // WebSocket message payload types
