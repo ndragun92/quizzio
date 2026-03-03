@@ -1,4 +1,4 @@
-type TQuestion = {
+export type TQuestion = {
   id: number;
   text: string;
   type:
@@ -22,7 +22,7 @@ type TQuestion = {
   points: number;
 };
 
-type TQuiz = {
+export type TQuiz = {
   id: number;
   title: string;
   description: string;

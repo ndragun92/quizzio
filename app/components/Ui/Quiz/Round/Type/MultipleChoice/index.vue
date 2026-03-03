@@ -6,7 +6,7 @@
       >
         A
       </div>
-      <h3 class="font-bold text-base">Solar Power</h3>
+      <h3 class="font-bold text-base">{{ question?.options?.[0] }}</h3>
     </UiCard>
     <UiCard class="flex items-center gap-4">
       <div
@@ -14,7 +14,7 @@
       >
         B
       </div>
-      <h3 class="font-bold text-base">Wind Power</h3>
+      <h3 class="font-bold text-base">{{ question?.options?.[1] }}</h3>
     </UiCard>
     <UiCard class="flex items-center gap-4">
       <div
@@ -22,7 +22,7 @@
       >
         C
       </div>
-      <h3 class="font-bold text-base">Natural Gas</h3>
+      <h3 class="font-bold text-base">{{ question?.options?.[2] }}</h3>
     </UiCard>
     <UiCard class="flex items-center gap-4">
       <div
@@ -30,7 +30,17 @@
       >
         D
       </div>
-      <h3 class="font-bold text-base">Hydroelectric Power</h3>
+      <h3 class="font-bold text-base">{{ question?.options?.[3] }}</h3>
     </UiCard>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { TQuestion } from "~~/shared/utils/quiz.db";
+
+type Props = {
+  question: TQuestion | null;
+};
+
+defineProps<Props>();
+</script>

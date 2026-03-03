@@ -20,12 +20,27 @@
           </button>
         </div>
         <div>
-          <h1 class="text-center font-semibold text-lg">Science & Technology Quiz</h1>
+          <h1 class="text-center font-semibold text-lg">
+            {{ isLoading ? "Loading..." : quiz?.title }}
+          </h1>
         </div>
         <div />
       </div>
     </header>
-    <div class="flex-1 flex items-center justify-center">
+    <div v-if="isLoading" class="flex items-center justify-center flex-1">
+      <div class="flex items-center gap-4">
+        <Icon name="eos-icons:bubble-loading" size="32" class="text-ascend-purple-dark" />
+        <span class="text-lg font-semibold text-ascend-purple-dark"
+          >Please wait for round to load...</span
+        >
+      </div>
+    </div>
+    <div v-else-if="!quiz" class="flex items-center justify-center flex-1">
+      <div class="flex items-center gap-4">
+        <span class="text-lg font-semibold text-ascend-purple-dark">Quiz not found.</span>
+      </div>
+    </div>
+    <div v-else class="flex-1 flex items-center justify-center">
       <div class="container mx-auto px-15 grid grid-cols-[minmax(0,1fr)_320px] gap-15">
         <div class="space-y-6">
           <div class="space-y-1.5">
@@ -57,11 +72,10 @@
               </div>
             </div>
             <h2 class="font-semibold text-2xl/7">
-              Which of the following energy sources cannot be replenished naturally on a human
-              timescale, making it an example of a non-renewable resource?
+              {{ currentQuestion?.text }}
             </h2>
           </UiCard>
-          <UiQuizRound />
+          <UiQuizRound :question="currentQuestion" />
           <div class="flex items-center gap-8 justify-between">
             <button type="button" class="button--primary w-auto!">
               <Icon name="mdi:flag-outline" size="24" />
@@ -104,3 +118,24 @@
     </div>
   </main>
 </template>
+
+<script lang="ts" setup>
+import type { TQuiz } from "~~/shared/utils/quiz.db";
+
+const route = useRoute();
+
+const routeParams = computed(() => route.params as { creatorId: string; quizId: string });
+
+const creatorId = computed(() => routeParams.value.creatorId);
+const quizId = computed(() => routeParams.value.quizId);
+
+const { data: quiz, status } = useFetch<TQuiz>(`/api/quizzes/${creatorId.value}/${quizId.value}`, {
+  key: `quiz-${creatorId.value}-${quizId.value}`,
+});
+
+const isLoading = computed(() => status.value === "pending");
+
+const currentRound = ref(1);
+const maxRounds = computed(() => quiz.value?.questions.length ?? 0); // Placeholder for max rounds, should come from quiz data
+const currentQuestion = computed(() => quiz.value?.questions[currentRound.value - 1]); // Placeholder for current question, should come from quiz data
+</script>
