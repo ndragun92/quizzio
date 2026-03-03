@@ -1,36 +1,19 @@
 <template>
   <div class="grid grid-cols-2 gap-4">
-    <UiCard class="flex items-center gap-4">
+    <UiCard
+      v-for="(option, index) in question?.options"
+      :key="option"
+      class="flex items-center gap-4"
+      :clickable="true"
+      :selected="index === 2"
+      tabindex="0"
+    >
       <div
-        class="size-8 bg-primary-800 border border-primary-700 flex items-center justify-center rounded-full text-sm"
+        class="size-8 group-hover:border-ascend-purple-dark bg-primary-800 border border-primary-700 flex items-center justify-center rounded-full text-sm"
       >
-        A
+        {{ onReturnLetterFromIndex(index) }}
       </div>
-      <h3 class="font-bold text-base">{{ question?.options?.[0] }}</h3>
-    </UiCard>
-    <UiCard class="flex items-center gap-4">
-      <div
-        class="size-8 bg-primary-800 border border-primary-700 flex items-center justify-center rounded-full text-sm"
-      >
-        B
-      </div>
-      <h3 class="font-bold text-base">{{ question?.options?.[1] }}</h3>
-    </UiCard>
-    <UiCard class="flex items-center gap-4">
-      <div
-        class="size-8 bg-primary-800 border border-primary-700 flex items-center justify-center rounded-full text-sm"
-      >
-        C
-      </div>
-      <h3 class="font-bold text-base">{{ question?.options?.[2] }}</h3>
-    </UiCard>
-    <UiCard class="flex items-center gap-4">
-      <div
-        class="size-8 bg-primary-800 border border-primary-700 flex items-center justify-center rounded-full text-sm"
-      >
-        D
-      </div>
-      <h3 class="font-bold text-base">{{ question?.options?.[3] }}</h3>
+      <h3 class="font-bold text-base">{{ option }}</h3>
     </UiCard>
   </div>
 </template>
@@ -43,4 +26,9 @@ type Props = {
 };
 
 defineProps<Props>();
+
+const onReturnLetterFromIndex = (index: number) => {
+  const letters = ["A", "B", "C", "D"];
+  return letters[index] || "";
+};
 </script>

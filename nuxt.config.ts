@@ -46,6 +46,7 @@ export default defineNuxtConfig({
     // compressPublicAssets: true,
     routeRules: {
       "/game/*": { ssr: false },
+      "/quiz/*": { ssr: false },
       // "/_nuxt/**": { headers: { "cache-control": "max-age=31536000" } }, // Set generated files cache to 1 year
     },
   },

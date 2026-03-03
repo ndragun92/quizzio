@@ -17,6 +17,7 @@
         <div>
           <button type="button" class="button--primary button--icon size-10!">
             <Icon name="mdi:chevron-left" size="24" />
+            <span class="sr-only">Go back</span>
           </button>
         </div>
         <div>
@@ -45,12 +46,15 @@
         <div class="space-y-6">
           <div class="space-y-1.5">
             <div class="text--secondary font-medium flex items-center justify-between">
-              <span>Question 1 of 10</span>
-              <span>10% Complete</span>
+              <span>Question {{ currentRound }} of {{ maxRounds }}</span>
+              <span>{{ Math.floor(completedPercentage) }}% Complete</span>
             </div>
             <div>
               <div class="w-full h-2 bg-primary-900 rounded-full overflow-hidden">
-                <div class="h-full bg-ascend-purple-dark rounded-full" style="width: 10%" />
+                <div
+                  class="h-full bg-ascend-purple-dark rounded-full transition-all duration-200"
+                  :style="{ width: `${completedPercentage}%` }"
+                />
               </div>
             </div>
           </div>
@@ -58,7 +62,7 @@
             <div class="grid grid-cols-[150px_minmax(0,1fr)_150px] items-center">
               <div>
                 <span class="bg-ascend-purple-dark py-1.5 px-3 text-xs rounded-full"
-                  >100 points</span
+                  >{{ currentQuestion?.points }} points</span
                 >
               </div>
               <div class="text-center">
@@ -68,13 +72,29 @@
                 </div>
               </div>
               <div class="flex justify-end">
-                <span class="bg-primary-800 py-1.5 px-3 text-xs rounded-full">Medium</span>
+                <span class="bg-primary-800 py-1.5 px-3 text-xs rounded-full capitalize">{{
+                  quiz.difficulty
+                }}</span>
               </div>
             </div>
             <h2 class="font-semibold text-2xl/7">
               {{ currentQuestion?.text }}
             </h2>
           </UiCard>
+          <div
+            v-if="currentQuestion?.doublePoints"
+            class="bg-yellow-500/10 border-2 border-yellow-400 rounded-lg p-4 flex items-start gap-4"
+          >
+            <div>
+              <Icon name="mdi:lightbulb-on-outline" size="24" class="text-yellow-400" />
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm text-yellow-300">
+                This question is worth double points! Answering correctly will earn you double the
+                points, but be careful - answering incorrectly will also deduct double the points!
+              </p>
+            </div>
+          </div>
           <UiQuizRound :question="currentQuestion" />
           <div class="flex items-center gap-8 justify-between">
             <button type="button" class="button--primary w-auto!">
@@ -92,20 +112,31 @@
             <h4 class="text-lg font-semibold">Quiz Stats</h4>
             <div class="space-y-4">
               <UiCard class="text-center py-2! space-y-0.5" :level="2">
+                <h5 class="text--secondary">Game mode</h5>
+                <div class="text-white font-semibold">{{ quiz?.gameMode }}</div>
+              </UiCard>
+              <UiCard class="text-center py-2! space-y-0.5" :level="2">
                 <h5 class="text--secondary">Score</h5>
                 <div class="text-ascend-purple-dark font-semibold">0</div>
               </UiCard>
-              <UiCard class="text-center py-2! space-y-0.5" :level="2">
+              <UiCard
+                v-if="quiz.gameMode === 'survival'"
+                class="text-center py-2! space-y-0.5"
+                :level="2"
+              >
                 <h5 class="text--secondary">Lives</h5>
                 <div class="text-red-500 space-x-2">
-                  <Icon name="mdi:heart" size="24" />
-                  <Icon name="mdi:heart" size="24" />
-                  <Icon name="mdi:heart" size="24" />
+                  <Icon
+                    v-for="live in quiz.settings.lives"
+                    :key="live"
+                    name="mdi:heart"
+                    size="24"
+                  />
                 </div>
               </UiCard>
               <UiCard class="text-center py-2! space-y-0.5" :level="2">
                 <h5 class="text--secondary">Progress</h5>
-                <div class="text-white font-semibold">1 of 10</div>
+                <div class="text-white font-semibold">{{ currentRound }} of {{ maxRounds }}</div>
               </UiCard>
               <UiCard class="text-center py-2! space-y-0.5" :level="2">
                 <h5 class="text--secondary">Position</h5>
@@ -137,5 +168,6 @@ const isLoading = computed(() => status.value === "pending");
 
 const currentRound = ref(1);
 const maxRounds = computed(() => quiz.value?.questions.length ?? 0); // Placeholder for max rounds, should come from quiz data
-const currentQuestion = computed(() => quiz.value?.questions[currentRound.value - 1]); // Placeholder for current question, should come from quiz data
+const currentQuestion = computed(() => quiz.value?.questions[currentRound.value - 1] || null); // Placeholder for current question, should come from quiz data
+const completedPercentage = computed(() => (currentRound.value / maxRounds.value) * 100);
 </script>

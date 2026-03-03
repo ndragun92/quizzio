@@ -20,6 +20,7 @@ export type TQuestion = {
   options?: string[]; // Only for multiple-choice questions
   correctAnswer: string | boolean; // String for multiple-choice, short-answer, and fill-in-the-blank, boolean for true-false
   points: number;
+  doublePoints?: boolean; // If true, points for this question are doubled if answered correctly and reduce by double if answered incorrectly
 };
 
 export type TQuiz = {
@@ -91,6 +92,7 @@ export const dbQuiz: TQuiz[] = [
         options: ["Paris", "London", "Berlin", "Madrid"],
         correctAnswer: "Paris",
         points: 10,
+        doublePoints: true,
       },
       {
         id: 2,
