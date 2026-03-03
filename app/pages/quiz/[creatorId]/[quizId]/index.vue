@@ -136,7 +136,7 @@
               </UiCard>
               <UiCard class="text-center py-2! space-y-0.5" :level="2">
                 <h5 class="text--secondary">Progress</h5>
-                <div class="text-white font-semibold">{{ currentRound }} of {{ maxRounds }}</div>
+                <div class="text-white font-semibold">{{ currentRound }} / {{ maxRounds }}</div>
               </UiCard>
               <UiCard class="text-center py-2! space-y-0.5" :level="2">
                 <h5 class="text--secondary">Position</h5>
