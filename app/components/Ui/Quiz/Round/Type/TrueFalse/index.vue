@@ -1,11 +1,11 @@
 <template>
   <div class="grid grid-cols-2 gap-4">
     <UiCard
-      v-for="(option, index) in question?.options"
+      v-for="(option, index) in returnOptions"
       :key="option"
       class="flex items-center gap-4"
       :clickable="true"
-      :selected="index === 2"
+      :selected="index === 1"
       tabindex="0"
     >
       <div
@@ -26,4 +26,6 @@ type Props = {
 };
 
 defineProps<Props>();
+
+const returnOptions = ["True", "False"];
 </script>
