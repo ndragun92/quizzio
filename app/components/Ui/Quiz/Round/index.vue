@@ -9,6 +9,7 @@
   <UiQuizRoundTypeMatching v-else-if="question?.type === 'matching'" :question="question" />
   <UiQuizRoundTypeOrdering v-else-if="question?.type === 'ordering'" :question="question" />
   <UiQuizRoundTypeImageBased v-else-if="question?.type === 'image-based'" :question="question" />
+  <UiQuizRoundTypeAudioBased v-else-if="question?.type === 'audio-based'" :question="question" />
 </template>
 
 <script setup lang="ts">
