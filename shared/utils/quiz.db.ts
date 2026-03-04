@@ -29,40 +29,62 @@ export type TQuestion = {
   };
 };
 
+export enum ECategory {
+  GENERAL = "general",
+  SCIENCE = "science",
+  HISTORY = "history",
+  ENTERTAINMENT = "entertainment",
+  SPORTS = "sports",
+  GEOGRAPHY = "geography",
+  LITERATURE = "literature",
+  TECHNOLOGY = "technology",
+  ART = "art",
+  MUSIC = "music",
+  MOVIES = "movies",
+  TV_SHOWS = "tv-shows",
+  VIDEO_GAMES = "video-games",
+  FOOD_AND_DRINK = "food-and-drink",
+  ANIMALS = "animals",
+  NATURE = "nature",
+  SPACE = "space",
+  MATH = "math",
+  LANGUAGE = "language",
+  MISCELLANEOUS = "miscellaneous",
+  CODING = "coding",
+}
+
+export enum EStatus {
+  DRAFT = "draft",
+  PUBLISHED = "published",
+  ARCHIVED = "archived",
+}
+
+export enum EDifficulty {
+  EASY = "easy",
+  MEDIUM = "medium",
+  HARD = "hard",
+  EXPERT = "expert",
+}
+
+export enum EGameMode {
+  CLASSIC = "classic",
+  TIMED = "timed",
+  SURVIVAL = "survival",
+}
+
 export type TQuiz = {
   id: number;
   title: string;
   description: string;
   creatorId: number;
-  status?: "draft" | "published" | "archived";
-  category:
-    | "general"
-    | "science"
-    | "history"
-    | "entertainment"
-    | "sports"
-    | "geography"
-    | "literature"
-    | "technology"
-    | "art"
-    | "music"
-    | "movies"
-    | "tv-shows"
-    | "video-games"
-    | "food-and-drink"
-    | "animals"
-    | "nature"
-    | "space"
-    | "math"
-    | "language"
-    | "miscellaneous"
-    | "coding";
-  difficulty: "easy" | "medium" | "hard" | "expert";
+  status?: EStatus;
+  category: ECategory;
+  difficulty: EDifficulty;
   // Game modes:
   // - classic: standard quiz format with a fixed number of questions and no time limit
   // - timed: players have a limited amount of time to answer each question
   // - survival: players continue until they answer incorrectly, with a limited number of lives
-  gameMode: "classic" | "timed" | "survival";
+  gameMode: EGameMode;
   settings: {
     timeLimitPerRound: number; // in seconds
     passingScorePercentage: number; // percentage required to pass
@@ -81,10 +103,10 @@ export const dbQuiz: TQuiz[] = [
     title: "General Knowledge Quiz",
     description: "Test your general knowledge with this fun quiz!",
     creatorId: 123,
-    status: "published",
-    category: "general",
-    difficulty: "medium",
-    gameMode: "classic",
+    status: EStatus.PUBLISHED,
+    category: ECategory.GENERAL,
+    difficulty: EDifficulty.MEDIUM,
+    gameMode: EGameMode.CLASSIC,
     settings: {
       timeLimitPerRound: 60,
       passingScorePercentage: 70,
@@ -219,10 +241,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Science Fundamentals",
     description: "Test your basic science knowledge with this beginner-friendly quiz!",
     creatorId: 456,
-    status: "published",
-    category: "science",
-    difficulty: "easy",
-    gameMode: "classic",
+    status: EStatus.PUBLISHED,
+    category: ECategory.SCIENCE,
+    difficulty: EDifficulty.EASY,
+    gameMode: EGameMode.CLASSIC,
     settings: {
       timeLimitPerRound: 45,
       passingScorePercentage: 60,
@@ -270,10 +292,10 @@ export const dbQuiz: TQuiz[] = [
     title: "World War II History",
     description: "Explore the key events and figures of World War II",
     creatorId: 789,
-    status: "published",
-    category: "history",
-    difficulty: "medium",
-    gameMode: "timed",
+    status: EStatus.PUBLISHED,
+    category: ECategory.HISTORY,
+    difficulty: EDifficulty.MEDIUM,
+    gameMode: EGameMode.TIMED,
     settings: {
       timeLimitPerRound: 30,
       passingScorePercentage: 70,
@@ -342,10 +364,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Advanced JavaScript Concepts",
     description: "Challenge yourself with advanced JavaScript patterns and concepts",
     creatorId: 123,
-    status: "draft",
-    category: "technology",
-    difficulty: "hard",
-    gameMode: "survival",
+    status: EStatus.DRAFT,
+    category: ECategory.TECHNOLOGY,
+    difficulty: EDifficulty.HARD,
+    gameMode: EGameMode.SURVIVAL,
     settings: {
       timeLimitPerRound: 90,
       passingScorePercentage: 80,
@@ -386,10 +408,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Classic Movie Trivia",
     description: "How well do you know the greatest films of all time?",
     creatorId: 456,
-    status: "published",
-    category: "movies",
-    difficulty: "medium",
-    gameMode: "classic",
+    status: EStatus.PUBLISHED,
+    category: ECategory.MOVIES,
+    difficulty: EDifficulty.MEDIUM,
+    gameMode: EGameMode.CLASSIC,
     settings: {
       timeLimitPerRound: 60,
       passingScorePercentage: 65,
@@ -451,10 +473,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Python Programming Mastery",
     description: "Expert-level Python programming challenges for seasoned developers",
     creatorId: 789,
-    status: "published",
-    category: "coding",
-    difficulty: "expert",
-    gameMode: "survival",
+    status: EStatus.PUBLISHED,
+    category: ECategory.CODING,
+    difficulty: EDifficulty.EXPERT,
+    gameMode: EGameMode.SURVIVAL,
     settings: {
       timeLimitPerRound: 120,
       passingScorePercentage: 85,
@@ -503,10 +525,10 @@ export const dbQuiz: TQuiz[] = [
     title: "World Geography Basics",
     description: "Test your knowledge of countries, capitals, and continents",
     creatorId: 123,
-    status: "archived",
-    category: "geography",
-    difficulty: "easy",
-    gameMode: "classic",
+    status: EStatus.ARCHIVED,
+    category: ECategory.GEOGRAPHY,
+    difficulty: EDifficulty.EASY,
+    gameMode: EGameMode.CLASSIC,
     settings: {
       timeLimitPerRound: 40,
       passingScorePercentage: 60,
@@ -554,10 +576,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Sports Legends Quiz",
     description: "How well do you know the greatest athletes and moments in sports history?",
     creatorId: 456,
-    status: "published",
-    category: "sports",
-    difficulty: "medium",
-    gameMode: "timed",
+    status: EStatus.PUBLISHED,
+    category: ECategory.SPORTS,
+    difficulty: EDifficulty.MEDIUM,
+    gameMode: EGameMode.TIMED,
     settings: {
       timeLimitPerRound: 45,
       passingScorePercentage: 70,
@@ -619,10 +641,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Music Theory Fundamentals",
     description: "Learn and test your understanding of basic music theory concepts",
     creatorId: 789,
-    status: "draft",
-    category: "music",
-    difficulty: "medium",
-    gameMode: "classic",
+    status: EStatus.DRAFT,
+    category: ECategory.MUSIC,
+    difficulty: EDifficulty.MEDIUM,
+    gameMode: EGameMode.CLASSIC,
     settings: {
       timeLimitPerRound: 50,
       passingScorePercentage: 70,
@@ -670,10 +692,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Culinary Arts & Food History",
     description: "Explore the world of food, cooking techniques, and culinary traditions",
     creatorId: 123,
-    status: "archived",
-    category: "food-and-drink",
-    difficulty: "easy",
-    gameMode: "classic",
+    status: EStatus.ARCHIVED,
+    category: ECategory.FOOD_AND_DRINK,
+    difficulty: EDifficulty.EASY,
+    gameMode: EGameMode.CLASSIC,
     settings: {
       timeLimitPerRound: 45,
       passingScorePercentage: 60,
@@ -721,10 +743,10 @@ export const dbQuiz: TQuiz[] = [
     title: "Video Game Legends",
     description: "Test your knowledge of iconic games, characters, and gaming history",
     creatorId: 456,
-    status: "published",
-    category: "video-games",
-    difficulty: "hard",
-    gameMode: "timed",
+    status: EStatus.PUBLISHED,
+    category: ECategory.VIDEO_GAMES,
+    difficulty: EDifficulty.HARD,
+    gameMode: EGameMode.TIMED,
     settings: {
       timeLimitPerRound: 35,
       passingScorePercentage: 75,

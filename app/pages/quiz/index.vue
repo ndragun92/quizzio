@@ -11,23 +11,6 @@
           <p class="text--secondary">Browse and explore available quizzes</p>
         </div>
         <div class="flex items-center gap-4 justify-between">
-          <div
-            class="inline-flex rounded-md border border-primary-800 overflow-hidden"
-            role="group"
-          >
-            <button
-              v-for="option in filterOptions"
-              :key="option.value"
-              class="py-3 px-4 text-sm hover:bg-primary-800 focus:bg-primary-800"
-              type="button"
-              :class="{
-                'bg-primary-950!': option.value === filter,
-              }"
-              @click="onSelectOption(option.value)"
-            >
-              {{ option.label }}
-            </button>
-          </div>
           <div>
             <div class="flex items-center gap-4">
               <div class="relative">
@@ -38,7 +21,12 @@
                     class="text-primary-500 absolute left-3 top-1/2 -translate-y-1/2"
                   />
                 </div>
-                <input type="text" class="input--text pl-10!" placeholder="Search quizzes..." />
+                <input
+                  v-model.trim="keyword"
+                  type="search"
+                  class="input--text pl-10!"
+                  placeholder="Search quizzes..."
+                />
               </div>
               <div>
                 <UiInputSelect
@@ -51,8 +39,20 @@
           </div>
         </div>
         <div class="space-y-4">
+          <div v-if="isLoading" class="py-8">
+            <div class="flex items-center gap-2 justify-center py-4">
+              <Icon name="svg-spinners:90-ring-with-bg" size="24" />
+              <span class="font-bold">Loading... Please wait...</span>
+            </div>
+          </div>
+          <div v-if="!isLoading && filteredQuizzes.length === 0">
+            <p class="text-center py-8">
+              No quizzes found. Try adjusting your search or filter criteria.
+            </p>
+          </div>
           <UiCard
-            v-for="quiz in quizzes"
+            v-for="quiz in filteredQuizzes"
+            v-else
             :key="quiz.title"
             class="flex items-center justify-between gap-4"
             :level="2"
@@ -70,11 +70,11 @@
                   <div class="flex items-center gap-4">
                     <h4 class="font-semibold">{{ quiz.title }}</h4>
                     <span
-                      class="px-3 py-0.5 border text-xs rounded-full font-semibold"
+                      class="px-3 py-0.5 border text-xs rounded-full font-semibold capitalize"
                       :class="{
-                        'bg-green-500 border-green-300': quiz.status === 'Published',
+                        'bg-green-500 border-green-300': quiz.status === 'published',
                         'bg-orange-300/5 border-orange-300 text-orange-400':
-                          quiz.status === 'Draft',
+                          quiz.status === 'draft',
                       }"
                       >{{ quiz.status }}</span
                     >
@@ -84,15 +84,20 @@
                 <div class="flex items-center gap-2 text--secondary">
                   <div class="flex items-center gap-2">
                     <Icon name="lucide:book-open" size="16" />
-                    <span>{{ quiz.questions }} Questions</span>
+                    <span>{{ quiz.questions?.length }} Questions</span>
                   </div>
                   <div class="flex items-center gap-2">
                     <Icon name="lucide:clock" size="16" />
-                    <span>{{ quiz.duration }}</span>
+                    <span
+                      >{{
+                        Math.round(quiz.questions.length * (quiz.settings.timeLimitPerRound / 60))
+                      }}
+                      mins</span
+                    >
                   </div>
-                  <div class="flex items-center gap-2">
-                    <Icon name="lucide:users" size="16" />
-                    <span>{{ quiz.participants }} Participants</span>
+                  <div class="flex items-center gap-2 capitalize">
+                    <Icon name="lucide:tag" size="16" />
+                    <span>{{ quiz.category }}</span>
                   </div>
                 </div>
               </div>
@@ -115,56 +120,29 @@
 </template>
 
 <script lang="ts" setup>
-const filter = ref<"all" | "active" | "drafts" | "archived">("all");
+import { ECategory } from "~~/shared/utils/quiz.db";
 
-const filterOptions = [
-  { label: "All Quizzes", value: "all" },
-  { label: "Active Quizzes", value: "active" },
-  { label: "Drafts", value: "drafts" },
-  { label: "Archived", value: "archived" },
-];
+const { data: quizzes, status } = useFetch("/api/quizzes");
 
-const onSelectOption = (value: string) => {
-  filter.value = value as typeof filter.value;
-};
+const isLoading = computed(() => status.value === "pending");
 
 const category = ref<string>("");
 
-const categories = [
-  { label: "Mathematics", value: "mathematics" },
-  { label: "Science", value: "science" },
-  { label: "History", value: "history" },
-  { label: "Geography", value: "geography" },
-  { label: "Literature", value: "literature" },
-];
+const categories = Object.values(ECategory).map((cat) => ({
+  label: cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
+  value: cat,
+}));
 
-const quizzes = [
-  {
-    title: "Science Mid-term Quiz",
-    description: "Test your knowledge on basic science concepts.",
-    status: "Published",
-    date: "2024-06-15",
-    questions: 20,
-    duration: "30 mins",
-    participants: 120,
-  },
-  {
-    title: "History Final Quiz",
-    description: "A comprehensive quiz covering world history.",
-    status: "Draft",
-    date: "2024-06-20",
-    questions: 15,
-    duration: "25 mins",
-    participants: 0,
-  },
-  {
-    title: "Math Weekly Quiz",
-    description: "Weekly quiz on algebra and geometry.",
-    status: "Published",
-    date: "2024-06-18",
-    questions: 10,
-    duration: "20 mins",
-    participants: 85,
-  },
-];
+const keyword = ref("");
+
+const filteredQuizzes = computed(() => {
+  if (!category.value && !keyword.value) return quizzes.value || [];
+  return (quizzes.value || []).filter((quiz) => {
+    const matchesCategory = category.value ? quiz.category === category.value : true;
+    const matchesKeyword = keyword.value
+      ? quiz.title.toLowerCase().includes(keyword.value.toLowerCase())
+      : true;
+    return matchesCategory && matchesKeyword;
+  });
+});
 </script>
