@@ -18,6 +18,11 @@ type TQuizPlayer = {
   isOnline: boolean;
   remainingLives: number;
   skipCount: number;
+  answers: {
+    skipped: TQuestion["id"][];
+    correct: TQuestion["id"][];
+    incorrect: TQuestion["id"][];
+  };
 };
 
 type TQuizRoom = {
@@ -61,6 +66,11 @@ export function createQuiz({
           isOnline: true,
           remainingLives: 3,
           skipCount: 0,
+          answers: {
+            skipped: [],
+            correct: [],
+            incorrect: [],
+          },
         },
       ],
       maxPlayers: 8,
@@ -118,6 +128,11 @@ export function joinQuiz({
       isOnline: true,
       remainingLives: 3,
       skipCount: 0,
+      answers: {
+        skipped: [],
+        correct: [],
+        incorrect: [],
+      },
     });
   }
 
