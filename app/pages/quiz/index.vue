@@ -102,15 +102,19 @@
                 </div>
               </div>
             </div>
-            <div class="flex items-center gap-2">
-              <button type="button" class="button--primary button--compact">View</button>
-              <button
-                type="button"
-                class="button--default-outline border-primary-700! button--icon"
+            <div>
+              <NuxtLink
+                :to="{
+                  name: 'quiz-creatorId-quizId',
+                  params: {
+                    creatorId: quiz.creatorId,
+                    quizId: quiz.id,
+                  },
+                }"
+                class="button--primary button--compact"
               >
-                <Icon name="mi:options-vertical" size="20" />
-                <span class="sr-only">Edit</span>
-              </button>
+                View quiz
+              </NuxtLink>
             </div>
           </UiCard>
         </div>
