@@ -11,6 +11,16 @@
   <UiQuizRoundTypeImageBased v-else-if="question?.type === 'image-based'" :question="question" />
   <UiQuizRoundTypeAudioBased v-else-if="question?.type === 'audio-based'" :question="question" />
   <UiQuizRoundTypeVideoBased v-else-if="question?.type === 'video-based'" :question="question" />
+  <UiQuizRoundTypeCodeSnippet v-else-if="question?.type === 'code-snippet'" :question="question" />
+  <UiQuizRoundTypeDragAndDrop v-else-if="question?.type === 'drag-and-drop'" :question="question" />
+  <UiQuizRoundTypeGuessTheNumber
+    v-else-if="question?.type === 'guess-the-number'"
+    :question="question"
+  />
+  <UiQuizRoundTypeMemorizeTheOrder
+    v-else-if="question?.type === 'memorize-the-order'"
+    :question="question"
+  />
 </template>
 
 <script setup lang="ts">
