@@ -20,6 +20,7 @@ export type TQuestion = {
   options?: string[]; // Only for multiple-choice questions
   leftOptions?: string[]; // For matching questions, the options on the left side
   rightOptions?: string[]; // For matching questions, the options on the right side
+  src?: string; // For image-based, audio-based, and video-based questions, the source URL of the media
   correctAnswer: string | boolean; // String for multiple-choice, short-answer, and fill-in-the-blank, boolean for true-false
   points: number;
   doublePoints?: boolean; // If true, points for this question are doubled if answered correctly and reduce by double if answered incorrectly
@@ -168,6 +169,7 @@ export const dbQuiz: TQuiz[] = [
         id: 7,
         text: "Identify the object in the image.",
         type: "image-based",
+        src: "https://cdn.britannica.com/89/187589-050-E8D5A657/Workers-Big-Ben-London.jpg",
         options: ["Eiffel Tower", "Statue of Liberty", "Big Ben", "Colosseum"],
         correctAnswer: "Eiffel Tower",
         points: 15,
@@ -436,6 +438,7 @@ export const dbQuiz: TQuiz[] = [
         id: 2,
         text: "Identify the movie from this iconic scene.",
         type: "image-based",
+        src: "https://www.rollingstone.com/wp-content/uploads/2020/08/goodfellasc.jpg?w=1581&h=1054&crop=1",
         options: ["The Godfather", "Scarface", "Goodfellas", "Casino"],
         correctAnswer: "The Godfather",
         points: 20,
@@ -955,6 +958,7 @@ export const dbQuiz: TQuiz[] = [
         id: 2,
         text: "Identify the artwork in the image.",
         type: "image-based",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/1280px-1665_Girl_with_a_Pearl_Earring.jpg",
         options: [
           "The Starry Night",
           "The Persistence of Memory",
@@ -1099,6 +1103,7 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Identify the animal in the image.",
         type: "image-based",
+        src: "https://www.wwf.de/fileadmin/_processed_/b/c/csm_jaguar-WW1108826-c-Yves-Jacques-REY-MILLET-WWF_a50dfac362.jpg",
         options: ["Tiger", "Leopard", "Jaguar", "Cheetah"],
         correctAnswer: "Tiger",
         points: 15,
