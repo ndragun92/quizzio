@@ -40,55 +40,55 @@
         <div class="flex items-center justify-between">
           <div class="space-x-2">
             <span
-              class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+              class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:tag" size="16" class="text-yellow-400 mr-1" />
+              <Icon name="lucide:tag" size="16" class="text-orange-400 mr-1" />
               {{ capitalizeFirstLetter(quiz.category) }}</span
             >
             <span
-              class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+              class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:sliders-horizontal" size="16" class="text-yellow-400 mr-1" />
+              <Icon name="lucide:sliders-horizontal" size="16" class="text-orange-400 mr-1" />
               {{ capitalizeFirstLetter(quiz.difficulty) }}</span
             >
             <span
-              class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-              ><Icon name="lucide:gamepad" size="16" class="text-yellow-400 mr-1" />
+              class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+              ><Icon name="lucide:gamepad" size="16" class="text-orange-400 mr-1" />
               {{ capitalizeFirstLetter(quiz.gameMode) }}</span
             >
             <span
-              class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+              class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:book-open" size="16" class="text-yellow-400 mr-1" />
+              <Icon name="lucide:book-open" size="16" class="text-orange-400 mr-1" />
               {{ quiz.questions.length }} questions</span
             >
           </div>
           <div>
             <div class="space-x-2">
               <span
-                class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:clock" size="16" class="text-yellow-400 mr-1" /> Time limit per
+                class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+                ><Icon name="lucide:clock" size="16" class="text-orange-400 mr-1" /> Time limit per
                 round: {{ quiz.settings.timeLimitPerRound }} seconds</span
               >
               <span
-                class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:check-circle" size="16" class="text-yellow-400 mr-1" /> Passing
+                class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+                ><Icon name="lucide:check-circle" size="16" class="text-orange-400 mr-1" /> Passing
                 score: {{ quiz.settings.passingScorePercentage }}%</span
               >
               <span
-                class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:shuffle" size="16" class="text-yellow-400 mr-1" /> Shuffle
+                class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+                ><Icon name="lucide:shuffle" size="16" class="text-orange-400 mr-1" /> Shuffle
                 questions: {{ quiz.settings.shuffleQuestions ? "Yes" : "No" }}</span
               >
               <span
-                class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:refresh-cw" size="16" class="text-yellow-400 mr-1" /> Immediate
+                class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+                ><Icon name="lucide:refresh-cw" size="16" class="text-orange-400 mr-1" /> Immediate
                 results: {{ quiz.settings.immediateResults ? "Yes" : "No" }}</span
               >
               <span
                 v-if="quiz.gameMode === EGameMode.SURVIVAL"
-                class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:heart" size="16" class="text-yellow-400 mr-1" /> Number of
+                class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
+                ><Icon name="lucide:heart" size="16" class="text-orange-400 mr-1" /> Number of
                 lives: {{ quiz.settings.lives }}</span
               >
             </div>
