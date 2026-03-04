@@ -78,7 +78,7 @@ export function createQuiz({
       countdown: 10,
     });
   } else {
-    throw new Error("Quiz room already exists");
+    return "Quiz room already exists";
   }
 }
 

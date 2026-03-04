@@ -4,6 +4,7 @@ import {
   handlePlayerSubmission,
   startMatch,
 } from "#server/utils/rooms.utils";
+import { createQuiz } from "../utils/quiz.utils";
 
 type TCustomPeer = {
   playerId?: string;
@@ -148,30 +149,39 @@ export default defineWebSocketHandler({
           }
           break;
         }
-        case "joinQuiz": {
-          const { playerId, nickname, guestDisplayName, creatorId, quizId } = data;
-          const result = joinQuiz({ playerId, nickname, guestDisplayName, creatorId, quizId });
+        case "createQuiz": {
+          const { quizRoomId, quiz, playerId, nickname, guestDisplayName } = data;
+          const result = createQuiz({ quizRoomId, quiz, playerId, nickname, guestDisplayName });
           if (typeof result === "string") {
             peer.send(JSON.stringify({ type: "error", data: result }));
-          } else {
-            const { room, playerId } = result;
-            mapSocket({ socketId: peer.id, roomId: room.id, playerId });
-            peer.send(JSON.stringify({ type: "reconnectSuccess", data: { room, playerId } }));
-            broadcastRoomUpdate(room.id);
           }
+          broadcastToAllPeers(JSON.stringify({ type: "refreshQuizzes" }));
           break;
         }
-        case "leaveQuiz": {
-          const { quizId, playerId } = data;
-          const result = leaveQuiz({ quizId, playerId });
-          if (typeof result === "string") {
-            peer.send(JSON.stringify({ type: "error", data: result }));
-          } else {
-            const { roomId } = result;
-            broadcastRoomUpdate(roomId);
-          }
-          break;
-        }
+        // case "joinQuiz": {
+        //   const { playerId, nickname, guestDisplayName, creatorId, quizId } = data;
+        //   const result = joinQuiz({ playerId, nickname, guestDisplayName, creatorId, quizId });
+        //   if (typeof result === "string") {
+        //     peer.send(JSON.stringify({ type: "error", data: result }));
+        //   } else {
+        //     const { room, playerId } = result;
+        //     mapSocket({ socketId: peer.id, roomId: room.id, playerId });
+        //     peer.send(JSON.stringify({ type: "reconnectSuccess", data: { room, playerId } }));
+        //     broadcastRoomUpdate(room.id);
+        //   }
+        //   break;
+        // }
+        // case "leaveQuiz": {
+        //   const { quizId, playerId } = data;
+        //   const result = leaveQuiz({ quizId, playerId });
+        //   if (typeof result === "string") {
+        //     peer.send(JSON.stringify({ type: "error", data: result }));
+        //   } else {
+        //     const { roomId } = result;
+        //     broadcastRoomUpdate(roomId);
+        //   }
+        //   break;
+        // }
       }
     } catch (error) {
       console.error(`server/api/ws.ts:message() ${JSON.stringify(error)}`);
