@@ -34,6 +34,7 @@ export type TQuiz = {
   title: string;
   description: string;
   creatorId: number;
+  status?: "draft" | "published" | "archived";
   category:
     | "general"
     | "science"
@@ -80,6 +81,7 @@ export const dbQuiz: TQuiz[] = [
     title: "General Knowledge Quiz",
     description: "Test your general knowledge with this fun quiz!",
     creatorId: 123,
+    status: "published",
     category: "general",
     difficulty: "medium",
     gameMode: "classic",
