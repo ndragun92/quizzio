@@ -12,7 +12,7 @@
         Your browser does not support the video element.
       </video>
     </div>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-2">
       <UiCard
         v-for="(option, index) in question?.options"
         :key="option"

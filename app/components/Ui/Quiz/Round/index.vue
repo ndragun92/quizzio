@@ -21,6 +21,10 @@
     v-else-if="question?.type === 'memorize-the-order'"
     :question="question"
   />
+  <UiQuizRoundTypeMultipleChoiceSharedAnswers
+    v-else-if="question?.type === 'multiple-choice-shared-answers'"
+    :question="question"
+  />
 </template>
 
 <script setup lang="ts">

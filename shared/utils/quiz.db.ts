@@ -15,7 +15,6 @@ export type TQuestion = {
     | "drag-and-drop" // Question that requires players to drag and drop answers into the correct positions
     | "guess-the-number" // Question that requires players to guess a number within a certain range
     | "memorize-the-order" // Question that requires players to memorize the order of items and recall them
-    | "reveal-in-order" // Question that requires players to reveal the answers in a specific order to solve a puzzle
     | "multiple-choice-shared-answers"; // Answer locked once selected, shared among multiple questions
   options?: string[]; // Only for multiple-choice questions
   leftOptions?: string[]; // For matching questions, the options on the left side
@@ -225,14 +224,6 @@ export const dbQuiz: TQuiz[] = [
       },
       {
         id: 14,
-        text: "Reveal the answers in the correct order to solve the puzzle.",
-        type: "reveal-in-order",
-        options: ["Answer A", "Answer B", "Answer C", "Answer D"],
-        correctAnswer: "Answer C, Answer A, Answer D, Answer B",
-        points: 20,
-      },
-      {
-        id: 15,
         text: "Select the correct answer that is shared among multiple questions.",
         type: "multiple-choice-shared-answers",
         options: ["Shared Answer A", "Shared Answer B", "Shared Answer C", "Shared Answer D"],

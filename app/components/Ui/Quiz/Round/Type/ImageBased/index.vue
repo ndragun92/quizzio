@@ -10,7 +10,7 @@
         height="256"
       />
     </div>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-2">
       <UiCard
         v-for="(option, index) in question?.options"
         :key="option"
