@@ -6,6 +6,8 @@
     v-else-if="question?.type === 'fill-in-the-blank'"
     :question="question"
   />
+  <UiQuizRoundTypeMatching v-else-if="question?.type === 'matching'" :question="question" />
+  <UiQuizRoundTypeOrdering v-else-if="question?.type === 'ordering'" :question="question" />
 </template>
 
 <script setup lang="ts">

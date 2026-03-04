@@ -18,6 +18,8 @@ export type TQuestion = {
     | "reveal-in-order" // Question that requires players to reveal the answers in a specific order to solve a puzzle
     | "multiple-choice-shared-answers"; // Answer locked once selected, shared among multiple questions
   options?: string[]; // Only for multiple-choice questions
+  leftOptions?: string[]; // For matching questions, the options on the left side
+  rightOptions?: string[]; // For matching questions, the options on the right side
   correctAnswer: string | boolean; // String for multiple-choice, short-answer, and fill-in-the-blank, boolean for true-false
   points: number;
   doublePoints?: boolean; // If true, points for this question are doubled if answered correctly and reduce by double if answered incorrectly
@@ -149,7 +151,8 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Match the following countries with their capitals.",
         type: "matching",
-        options: ["France - Paris", "Germany - Berlin", "Spain - Madrid", "Italy - Rome"],
+        leftOptions: ["France", "Germany", "Spain", "Italy"],
+        rightOptions: ["Paris", "Berlin", "Madrid", "Rome"],
         correctAnswer: "France - Paris, Germany - Berlin, Spain - Madrid, Italy - Rome",
         points: 20,
       },
@@ -345,12 +348,13 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Match the code names with their operations.",
         type: "matching",
-        options: [
-          "Operation Overlord - D-Day",
-          "Operation Barbarossa - Invasion of USSR",
-          "Operation Market Garden - Netherlands",
-          "Operation Torch - North Africa",
+        leftOptions: [
+          "Operation Overlord",
+          "Operation Barbarossa",
+          "Operation Market Garden",
+          "Operation Torch",
         ],
+        rightOptions: ["D-Day", "Invasion of USSR", "Netherlands", "North Africa"],
         correctAnswer:
           "Operation Overlord - D-Day, Operation Barbarossa - Invasion of USSR, Operation Market Garden - Netherlands, Operation Torch - North Africa",
         points: 30,
@@ -440,12 +444,8 @@ export const dbQuiz: TQuiz[] = [
         id: 3,
         text: "Match the movies with their directors.",
         type: "matching",
-        options: [
-          "Inception - Christopher Nolan",
-          "The Grand Budapest Hotel - Wes Anderson",
-          "Parasite - Bong Joon-ho",
-          "Get Out - Jordan Peele",
-        ],
+        leftOptions: ["Inception", "The Grand Budapest Hotel", "Parasite", "Get Out"],
+        rightOptions: ["Christopher Nolan", "Wes Anderson", "Bong Joon-ho", "Jordan Peele"],
         correctAnswer:
           "Inception - Christopher Nolan, The Grand Budapest Hotel - Wes Anderson, Parasite - Bong Joon-ho, Get Out - Jordan Peele",
         points: 25,
@@ -563,7 +563,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the countries with their continents.",
         type: "matching",
-        options: ["Brazil - South America", "Egypt - Africa", "Japan - Asia", "Germany - Europe"],
+        leftOptions: ["Brazil", "Egypt", "Japan", "Germany"],
+        rightOptions: ["South America", "Africa", "Asia", "Europe"],
         correctAnswer: "Brazil - South America, Egypt - Africa, Japan - Asia, Germany - Europe",
         points: 20,
       },
@@ -622,11 +623,12 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Match the sport with its championship trophy.",
         type: "matching",
-        options: [
-          "NHL - Stanley Cup",
-          "NFL - Lombardi Trophy",
-          "NBA - Larry O'Brien Trophy",
-          "MLB - Commissioner's Trophy",
+        leftOptions: ["NHL", "NFL", "NBA", "MLB"],
+        rightOptions: [
+          "Stanley Cup",
+          "Lombardi Trophy",
+          "Larry O'Brien Trophy",
+          "Commissioner's Trophy",
         ],
         correctAnswer:
           "NHL - Stanley Cup, NFL - Lombardi Trophy, NBA - Larry O'Brien Trophy, MLB - Commissioner's Trophy",
@@ -723,7 +725,8 @@ export const dbQuiz: TQuiz[] = [
         id: 3,
         text: "Match the dishes with their countries of origin.",
         type: "matching",
-        options: ["Paella - Spain", "Pho - Vietnam", "Tacos - Mexico", "Pasta - Italy"],
+        leftOptions: ["Paella", "Pho", "Tacos", "Pasta"],
+        rightOptions: ["Spain", "Vietnam", "Mexico", "Italy"],
         correctAnswer: "Paella - Spain, Pho - Vietnam, Tacos - Mexico, Pasta - Italy",
         points: 20,
       },
@@ -798,12 +801,8 @@ export const dbQuiz: TQuiz[] = [
         id: 6,
         text: "Match the game series with their developers.",
         type: "matching",
-        options: [
-          "The Witcher - CD Projekt Red",
-          "Halo - Bungie",
-          "God of War - Santa Monica Studio",
-          "Uncharted - Naughty Dog",
-        ],
+        leftOptions: ["The Witcher", "Halo", "God of War", "Uncharted"],
+        rightOptions: ["CD Projekt Red", "Bungie", "Santa Monica Studio", "Naughty Dog"],
         correctAnswer:
           "The Witcher - CD Projekt Red, Halo - Bungie, God of War - Santa Monica Studio, Uncharted - Naughty Dog",
         points: 30,
@@ -856,12 +855,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the celebrity with their profession.",
         type: "matching",
-        options: [
-          "Dwayne Johnson - Actor",
-          "The Weeknd - Singer",
-          "Elon Musk - Entrepreneur",
-          "Oprah Winfrey - Talk Show Host",
-        ],
+        leftOptions: ["Dwayne Johnson", "The Weeknd", "Elon Musk", "Oprah Winfrey"],
+        rightOptions: ["Actor", "Singer", "Entrepreneur", "Talk Show Host"],
         correctAnswer:
           "Dwayne Johnson - Actor, The Weeknd - Singer, Elon Musk - Entrepreneur, Oprah Winfrey - Talk Show Host",
         points: 20,
@@ -913,12 +908,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the books with their authors.",
         type: "matching",
-        options: [
-          "1984 - George Orwell",
-          "The Great Gatsby - F. Scott Fitzgerald",
-          "Jane Eyre - Charlotte Brontë",
-          "Wuthering Heights - Emily Brontë",
-        ],
+        leftOptions: ["1984", "The Great Gatsby", "Jane Eyre", "Wuthering Heights"],
+        rightOptions: ["George Orwell", "F. Scott Fitzgerald", "Charlotte Brontë", "Emily Brontë"],
         correctAnswer:
           "1984 - George Orwell, The Great Gatsby - F. Scott Fitzgerald, Jane Eyre - Charlotte Brontë, Wuthering Heights - Emily Brontë",
         points: 25,
@@ -985,12 +976,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the artists with their art movements.",
         type: "matching",
-        options: [
-          "Vincent van Gogh - Post-Impressionism",
-          "Pablo Picasso - Cubism",
-          "Jackson Pollock - Abstract Expressionism",
-          "Andy Warhol - Pop Art",
-        ],
+        leftOptions: ["Vincent van Gogh", "Pablo Picasso", "Jackson Pollock", "Andy Warhol"],
+        rightOptions: ["Post-Impressionism", "Cubism", "Abstract Expressionism", "Pop Art"],
         correctAnswer:
           "Vincent van Gogh - Post-Impressionism, Pablo Picasso - Cubism, Jackson Pollock - Abstract Expressionism, Andy Warhol - Pop Art",
         points: 25,
@@ -1050,12 +1037,8 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Match the TV show with the actor who plays the main role.",
         type: "matching",
-        options: [
-          "House - Hugh Laurie",
-          "Sherlock - Benedict Cumberbatch",
-          "The Wire - Dominic West",
-          "The Sopranos - James Gandolfini",
-        ],
+        leftOptions: ["House", "Sherlock", "The Wire", "The Sopranos"],
+        rightOptions: ["Hugh Laurie", "Benedict Cumberbatch", "Dominic West", "James Gandolfini"],
         correctAnswer:
           "House - Hugh Laurie, Sherlock - Benedict Cumberbatch, The Wire - Dominic West, The Sopranos - James Gandolfini",
         points: 25,
@@ -1107,7 +1090,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the animals with their diets.",
         type: "matching",
-        options: ["Lion - Carnivore", "Cow - Herbivore", "Bear - Omnivore", "Parrot - Frugivore"],
+        leftOptions: ["Lion", "Cow", "Bear", "Parrot"],
+        rightOptions: ["Carnivore", "Herbivore", "Omnivore", "Frugivore"],
         correctAnswer: "Lion - Carnivore, Cow - Herbivore, Bear - Omnivore, Parrot - Frugivore",
         points: 20,
       },
@@ -1171,12 +1155,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the biomes with their characteristics.",
         type: "matching",
-        options: [
-          "Desert - Hot and dry",
-          "Tundra - Cold and frozen",
-          "Tropical - Hot and humid",
-          "Temperate - Moderate climate",
-        ],
+        leftOptions: ["Desert", "Tundra", "Tropical", "Temperate"],
+        rightOptions: ["Hot and dry", "Cold and frozen", "Hot and humid", "Moderate climate"],
         correctAnswer:
           "Desert - Hot and dry, Tundra - Cold and frozen, Tropical - Hot and humid, Temperate - Moderate climate",
         points: 20,
@@ -1243,12 +1223,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the planets with their characteristics.",
         type: "matching",
-        options: [
-          "Venus - Hottest planet",
-          "Mars - Red planet",
-          "Jupiter - Largest planet",
-          "Saturn - Ring planet",
-        ],
+        leftOptions: ["Venus", "Mars", "Jupiter", "Saturn"],
+        rightOptions: ["Hottest planet", "Red planet", "Largest planet", "Ring planet"],
         correctAnswer:
           "Venus - Hottest planet, Mars - Red planet, Jupiter - Largest planet, Saturn - Ring planet",
         points: 25,
@@ -1316,11 +1292,12 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Match the mathematical concepts with their definitions.",
         type: "matching",
-        options: [
-          "Prime Number - Divisible only by 1 and itself",
-          "Composite Number - Has more than two factors",
-          "Perfect Square - Result of multiplying a number by itself",
-          "Integer - Whole number",
+        leftOptions: ["Prime Number", "Composite Number", "Perfect Square", "Integer"],
+        rightOptions: [
+          "Divisible only by 1 and itself",
+          "Has more than two factors",
+          "Result of multiplying a number by itself",
+          "Whole number",
         ],
         correctAnswer:
           "Prime Number - Divisible only by 1 and itself, Composite Number - Has more than two factors, Perfect Square - Result of multiplying a number by itself, Integer - Whole number",
@@ -1373,7 +1350,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the languages with their countries.",
         type: "matching",
-        options: ["Portuguese - Brazil", "Swahili - Kenya", "Thai - Thailand", "Polish - Poland"],
+        leftOptions: ["Portuguese", "Swahili", "Thai", "Polish"],
+        rightOptions: ["Brazil", "Kenya", "Thailand", "Poland"],
         correctAnswer: "Portuguese - Brazil, Swahili - Kenya, Thai - Thailand, Polish - Poland",
         points: 20,
       },
@@ -1432,12 +1410,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the landmarks with their locations.",
         type: "matching",
-        options: [
-          "Statue of Liberty - New York",
-          "Big Ben - London",
-          "Taj Mahal - India",
-          "Machu Picchu - Peru",
-        ],
+        leftOptions: ["Statue of Liberty", "Big Ben", "Taj Mahal", "Machu Picchu"],
+        rightOptions: ["New York", "London", "India", "Peru"],
         correctAnswer:
           "Statue of Liberty - New York, Big Ben - London, Taj Mahal - India, Machu Picchu - Peru",
         points: 20,
@@ -1489,11 +1463,12 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the inventions with their inventors.",
         type: "matching",
-        options: [
-          "Light Bulb - Thomas Edison",
-          "Telephone - Alexander Graham Bell",
-          "Airplane - Wright Brothers",
-          "Printing Press - Johannes Gutenberg",
+        leftOptions: ["Light Bulb", "Telephone", "Airplane", "Printing Press"],
+        rightOptions: [
+          "Thomas Edison",
+          "Alexander Graham Bell",
+          "Wright Brothers",
+          "Johannes Gutenberg",
         ],
         correctAnswer:
           "Light Bulb - Thomas Edison, Telephone - Alexander Graham Bell, Airplane - Wright Brothers, Printing Press - Johannes Gutenberg",
@@ -1554,11 +1529,12 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the branches of science with their focus.",
         type: "matching",
-        options: [
-          "Physics - Study of matter and energy",
-          "Chemistry - Study of atoms and molecules",
-          "Biology - Study of living organisms",
-          "Geology - Study of rocks and Earth",
+        leftOptions: ["Physics", "Chemistry", "Biology", "Geology"],
+        rightOptions: [
+          "Study of matter and energy",
+          "Study of atoms and molecules",
+          "Study of living organisms",
+          "Study of rocks and Earth",
         ],
         correctAnswer:
           "Physics - Study of matter and energy, Chemistry - Study of atoms and molecules, Biology - Study of living organisms, Geology - Study of rocks and Earth",
@@ -1620,12 +1596,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the historical events with their years.",
         type: "matching",
-        options: [
-          "Moon Landing - 1969",
-          "Fall of Berlin Wall - 1989",
-          "9/11 Attacks - 2001",
-          "End of Cold War - 1991",
-        ],
+        leftOptions: ["Moon Landing", "Fall of Berlin Wall", "9/11 Attacks", "End of Cold War"],
+        rightOptions: ["1969", "1989", "2001", "1991"],
         correctAnswer:
           "Moon Landing - 1969, Fall of Berlin Wall - 1989, 9/11 Attacks - 2001, End of Cold War - 1991",
         points: 25,
@@ -1685,12 +1657,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the Olympic athletes with their sports.",
         type: "matching",
-        options: [
-          "Serena Williams - Tennis",
-          "Usain Bolt - Track and Field",
-          "Nadia Comaneci - Gymnastics",
-          "Mark Spitz - Swimming",
-        ],
+        leftOptions: ["Serena Williams", "Usain Bolt", "Nadia Comaneci", "Mark Spitz"],
+        rightOptions: ["Tennis", "Track and Field", "Gymnastics", "Swimming"],
         correctAnswer:
           "Serena Williams - Tennis, Usain Bolt - Track and Field, Nadia Comaneci - Gymnastics, Mark Spitz - Swimming",
         points: 20,
@@ -1750,12 +1718,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the countries with their capitals.",
         type: "matching",
-        options: [
-          "Thailand - Bangkok",
-          "South Korea - Seoul",
-          "Indonesia - Jakarta",
-          "Malaysia - Kuala Lumpur",
-        ],
+        leftOptions: ["Thailand", "South Korea", "Indonesia", "Malaysia"],
+        rightOptions: ["Bangkok", "Seoul", "Jakarta", "Kuala Lumpur"],
         correctAnswer:
           "Thailand - Bangkok, South Korea - Seoul, Indonesia - Jakarta, Malaysia - Kuala Lumpur",
         points: 25,
@@ -1816,12 +1780,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the artists with their iconic albums.",
         type: "matching",
-        options: [
-          "The Beatles - Abbey Road",
-          "Pink Floyd - The Dark Side of the Moon",
-          "David Bowie - Ziggy Stardust",
-          "Prince - Purple Rain",
-        ],
+        leftOptions: ["The Beatles", "Pink Floyd", "David Bowie", "Prince"],
+        rightOptions: ["Abbey Road", "The Dark Side of the Moon", "Ziggy Stardust", "Purple Rain"],
         correctAnswer:
           "The Beatles - Abbey Road, Pink Floyd - The Dark Side of the Moon, David Bowie - Ziggy Stardust, Prince - Purple Rain",
         points: 25,
@@ -1880,12 +1840,13 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the famous movie quotes with the films they're from.",
         type: "matching",
-        options: [
-          "'You can't handle the truth!' - A Few Good Men",
-          "'Here's looking at you, kid.' - Casablanca",
-          "'Frankly, my dear, I don't give a damn.' - Gone with the Wind",
-          "'I feel the need... the need for speed!' - Top Gun",
+        leftOptions: [
+          "'You can't handle the truth!'",
+          "'Here's looking at you, kid.'",
+          "'Frankly, my dear, I don't give a damn.'",
+          "'I feel the need... the need for speed!'",
         ],
+        rightOptions: ["A Few Good Men", "Casablanca", "Gone with the Wind", "Top Gun"],
         correctAnswer:
           "'You can't handle the truth!' - A Few Good Men, 'Here's looking at you, kid.' - Casablanca, 'Frankly, my dear, I don't give a damn.' - Gone with the Wind, 'I feel the need... the need for speed!' - Top Gun",
         points: 25,
@@ -1945,12 +1906,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the tech companies with their founders.",
         type: "matching",
-        options: [
-          "Apple - Steve Jobs",
-          "Facebook - Mark Zuckerberg",
-          "Amazon - Jeff Bezos",
-          "Tesla - Elon Musk",
-        ],
+        leftOptions: ["Apple", "Facebook", "Amazon", "Tesla"],
+        rightOptions: ["Steve Jobs", "Mark Zuckerberg", "Jeff Bezos", "Elon Musk"],
         correctAnswer:
           "Apple - Steve Jobs, Facebook - Mark Zuckerberg, Amazon - Jeff Bezos, Tesla - Elon Musk",
         points: 25,
@@ -2010,7 +1967,8 @@ export const dbQuiz: TQuiz[] = [
         id: 4,
         text: "Match the cuisines with their signature dishes.",
         type: "matching",
-        options: ["Italian - Pasta", "Thai - Pad Thai", "French - Croissant", "Greek - Moussaka"],
+        leftOptions: ["Italian", "Thai", "French", "Greek"],
+        rightOptions: ["Pasta", "Pad Thai", "Croissant", "Moussaka"],
         correctAnswer: "Italian - Pasta, Thai - Pad Thai, French - Croissant, Greek - Moussaka",
         points: 20,
       },
@@ -2087,12 +2045,8 @@ export const dbQuiz: TQuiz[] = [
         id: 5,
         text: "Match the web technologies with their purposes.",
         type: "matching",
-        options: [
-          "HTML - Structure",
-          "CSS - Styling",
-          "JavaScript - Interactivity",
-          "SQL - Database",
-        ],
+        leftOptions: ["HTML", "CSS", "JavaScript", "SQL"],
+        rightOptions: ["Structure", "Styling", "Interactivity", "Database"],
         correctAnswer:
           "HTML - Structure, CSS - Styling, JavaScript - Interactivity, SQL - Database",
         points: 25,
