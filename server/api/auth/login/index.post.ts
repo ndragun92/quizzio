@@ -1,33 +1,19 @@
 import jwt from "jsonwebtoken";
+import { and, eq } from "drizzle-orm";
 import type { TLoginRequest, TLoginResponse } from "#shared/types/api.type";
-import type { TApiUser } from "#shared/types/user.type";
-
-interface TUserRecord extends TApiUser {
-  password: string;
-}
-
-const users: TUserRecord[] = [
-  {
-    id: 1,
-    username: "admin",
-    nickname: "Admin",
-    password: "12345678",
-  },
-  {
-    id: 2,
-    username: "user",
-    nickname: "User",
-    password: "12345678",
-  },
-];
+import { getDatabase, schema } from "~~/server/utils/db/client";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
 
 export default defineEventHandler(async (event): Promise<TLoginResponse | Response> => {
   const body = await readBody<TLoginRequest>(event);
-  const user = users.find(
-    (user) => user.username === body.username && user.password === body.password
-  );
+  const db = await getDatabase();
+  const [user] = (await (db as any)
+    .select()
+    .from(schema.users)
+    .where(and(eq(schema.users.username, body.username), eq(schema.users.password, body.password)))
+    .limit(1)) as Array<{ id: number; username: string; nickname: string }>;
+
   if (!user) {
     return new Response("Unauthorized", { status: 401 });
   }
