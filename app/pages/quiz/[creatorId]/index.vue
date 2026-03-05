@@ -161,7 +161,7 @@ const creatorId = computed(() => routeParams.value.creatorId);
 const quizId = computed(() => routeParams.value.quizId);
 
 const { onJoinQuiz } = useQuiz();
-const {nickname} = useUser();
+const { nickname } = useUser();
 const socketStore = useSocketStore();
 const isConnected = computed(() => socketStore.isConnected);
 // const error = computed(() => socketStore.error);
