@@ -12,6 +12,15 @@ export interface TLoginResponse {
   user: TApiUser;
 }
 
+export interface TRegisterRequest {
+  username: TApiUser["username"];
+  password: string;
+  nickname?: TApiUser["nickname"];
+  type?: "player" | "quiz_creator";
+}
+
+export type TRegisterResponse = TLoginResponse;
+
 export interface TValidateResponse {
   success: boolean;
   message: string;

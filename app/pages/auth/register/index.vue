@@ -165,13 +165,13 @@ const userStore = useUserStore();
 
 const onSubmit = handleSubmit(async (values) => {
   try {
-    const response = await $fetch<{
-      token: string;
-      user: {
-        id: string;
-        username: string;
-      };
-    }>("/api/auth/login", {
+        const response = await $fetch<{
+          token: string;
+          user: {
+            id: string;
+            username: string;
+          };
+        }>("/api/auth/register", {
       method: "POST",
       body: values,
     });
@@ -188,7 +188,7 @@ const onSubmit = handleSubmit(async (values) => {
       name: "index",
     });
   } catch (error) {
-    console.error(`pages/auth/login/index.vue:onSubmit() ${JSON.stringify(error)}`);
+    console.error(`pages/auth/register/index.vue:onSubmit() ${JSON.stringify(error)}`);
   }
 });
 </script>

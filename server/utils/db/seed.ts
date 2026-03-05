@@ -1,5 +1,6 @@
 import { inArray } from "drizzle-orm";
 import { dbQuiz, EStatus } from "~~/shared/utils/quiz.db";
+import { hashPassword } from "~~/server/utils/auth/password";
 import type { TDbQuiz, TNewQuiz } from "./schema";
 import { quizzes, users } from "./schema";
 
@@ -29,9 +30,11 @@ const chunkArray = <T>(items: T[], size: number): T[][] => {
 
 export const seedDatabase = async (db: any, rawDb: any): Promise<void> => {
   for (const user of bootstrapUsers) {
+    const passwordHash = await hashPassword(user.password);
+
     await rawDb.sql`
       INSERT INTO users (username, nickname, password)
-      VALUES (${user.username}, ${user.nickname}, ${user.password})
+      VALUES (${user.username}, ${user.nickname}, ${passwordHash})
       ON CONFLICT (username) DO NOTHING
     `;
   }
