@@ -3,6 +3,15 @@ import type { TDeleteQuizResponse } from "~~/shared/types/api.type";
 import { getDatabase, schema } from "~~/server/utils/db/client";
 
 export default defineEventHandler(async (event): Promise<TDeleteQuizResponse> => {
+  const user = event.context.user;
+
+  if (!user) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Unauthorized",
+    });
+  }
+
   const quizId = Number(event.context.params?.quizId);
 
   if (!Number.isInteger(quizId) || quizId < 1) {
