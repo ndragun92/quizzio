@@ -110,6 +110,11 @@ const { value: password } = useField("password", {}, { initialValue: "12345678" 
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
+const toastStore = useToastStore();
+
+const route = useRoute();
+
+const redirectedFrom = route.query.redirect as string;
 
 const onSubmit = handleSubmit(async (values) => {
   try {
@@ -132,11 +137,22 @@ const onSubmit = handleSubmit(async (values) => {
       path: "/",
     }).value = token;
     await userStore.getUser();
-    navigateTo({
-      name: "index",
+    toastStore.success({
+      text: "Login successful! Redirecting to dashboard...",
     });
+
+    if (redirectedFrom) {
+      navigateTo(redirectedFrom);
+    } else {
+      navigateTo({
+        name: "@creator",
+      });
+    }
   } catch (error) {
     console.error(`pages/auth/login/index.vue:onSubmit() ${JSON.stringify(error)}`);
+    toastStore.error({
+      text: "Login failed. Please check your credentials and try again.",
+    });
   }
 });
 </script>

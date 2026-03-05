@@ -5,9 +5,9 @@ export default defineNuxtRouteMiddleware((from) => {
   const fromPath = from.fullPath;
   const fromName = from.name;
   if (!isAuthenticated) {
-    if (fromName === "quiz-creatorId") {
+    if (fromName.startsWith("@creator")) {
       return navigateTo({
-        name: "index",
+        name: "auth-login",
         query: {
           redirect: fromPath,
         },
