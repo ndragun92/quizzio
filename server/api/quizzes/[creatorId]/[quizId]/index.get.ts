@@ -1,5 +1,4 @@
 import { and, eq } from "drizzle-orm";
-import type { TQuiz } from "~~/shared/utils/quiz.db";
 import { getDatabase, schema } from "~~/server/utils/db/client";
 import { mapDbQuizToQuiz } from "~~/server/utils/db/seed";
 
@@ -8,11 +7,11 @@ export default defineEventHandler(async (_event) => {
   const quizId = Number(_event.context.params?.quizId);
 
   const db = await getDatabase();
-  const [quiz] = (await (db as any)
+  const [quiz] = await db
     .select()
     .from(schema.quizzes)
     .where(and(eq(schema.quizzes.id, quizId), eq(schema.quizzes.creatorId, creatorId)))
-    .limit(1)) as any[];
+    .limit(1);
 
-  return quiz ? (mapDbQuizToQuiz(quiz) as TQuiz) : null;
+  return quiz ? mapDbQuizToQuiz(quiz) : null;
 });

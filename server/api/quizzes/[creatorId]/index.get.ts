@@ -6,10 +6,10 @@ import { mapDbQuizToQuiz } from "~~/server/utils/db/seed";
 export default defineEventHandler(async (_event) => {
   const creatorId = Number(_event.context.params?.creatorId);
   const db = await getDatabase();
-  const quizzes = (await (db as any)
+  const quizzes = await db
     .select()
     .from(schema.quizzes)
-    .where(eq(schema.quizzes.creatorId, creatorId))) as any[];
+    .where(eq(schema.quizzes.creatorId, creatorId));
 
   return quizzes.map((quiz) => mapDbQuizToQuiz(quiz) as TQuiz);
 });
