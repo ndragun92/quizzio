@@ -65,7 +65,8 @@
         <div class="space-y-2">
           <div class="input--box">
             <label for="quiz-time-limit-per-round" class="input--label"
-              >Time Limit (per round)</label
+              >Time Limit
+              {{ gameMode === EGameMode.SURVIVAL ? "per each round" : "for the whole quiz" }}</label
             >
             <div class="relative">
               <div>
@@ -85,13 +86,13 @@
               />
               <div>
                 <div class="text-primary-500 text-sm absolute right-3 top-1/2 -translate-y-1/2">
-                  seconds
+                  {{ gameMode === EGameMode.SURVIVAL ? "seconds" : "minutes" }}
                 </div>
               </div>
             </div>
-            <span class="text-red-500 text-sm">{{ errors.timeLimitPerRound }} </span>
+            <span class="text-red-500 text-sm">{{ errors["settings.timeLimitPerRound"] }} </span>
           </div>
-          <div class="input--box">
+          <div v-if="gameMode === EGameMode.SURVIVAL" class="input--box">
             <label for="quiz-time-lives" class="input--label">Number of lives</label>
             <div class="relative">
               <div>
@@ -115,9 +116,9 @@
                 </div>
               </div>
             </div>
-            <span class="text-red-500 text-sm">{{ errors.lives }} </span>
+            <span class="text-red-500 text-sm">{{ errors["settings.lives"] }} </span>
           </div>
-          <div class="input--box">
+          <div v-if="gameMode === EGameMode.CLASSIC" class="input--box">
             <label for="quiz-passing-score-percentage" class="input--label">Passing Score</label>
             <div class="relative">
               <div>
@@ -141,7 +142,9 @@
                 </div>
               </div>
             </div>
-            <span class="text-red-500 text-sm">{{ errors.passingScorePercentage }} </span>
+            <span class="text-red-500 text-sm">
+              {{ errors["settings.passingScorePercentage"] }}
+            </span>
           </div>
           <div class="space-y-4 mt-4">
             <div class="flex items-center gap-4">
@@ -214,11 +217,13 @@ const validationSchema = toTypedSchema(
     category: z.string().min(1, "Quiz category is required"),
     difficulty: z.string().min(1, "Quiz difficulty is required"),
     gameMode: z.string().min(1, "Quiz game mode is required"),
-    timeLimitPerRound: z.number().min(1, "Time limit must be at least 1 minute"),
-    passingScorePercentage: z.number().min(1, "Passing score must be at least 1%"),
-    shuffleQuestions: z.boolean(),
-    immediateResults: z.boolean(),
-    lives: z.number().min(0, "Lives must be 0 or more"),
+    settings: z.object({
+      timeLimitPerRound: z.number().min(1, "Time limit must be at least 1 minute"),
+      passingScorePercentage: z.number().min(1, "Passing score must be at least 1%"),
+      shuffleQuestions: z.boolean(),
+      immediateResults: z.boolean(),
+      lives: z.number().min(0, "Lives must be 0 or more"),
+    }),
   })
 );
 
@@ -245,7 +250,7 @@ const { value: status } = useField(
   "status",
   {},
   {
-    initialValue: "",
+    initialValue: EStatus.PUBLISHED,
   }
 );
 
@@ -261,7 +266,7 @@ const { value: difficulty } = useField(
   "difficulty",
   {},
   {
-    initialValue: "",
+    initialValue: EDifficulty.EASY,
   }
 );
 
@@ -269,12 +274,12 @@ const { value: gameMode } = useField(
   "gameMode",
   {},
   {
-    initialValue: "",
+    initialValue: EGameMode.SURVIVAL,
   }
 );
 
 const { value: timeLimitPerRound } = useField(
-  "timeLimitPerRound",
+  "settings.timeLimitPerRound",
   {},
   {
     initialValue: 30,
@@ -282,7 +287,7 @@ const { value: timeLimitPerRound } = useField(
 );
 
 const { value: passingScorePercentage } = useField(
-  "passingScorePercentage",
+  "settings.passingScorePercentage",
   {},
   {
     initialValue: 70,
@@ -290,7 +295,7 @@ const { value: passingScorePercentage } = useField(
 );
 
 const { value: shuffleQuestions } = useField(
-  "shuffleQuestions",
+  "settings.shuffleQuestions",
   {},
   {
     initialValue: false,
@@ -298,7 +303,7 @@ const { value: shuffleQuestions } = useField(
 );
 
 const { value: immediateResults } = useField(
-  "immediateResults",
+  "settings.immediateResults",
   {},
   {
     initialValue: false,
@@ -306,7 +311,7 @@ const { value: immediateResults } = useField(
 );
 
 const { value: lives } = useField(
-  "lives",
+  "settings.lives",
   {},
   {
     initialValue: 3,
