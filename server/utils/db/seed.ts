@@ -12,9 +12,9 @@ const bootstrapUsers: Array<{ username: string; nickname: string; password: stri
 ];
 
 const legacyCreatorIdToUsername: Record<number, string> = {
-  123: "creator1",
-  456: "creator2",
-  789: "creator3",
+  1: "creator1",
+  2: "creator2",
+  3: "creator3",
 };
 
 const chunkArray = <T>(items: T[], size: number): T[][] => {

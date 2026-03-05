@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-producti
 export default defineEventHandler(async (event): Promise<TLoginResponse | Response> => {
   const body = await readBody<TLoginRequest>(event);
   const db = await getDatabase();
-  const [user] = (await (db as any)
+  const [user] = (await db
     .select()
     .from(schema.users)
     .where(and(eq(schema.users.username, body.username), eq(schema.users.password, body.password)))

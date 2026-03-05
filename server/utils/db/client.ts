@@ -14,7 +14,7 @@ const createDrizzleClient = () => {
   const db0 = createDatabase(postgresql({ url }));
   console.info("Connected to PostgreSQL database successfully.");
   return {
-    db: drizzle(db0 as any),
+    db: drizzle(db0),
     raw: db0,
   };
 };
@@ -38,7 +38,7 @@ export const getDatabase = async (): Promise<TDatabaseClient> => {
   const clients = getClient();
 
   if (!databaseReadyPromise) {
-    databaseReadyPromise = seedDatabase(clients.db as any, clients.raw as any).catch((error) => {
+    databaseReadyPromise = seedDatabase(clients.db, clients.raw).catch((error) => {
       databaseReadyPromise = null;
       throw error;
     });
