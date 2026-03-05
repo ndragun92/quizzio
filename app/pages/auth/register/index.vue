@@ -165,13 +165,13 @@ const userStore = useUserStore();
 
 const onSubmit = handleSubmit(async (values) => {
   try {
-        const response = await $fetch<{
-          token: string;
-          user: {
-            id: string;
-            username: string;
-          };
-        }>("/api/auth/register", {
+    const response = await $fetch<{
+      token: string;
+      user: {
+        id: string;
+        username: string;
+      };
+    }>("/api/auth/register", {
       method: "POST",
       body: values,
     });
