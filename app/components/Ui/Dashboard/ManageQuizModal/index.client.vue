@@ -38,7 +38,7 @@
               </div>
             </div>
           </div>
-          <UiDashboardManageQuizModalStepOne />
+          <UiDashboardManageQuizModalStepOne v-if="step === 1" @next="onNext" />
         </div>
       </UiCard>
     </div>
@@ -46,5 +46,32 @@
 </template>
 
 <script lang="ts" setup>
+const { userId } = useUser();
 
+type TForm = Omit<TQuiz, "id" | "createdAt" | "updatedAt">;
+
+const form = ref<TForm>({
+  title: "",
+  description: "",
+  creatorId: userId.value!,
+  status: EStatus.PUBLISHED,
+  category: ECategory.GENERAL,
+  difficulty: EDifficulty.EASY,
+  gameMode: EGameMode.SURVIVAL,
+  settings: {
+    timeLimitPerRound: 30,
+    passingScorePercentage: 70,
+    shuffleQuestions: false,
+    immediateResults: false,
+    lives: 3,
+  },
+  questions: [],
+});
+
+const step = ref(1);
+
+const onNext = (values: TForm) => {
+  form.value = { ...form.value, ...values };
+  step.value = 2;
+};
 </script>
