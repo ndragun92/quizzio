@@ -12,7 +12,8 @@
           </div>
           <input type="text" class="input--text pl-10!" placeholder="Search..." />
         </div>
-        <div class="flex items-center gap-4 justify-end col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-2 justify-end col-span-2 lg:col-span-1">
+          <button type="button" class="button--primary w-auto!" @click="logout()">Log Out</button>
           <NuxtLink
             :to="{ name: 'auth-register' }"
             class="button--default-outline border-primary-700! w-auto! px-4!"
@@ -110,6 +111,10 @@
     </div>
   </main>
 </template>
+
+<script lang="ts" setup>
+const { logout } = useUser();
+</script>
 
 <style scoped>
 #main {

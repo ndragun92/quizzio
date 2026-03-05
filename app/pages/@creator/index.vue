@@ -3,7 +3,8 @@
     <UiHeading>
       <template #title> Dashboard </template>
       <template #description>
-        Welcome back, John Doe! Here's what's happening with your quizzes today.
+        Welcome back, <strong class="text-white">{{ nickname }}</strong
+        >! Here's what's happening with your quizzes today.
       </template>
       <template #actions>
         <button class="button--default">
@@ -20,3 +21,7 @@
     <UiDashboardRecentQuizzes />
   </div>
 </template>
+
+<script lang="ts" setup>
+const { nickname } = useUser();
+</script>
