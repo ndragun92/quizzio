@@ -13,15 +13,19 @@ const createDrizzleClient = () => {
 
   const db0 = createDatabase(postgresql({ url }));
   console.info("Connected to PostgreSQL database successfully.");
-  return drizzle(db0 as any);
+  return {
+    db: drizzle(db0 as any),
+    raw: db0,
+  };
 };
 
-type TDatabaseClient = ReturnType<typeof createDrizzleClient>;
+type TDatabaseClients = ReturnType<typeof createDrizzleClient>;
+type TDatabaseClient = TDatabaseClients["db"];
 
-let databaseClient: TDatabaseClient | null = null;
+let databaseClient: TDatabaseClients | null = null;
 let databaseReadyPromise: Promise<void> | null = null;
 
-const getClient = (): TDatabaseClient => {
+const getClient = (): TDatabaseClients => {
   if (databaseClient) {
     return databaseClient;
   }
@@ -31,17 +35,17 @@ const getClient = (): TDatabaseClient => {
 };
 
 export const getDatabase = async (): Promise<TDatabaseClient> => {
-  const db = getClient();
+  const clients = getClient();
 
   if (!databaseReadyPromise) {
-    databaseReadyPromise = seedDatabase(db as any).catch((error) => {
+    databaseReadyPromise = seedDatabase(clients.db as any, clients.raw as any).catch((error) => {
       databaseReadyPromise = null;
       throw error;
     });
   }
 
   await databaseReadyPromise;
-  return db;
+  return clients.db;
 };
 
 export { schema };

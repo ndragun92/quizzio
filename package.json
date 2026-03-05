@@ -12,6 +12,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
+    "db:reset": "node --env-file=.env scripts/db-reset.mjs",
     "lint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "lint:prettier": "prettier . --check",
