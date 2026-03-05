@@ -4,7 +4,7 @@
       <template #title> Quizzes </template>
       <template #description> Create, manage and analyze your quizzes </template>
       <template #actions>
-        <button class="button--default">
+        <button class="button--default" type="button" @click="showManageQuizModal = true">
           <Icon name="lucide:plus" size="20" />
           <span>Create New Quiz</span>
         </button>
@@ -107,7 +107,7 @@
       </div>
     </UiCard>
   </div>
-  <UiDashboardManageQuizModal />
+  <UiDashboardManageQuizModal v-if="showManageQuizModal" />
 </template>
 
 <script lang="ts" setup>
@@ -163,4 +163,6 @@ const quizzes = [
     participants: 85,
   },
 ];
+
+const showManageQuizModal = ref(false);
 </script>
