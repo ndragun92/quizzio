@@ -1,5 +1,6 @@
 import type { TApiUser } from "~~/shared/types/user.type";
 import type { TQuestion, TQuiz } from "~~/shared/utils/quiz.db";
+import { getAllPeers, getSocketInfo } from "./ws.utils";
 
 export const localStorageSessionKey = "user:room:session";
 
