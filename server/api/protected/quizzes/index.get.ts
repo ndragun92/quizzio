@@ -3,7 +3,7 @@ import type { TQuiz } from "~~/shared/utils/quiz.db";
 import { getDatabase, schema } from "~~/server/utils/db/client";
 import { mapDbQuizToQuiz } from "~~/server/utils/db/seed";
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const db = await getDatabase();
   const quizzes = await db
     .select()
