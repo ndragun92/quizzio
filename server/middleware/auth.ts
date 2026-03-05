@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-producti
 
 export default defineEventHandler(async (event) => {
   // List of protected routes that require authentication
-  const protectedRoutes = ["/api/protected", "/api/user", "/api/admin"];
+  const protectedRoutes = ["/api/protected", "/api/user"];
 
   const isProtectedRoute = protectedRoutes.some((route) => event.node.req.url?.startsWith(route));
 

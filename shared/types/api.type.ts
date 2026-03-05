@@ -1,4 +1,5 @@
 import type { TApiUser } from "./user.type";
+import type { TQuestion, TQuiz } from "../utils/quiz.db";
 
 // Auth API types
 export interface TLoginRequest {
@@ -22,6 +23,24 @@ export interface TValidateResponse {
     items: string[];
     timestamp: string;
   };
+}
+
+// Protected quiz CRUD API types
+export interface TCreateQuizRequest {
+  title: string;
+  description: string;
+  status?: NonNullable<TQuiz["status"]>;
+  category: TQuiz["category"];
+  difficulty: TQuiz["difficulty"];
+  gameMode: TQuiz["gameMode"];
+  settings: TQuiz["settings"];
+  questions: TQuestion[];
+}
+
+export type TUpdateQuizRequest = Partial<TCreateQuizRequest>;
+
+export interface TDeleteQuizResponse {
+  success: boolean;
 }
 
 // Status API response
