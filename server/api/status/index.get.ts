@@ -1,7 +1,8 @@
 import type { TStatusResponse } from "#shared/types/api.type";
+import { getQuizRooms } from "~~/server/utils/quiz.utils";
 
 export default defineEventHandler((_event): TStatusResponse => {
-  const rooms = getRooms();
+  const quizRooms = getQuizRooms();
   const userPeers = Array.from(getUserPeers());
   const deploymentId = process.env.DENO_DEPLOYMENT_ID || "local";
 
@@ -10,9 +11,9 @@ export default defineEventHandler((_event): TStatusResponse => {
     deploymentId,
     total: {
       users: userPeers.length,
-      rooms: rooms.length,
+      quizRooms: quizRooms.length,
     },
-    rooms,
+    quizRooms: quizRooms,
     userPeers: userPeers.map(([userId, data]) => ({ userId, data })),
   };
 });

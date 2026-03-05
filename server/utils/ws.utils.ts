@@ -1,11 +1,13 @@
 import type { TUserPeerData, TSocketInfo } from "#shared/types/websocket.type";
+import type { TApiUser } from "#shared/types/user.type";
+import type { TQuizRoom } from "./quiz.utils";
 
 // Peer type for WebSocket connections
-export interface TWebSocketPeer {
+export type TWebSocketPeer = {
   id: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-}
+};
 
 const allPeers = new Map<string, TWebSocketPeer>(); // peerId -> peer
 const userPeers = new Map<string, TUserPeerData>(); // userId -> peer data
@@ -13,26 +15,25 @@ const userPeers = new Map<string, TUserPeerData>(); // userId -> peer data
 export const getAllPeers = (): IterableIterator<[string, TWebSocketPeer]> => allPeers.entries();
 export const getUserPeers = (): IterableIterator<[string, TUserPeerData]> => userPeers.entries();
 
-export const addPeer = (peerId: string, peer: TWebSocketPeer): void => {
+export const addPeer = (peerId: TWebSocketPeer["id"], peer: TWebSocketPeer): void => {
   allPeers.set(peerId, peer);
 };
 
-export const removePeer = (peerId: string): void => {
+export const removePeer = (peerId: TWebSocketPeer["id"]): void => {
   allPeers.delete(peerId);
 };
 
 export interface TAddUserPeerParams {
-  userId: string;
+  userId: TApiUser["id"];
   peerId: string;
-  isGuest: boolean;
 }
 
-export const addUserPeer = ({ userId, peerId, isGuest }: TAddUserPeerParams): void => {
-  userPeers.set(userId, { peerId, isGuest });
+export const addUserPeer = ({ userId, peerId }: TAddUserPeerParams): void => {
+  userPeers.set(String(userId), { peerId });
 };
 
-export const removeUserPeer = (userId: string): void => {
-  userPeers.delete(userId);
+export const removeUserPeer = (userId: TApiUser["id"]): void => {
+  userPeers.delete(String(userId));
 };
 
 // Map socket IDs to player/room info for an easy lookup
@@ -46,12 +47,12 @@ export const unmapSocket = (socketId: string): TSocketInfo | undefined => {
 
 export interface TMapSocketParams {
   socketId: string;
-  roomId: string;
-  playerId: string;
+  quizRoomId: TQuizRoom["quizRoomId"];
+  userId: TApiUser["id"];
 }
 
-export const mapSocket = ({ socketId, roomId, playerId }: TMapSocketParams): void => {
-  socketMap.set(socketId, { roomId, playerId });
+export const mapSocket = ({ socketId, quizRoomId, userId }: TMapSocketParams): void => {
+  socketMap.set(socketId, { quizRoomId, userId });
 };
 
 export const getSocketInfo = (socketId: string): TSocketInfo | undefined => socketMap.get(socketId);

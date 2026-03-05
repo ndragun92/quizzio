@@ -1,10 +1,8 @@
 import type { TApiUser } from "./user.type";
-import type { TGameState } from "./game.type";
-import type { TRoom } from "./rooms.type";
 
 // Auth API types
 export interface TLoginRequest {
-  username: string;
+  username: TApiUser["username"];
   password: string;
 }
 
@@ -17,23 +15,13 @@ export interface TValidateResponse {
   success: boolean;
   message: string;
   user: {
-    id: number;
-    username: string;
+    id: TApiUser["id"];
+    username: TApiUser["username"];
   };
   data: {
     items: string[];
     timestamp: string;
   };
-}
-
-// Room list item for public endpoints
-export interface TRoomListItem {
-  id: string;
-  name: string;
-  playersCount: number;
-  maxPlayers: number;
-  status: TGameState;
-  wordPack: TRoom["wordPack"];
 }
 
 // Status API response
@@ -42,20 +30,13 @@ export interface TStatusResponse {
   deploymentId: string;
   total: {
     users: number;
-    rooms: number;
+    quizRooms: number;
   };
-  rooms: unknown[];
+  quizRooms: unknown[];
   userPeers: Array<{
     userId: string;
     data: {
       peerId: string;
-      isGuest: boolean;
     };
   }>;
-}
-
-// Session storage types
-export interface TRoomSession {
-  roomId: string;
-  playerId: string;
 }

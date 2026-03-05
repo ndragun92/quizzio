@@ -1,30 +1,41 @@
 export default function useQuiz() {
   const { onSend } = useSocket();
 
-  const roomStore = useRoomStore();
-
-  const { playerId } = useUser();
+  const { userId, nickname } = useUser();
 
   interface TJoinQuizParams {
-    nickname: string;
-    guestDisplayName?: TPlayer["guestDisplayName"];
+    nickname: TApiUser["nickname"];
     creatorId: TQuiz["creatorId"];
     quizId: TQuiz["id"];
   }
 
-  const onJoinQuiz = ({ nickname, guestDisplayName, creatorId, quizId }: TJoinQuizParams) => {
-    onSend("joinQuiz", { playerId: playerId.value, nickname, guestDisplayName, creatorId, quizId });
+  const onCreateQuiz = ({ quiz }: { quiz: TQuiz }) => {
+    const quizRoomId = `${quiz.creatorId}-${quiz.id}--${Date.now()}`;
+    const quizRoomName = prompt("Enter a name for your quiz room:");
+    if (!quizRoomName) {
+      alert("Quiz room name cannot be empty");
+      return;
+    }
+    onSend("create", {
+      quizRoomId,
+      quizRoomName,
+      quiz,
+      userId: userId.value,
+      nickname: nickname.value,
+    });
   };
 
-  const onLeaveQuiz = (quizId: TQuiz["id"], playerId: TPlayer["id"]) => {
-    onSend("leaveQuiz", { quizId, playerId });
+  const onJoinQuiz = ({ nickname, creatorId, quizId }: TJoinQuizParams) => {
+    onSend("join", { userId: userId.value, nickname, creatorId, quizId });
   };
 
-  const room = computed(() => roomStore.room);
+  const onLeaveQuiz = (quizId: TQuiz["id"], userId: TApiUser["id"]) => {
+    onSend("leave", { quizId, userId: userId });
+  };
 
   return {
+    onCreateQuiz,
     onJoinQuiz,
     onLeaveQuiz,
-    room,
   };
 }

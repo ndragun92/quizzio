@@ -1,16 +1,12 @@
-import { localStorageSessionKey } from "#server/utils/rooms.utils";
 import type { TWebSocketMessageType, TWebSocketMessage } from "#shared/types/websocket.type";
-import type { TRoomSession } from "#shared/types/api.type";
-import type { TRoom } from "#shared/types/rooms.type";
 
 export default function useSocket() {
   const socketStore = useSocketStore();
-  const roomStore = useRoomStore();
 
-  const { playerId, isGuest, nickname, guestDisplayName } = useUser();
+  const { userId, nickname } = useUser();
 
-  const route = useRoute();
-  const isRoom = computed(() => route.name === "game-rooms-id");
+  // const route = useRoute();
+  // const isRoom = computed(() => route.name === "quiz-creatorId"); // TODO: Update this when we have more routes
   const router = useRouter();
 
   const onConnect = (): void => {
@@ -19,34 +15,24 @@ export default function useSocket() {
 
     const token = localStorage.getItem("token") || "ey12fas321fSAdfsa"; // JWT
 
-    const newPlayerId = crypto.randomUUID();
-    if (!playerId.value) {
-      useCookie("guestPlayerId", {
-        maxAge: 2629800, // 1 month
-        secure: process.env.NODE_ENV !== "development",
-        sameSite: "strict",
-        path: "/",
-      }).value = newPlayerId;
-    }
-
-    const playerIdValue = playerId.value || newPlayerId;
+    const userIdValue = userId.value;
 
     socketStore.socket = new WebSocket(
-      `${protocol}//${host}/api/ws?token=${token}&playerId=${playerIdValue}&isGuest=${isGuest.value}&nickname=${nickname.value}&guestDisplayName=${guestDisplayName.value}`
+      `${protocol}//${host}/api/ws?token=${token}&userId=${userIdValue}&nickname=${nickname.value}`
     );
 
     socketStore.socket.onopen = () => {
       socketStore.isConnected = true;
       console.info("Connected to WebSocket");
 
-      if (isRoom) {
-        // Try to reconnect if we have saved data
-        const savedSessionData = localStorage.getItem(localStorageSessionKey);
-        if (savedSessionData) {
-          const { roomId } = JSON.parse(savedSessionData) as TRoomSession;
-          onSend("reconnect", { roomId, playerId: playerIdValue });
-        }
-      }
+      // if (isRoom) {
+      //   // Try to reconnect if we have saved data
+      //   const savedSessionData = localStorage.getItem(localStorageSessionKey);
+      //   if (savedSessionData) {
+      //     const { roomId } = JSON.parse(savedSessionData) as TRoomSession;
+      //     onSend("reconnect", { roomId, userId: userIdValue });
+      //   }
+      // }
     };
 
     socketStore.socket.onmessage = async (event) => {
@@ -58,11 +44,11 @@ export default function useSocket() {
       socketStore.isConnected = false;
       console.info("Disconnected from WebSocket");
       // Try to reconnect if we have saved data
-      const saved = localStorage.getItem(localStorageSessionKey);
-      if (saved) {
-        const { roomId: sRoomId, playerId: sPlayerId } = JSON.parse(saved) as TRoomSession;
-        onSend("leaveRoom", { roomId: sRoomId, playerId: sPlayerId });
-      }
+      // const saved = localStorage.getItem(localStorageSessionKey);
+      // if (saved) {
+      //   const { roomId: sRoomId, playerId: sPlayerId } = JSON.parse(saved) as TRoomSession;
+      //   onSend("leave", { roomId: sRoomId, playerId: sPlayerId });
+      // }
     };
 
     socketStore.socket.onerror = (error) => {
@@ -80,35 +66,15 @@ export default function useSocket() {
   const onHandleMessage = async (type: TWebSocketMessageType, data: unknown): Promise<void> => {
     // console.info("onHandleMessage", type, data);
     switch (type) {
-      case "roomUpdate": {
-        const roomData = data as TRoom;
-        roomStore.onSetRoom(roomData);
-        break;
-      }
-      case "reconnectSuccess": {
-        const reconnectData = data as { room: TRoom; playerId: string };
-        roomStore.onSetRoom(reconnectData.room);
-        roomStore.onSetPlayerId(reconnectData.playerId);
-        const sessionData: TRoomSession = {
-          roomId: reconnectData.room.id,
-          playerId: reconnectData.playerId,
-        };
-        localStorage.setItem(localStorageSessionKey, JSON.stringify(sessionData));
-        await router.push({ name: "game-rooms-id", params: { id: reconnectData.room.id } });
-        break;
-      }
-      case "refreshRooms":
-        await refreshNuxtData("rooms");
-        await refreshNuxtData("status");
-        break;
-      case "refreshStatus":
+      case "refresh":
+        // await refreshNuxtData("rooms");
         await refreshNuxtData("status");
         break;
       case "error": {
         const errorMessage = data as string;
         socketStore.error = errorMessage;
         if (errorMessage === "Room not found") {
-          await router.push({ name: "game-rooms" });
+          await router.push({ name: "quiz" });
         }
         break;
       }

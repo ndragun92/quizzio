@@ -10,8 +10,6 @@ export const useAuthStore = defineStore("auth", () => {
   const logout = async (redirect = true): Promise<void> => {
     setToken(null);
     useCookie("token").value = null;
-    useCookie("guestNickname").value = null;
-    useCookie("guestPlayerId").value = null;
 
     // Clear user data from the user store
     const userStore = useUserStore();

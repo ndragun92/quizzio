@@ -161,6 +161,7 @@ const creatorId = computed(() => routeParams.value.creatorId);
 const quizId = computed(() => routeParams.value.quizId);
 
 const { onJoinQuiz } = useQuiz();
+const {nickname} = useUser();
 const socketStore = useSocketStore();
 const isConnected = computed(() => socketStore.isConnected);
 // const error = computed(() => socketStore.error);
@@ -173,8 +174,7 @@ watch(
       console.info("WebSocket connected, joining quiz...");
       if (!joinedQuiz.value) {
         onJoinQuiz({
-          nickname: `TestUser${Math.floor(Math.random() * 1000)}`,
-          guestDisplayName: `Guest${Math.floor(Math.random() * 1000)}`,
+          nickname: nickname.value,
           creatorId: parseInt(creatorId.value),
           quizId: parseInt(quizId.value),
         });

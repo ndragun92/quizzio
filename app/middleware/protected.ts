@@ -1,12 +1,11 @@
 export default defineNuxtRouteMiddleware((from) => {
   const { $pinia } = useNuxtApp();
   const userStore = useUserStore($pinia);
-  const guestNickname = useCookie("guestNickname");
-  const isAuthenticated = userStore.data?.id || guestNickname.value;
+  const isAuthenticated = userStore.data?.id;
   const fromPath = from.fullPath;
   const fromName = from.name;
   if (!isAuthenticated) {
-    if (fromName === "game-rooms-id") {
+    if (fromName === "quiz-creatorId") {
       return navigateTo({
         name: "index",
         query: {

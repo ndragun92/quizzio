@@ -11,11 +11,7 @@
         </div>
         <div class="flex items-center gap-2">
           <strong>Active rooms:</strong>
-          <div class="text-green-400">{{ status?.total?.rooms || 0 }}</div>
-        </div>
-        <div class="flex items-center gap-2">
-          <strong>Public rooms:</strong>
-          <div class="text-green-400">{{ publicRooms?.length || 0 }}</div>
+          <div class="text-green-400">{{ status?.total?.quizRooms || 0 }}</div>
         </div>
         <div class="flex items-center gap-2">
           <strong>Socket connected:</strong>
@@ -49,10 +45,6 @@ const socketStore = useSocketStore();
 
 const { data: status, execute } = useFetch("/api/status", {
   key: "status",
-});
-
-const { data: publicRooms } = useFetch("/api/rooms", {
-  key: "rooms",
 });
 
 onMounted(async () => {

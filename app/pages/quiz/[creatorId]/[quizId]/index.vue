@@ -122,6 +122,11 @@
         </UiCard>
       </div>
     </div>
+    <div v-if="quiz" class="fixed top-4 right-4 z-10">
+      <button class="button--secondary" type="button" @click="onCreateQuiz({ quiz })">
+        Start Quiz
+      </button>
+    </div>
   </main>
 </template>
 
@@ -142,4 +147,6 @@ const { data: quiz, status } = useFetch<TQuiz>(`/api/quizzes/${creatorId.value}/
 
 const isLoading = computed(() => status.value === "pending");
 const hasError = computed(() => status.value === "error");
+
+const { onCreateQuiz } = useQuiz();
 </script>

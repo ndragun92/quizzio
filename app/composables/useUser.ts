@@ -4,13 +4,13 @@ export default function useUser() {
 
   const id = computed(() => userStore.data?.id || null);
   const username = computed(() => userStore.data?.username || "");
-  const guestNickname = computed(() => useCookie("guestNickname").value || "");
-  const nickname = computed(() => userStore.data?.nickname || guestNickname.value || "");
-  const guestDisplayName = computed(() => useCookie("guestDisplayName").value || "");
-  const playerId = computed(
-    () => `${userStore.data?.id || useCookie("guestPlayerId").value || ""}`
-  );
-  const isGuest = computed(() => !id.value);
+  const nickname = computed(() => userStore.data?.nickname || "");
 
-  return { id, username, nickname, guestDisplayName, logout: authStore.logout, playerId, isGuest };
+  return {
+    id: readonly(id),
+    username: readonly(username),
+    nickname: readonly(nickname),
+    logout: authStore.logout,
+    userId: readonly(id),
+  };
 }

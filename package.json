@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxi prepare && nuxt build",
     "dev": "nuxi prepare && nuxt dev",
     "generate": "nuxt generate",
     "start": "node .output/server/index.mjs",

@@ -1,76 +1,15 @@
-import type { TRoom } from "./rooms.type";
+import type { TQuizRoom } from "../../server/utils/quiz.utils";
+import type { TApiUser } from "./user.type";
 
 // WebSocket message types
-export type TWebSocketMessageType =
-  | "createRoom"
-  | "joinRoom"
-  | "leaveRoom"
-  | "reconnect"
-  | "roomUpdate"
-  | "reconnectSuccess"
-  | "refreshRooms"
-  | "refreshStatus"
-  | "startGame"
-  | "submitProgress"
-  | "submitResult"
-  | "joinQuiz"
-  | "leaveQuiz"
-  | "error";
-
-// WebSocket message payload types
-export interface TCreateRoomPayload {
-  playerId: string;
-  nickname: string;
-  guestDisplayName?: string;
-  name: string;
-  isPrivate: boolean;
-  wordPack: TRoom["wordPack"];
-  password?: string;
-}
-
-export interface TJoinRoomPayload {
-  playerId: string;
-  nickname: string;
-  guestDisplayName?: string;
-  roomId: string;
-  password?: string;
-}
-
-export interface TReconnectPayload {
-  roomId: string;
-  playerId: string;
-}
-
-export interface TLeaveRoomPayload {
-  roomId: string;
-  playerId: string;
-}
-
-// WebSocket response payloads
-export interface TRoomUpdateResponse {
-  type: "roomUpdate";
-  data: TRoom;
-}
-
-export interface TReconnectSuccessResponse {
-  type: "reconnectSuccess";
-  data: {
-    room: TRoom;
-    playerId: string;
-  };
-}
+export type TWebSocketMessageType = "refresh" | "create" | "join" | "leave" | "error";
 
 export interface TErrorResponse {
   type: "error";
   data: string;
 }
 
-export type TWebSocketResponse =
-  | TRoomUpdateResponse
-  | TReconnectSuccessResponse
-  | TErrorResponse
-  | { type: "refreshRooms" }
-  | { type: "refreshStatus" };
+export type TWebSocketResponse = TErrorResponse | { type: "refresh" };
 
 // WebSocket message structure
 export interface TWebSocketMessage<T = unknown> {
@@ -81,10 +20,9 @@ export interface TWebSocketMessage<T = unknown> {
 // Peer types
 export interface TUserPeerData {
   peerId: string;
-  isGuest: boolean;
 }
 
 export interface TSocketInfo {
-  roomId: string;
-  playerId: string;
+  quizRoomId: TQuizRoom["quizRoomId"];
+  userId: TApiUser["id"];
 }

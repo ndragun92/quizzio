@@ -1,3 +1,5 @@
+import type { TApiUser } from "../types/user.type";
+
 export type TQuestion = {
   id: number;
   text: string;
@@ -24,7 +26,7 @@ export type TQuestion = {
   points: number;
   doublePoints?: boolean; // If true, points for this question are doubled if answered correctly and reduce by double if answered incorrectly
   answeredBy?: {
-    [playerId: number]: {
+    [playerId: TApiUser["id"]]: {
       answer: TQuestion["correctAnswer"];
       skipped: boolean;
     };
