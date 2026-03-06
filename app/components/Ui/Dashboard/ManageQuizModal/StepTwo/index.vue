@@ -41,6 +41,7 @@
               <button
                 type="button"
                 class="button--default-outline button--icon text-red-500! border-transparent!"
+                @click="onDeleteQuestion(index)"
               >
                 <Icon name="lucide:trash" size="20" />
                 <span class="sr-only">Delete question</span>
@@ -67,6 +68,16 @@
           />
         </div>
       </UiCard>
+      <div>
+        <button
+          type="button"
+          class="button--primary bg-transparent! border-dashed! hover:bg-primary-900!"
+          @click="onAddQuestion"
+        >
+          <Icon name="lucide:plus" size="20" />
+          <span>Add Question</span>
+        </button>
+      </div>
     </UiCard>
     <div class="flex justify-end">
       <div class="flex items-center gap-2">
@@ -95,7 +106,7 @@
 import { useForm, useField } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
-import { EQuestionType } from "~~/shared/utils/quiz.db";
+import { EQuestionType, type TQuestion } from "~~/shared/utils/quiz.db";
 
 const validationSchema = toTypedSchema(
   z.object({
@@ -122,20 +133,8 @@ const validationSchema = toTypedSchema(
 const { handleSubmit, errors, isSubmitting } = useForm({
   validationSchema,
 });
-const { value: questions } = useField("questions", undefined, {
-  initialValue: [
-    {
-      text: "",
-      type: EQuestionType.MULTIPLE_CHOICE,
-      options: [],
-      leftOptions: [],
-      rightOptions: [],
-      src: "",
-      correctAnswer: "",
-      points: 10,
-      doublePoints: false,
-    },
-  ],
+const { value: questions } = useField<TQuestion[]>("questions", undefined, {
+  initialValue: [],
 });
 
 const emit = defineEmits(["back", "next"]);
@@ -177,5 +176,24 @@ const getQuestionComponent = (type: EQuestionType) => {
     default:
       return null;
   }
+};
+
+const onAddQuestion = () => {
+  questions.value!.push({
+    id: createRandomQuestionId(),
+    text: "",
+    type: EQuestionType.MULTIPLE_CHOICE,
+    options: [],
+    leftOptions: [],
+    rightOptions: [],
+    src: "",
+    correctAnswer: "",
+    points: 10,
+    doublePoints: false,
+  });
+};
+
+const onDeleteQuestion = (index: number) => {
+  questions.value!.splice(index, 1);
 };
 </script>
