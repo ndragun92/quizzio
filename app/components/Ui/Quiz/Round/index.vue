@@ -35,10 +35,6 @@
     v-else-if="question?.type === EQuestionType.VIDEO_BASED"
     :question="question"
   />
-  <UiQuizRoundTypeCodeSnippet
-    v-else-if="question?.type === EQuestionType.CODE_SNIPPET"
-    :question="question"
-  />
   <UiQuizRoundTypeDragAndDrop
     v-else-if="question?.type === EQuestionType.DRAG_AND_DROP"
     :question="question"

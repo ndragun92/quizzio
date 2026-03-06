@@ -118,7 +118,7 @@
                 :id="`text-${question.id}`"
                 v-model="questions[index]!.text"
                 class="input--text bg-primary-900! h-24!"
-                placeholder="Type your question here..."
+                :placeholder="returnQuestionExamplePlaceholder(questions[index]!.type)"
               />
             </div>
           </div>
@@ -261,8 +261,6 @@ const getQuestionComponent = (type: EQuestionType) => {
       return resolveComponent('UiQuizRoundTypeAudioBased')
     case EQuestionType.VIDEO_BASED:
       return resolveComponent('UiQuizRoundTypeVideoBased')
-    case EQuestionType.CODE_SNIPPET:
-      return resolveComponent('UiQuizRoundTypeCodeSnippet')
     case EQuestionType.DRAG_AND_DROP:
       return resolveComponent('UiQuizRoundTypeDragAndDrop')
     case EQuestionType.GUESS_THE_NUMBER:
@@ -273,6 +271,39 @@ const getQuestionComponent = (type: EQuestionType) => {
       return resolveComponent('UiQuizRoundTypeMultipleChoiceSharedAnswers')
     default:
       return null
+  }
+}
+
+const returnQuestionExamplePlaceholder = (type: EQuestionType) => {
+  switch (type) {
+    case EQuestionType.MULTIPLE_CHOICE:
+      return 'Example: What is the capital of France?'
+    case EQuestionType.TRUE_FALSE:
+      return 'Example: The sky is green. True or False?'
+    case EQuestionType.SHORT_ANSWER:
+      return 'Example: Name a programming language that starts with "J".'
+    case EQuestionType.FILL_IN_THE_BLANK:
+      return 'Example: The largest planet in our solar system is ____.'
+    case EQuestionType.MATCHING:
+      return 'Example: Match the following countries with their capitals.'
+    case EQuestionType.ORDERING:
+      return 'Example: Arrange the following historical events in chronological order.'
+    case EQuestionType.IMAGE_BASED:
+      return 'Example: Identify the object in the image.'
+    case EQuestionType.AUDIO_BASED:
+      return 'Example: Identify the song from the audio clip.'
+    case EQuestionType.VIDEO_BASED:
+      return 'Example: Answer the question based on the video clip.'
+    case EQuestionType.DRAG_AND_DROP:
+      return 'Example: Drag cities from Croatia to the box'
+    case EQuestionType.GUESS_THE_NUMBER:
+      return 'Example: Guess a number between 1 and 100. Closest answer wins!'
+    case EQuestionType.MEMORIZE_THE_ORDER:
+      return 'Example: Memorize the order of the following items and recall them.'
+    case EQuestionType.MULTIPLE_CHOICE_SHARED_ANSWERS:
+      return 'Example: What is the chemical symbol for water?'
+    default:
+      return 'Type your question here...'
   }
 }
 

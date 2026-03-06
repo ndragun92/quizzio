@@ -10,7 +10,6 @@ export enum EQuestionType {
   IMAGE_BASED = 'image-based', // Question that requires players to identify something in an image
   AUDIO_BASED = 'audio-based', // Question that requires players to identify something in an audio clip
   VIDEO_BASED = 'video-based', // Question that requires players to identify something in a video clip
-  CODE_SNIPPET = 'code-snippet', // Question that requires players to analyze a code snippet and answer a question about it
   DRAG_AND_DROP = 'drag-and-drop', // Question that requires players to drag and drop answers into the correct positions
   GUESS_THE_NUMBER = 'guess-the-number', // Question that requires players to guess a number within a certain range
   MEMORIZE_THE_ORDER = 'memorize-the-order', // Question that requires players to memorize the order of items and recall them
@@ -208,15 +207,6 @@ export const dbQuiz: TQuiz[] = [
       },
       {
         id: 10,
-        text: 'What does the following code snippet output?',
-        type: EQuestionType.CODE_SNIPPET,
-        options: ['Output A', 'Output B', 'Output C', 'Output D'],
-        correctAnswer: 'Output C',
-        providedAnswer: '',
-        points: 20,
-      },
-      {
-        id: 11,
         text: 'Drag and drop the correct answers into the boxes.',
         type: EQuestionType.DRAG_AND_DROP,
         options: ['Option A', 'Option B', 'Option C', 'Option D'],
@@ -225,7 +215,7 @@ export const dbQuiz: TQuiz[] = [
         points: 20,
       },
       {
-        id: 12,
+        id: 11,
         text: 'Guess the number between 1 and 100.',
         type: EQuestionType.GUESS_THE_NUMBER,
         correctAnswer: '42',
@@ -233,7 +223,7 @@ export const dbQuiz: TQuiz[] = [
         points: 25,
       },
       {
-        id: 13,
+        id: 12,
         text: 'Memorize the order of the following items and recall them.',
         type: EQuestionType.MEMORIZE_THE_ORDER,
         options: ['Item A', 'Item B', 'Item C', 'Item D'],
@@ -242,7 +232,7 @@ export const dbQuiz: TQuiz[] = [
         points: 20,
       },
       {
-        id: 14,
+        id: 13,
         text: 'Select the correct answer that is shared among multiple questions.',
         type: EQuestionType.MULTIPLE_CHOICE_SHARED_ANSWERS,
         options: ['Shared Answer A', 'Shared Answer B', 'Shared Answer C', 'Shared Answer D'],
@@ -406,16 +396,6 @@ export const dbQuiz: TQuiz[] = [
     questions: [
       {
         id: 1,
-        text: 'What does the following code snippet output? console.log(typeof null);',
-        type: EQuestionType.CODE_SNIPPET,
-        options: ['object', 'null', 'undefined', 'error'],
-        correctAnswer: 'object',
-        providedAnswer: '',
-        points: 20,
-        doublePoints: true,
-      },
-      {
-        id: 2,
         text: 'Event delegation works by utilizing event bubbling.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
@@ -423,7 +403,7 @@ export const dbQuiz: TQuiz[] = [
         points: 15,
       },
       {
-        id: 3,
+        id: 2,
         text: 'What keyword is used to create a constant reference in JavaScript?',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'const',
@@ -520,16 +500,6 @@ export const dbQuiz: TQuiz[] = [
     questions: [
       {
         id: 1,
-        text: 'What does the following code output? print([i for i in range(5) if i % 2 == 0])',
-        type: EQuestionType.CODE_SNIPPET,
-        options: ['[0, 2, 4]', '[1, 3]', '[0, 1, 2, 3, 4]', '[2, 4]'],
-        correctAnswer: '[0, 2, 4]',
-        providedAnswer: '',
-        points: 25,
-        doublePoints: true,
-      },
-      {
-        id: 2,
         text: 'A decorator in Python is a function that takes another function and extends its behavior.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
@@ -537,7 +507,7 @@ export const dbQuiz: TQuiz[] = [
         points: 20,
       },
       {
-        id: 3,
+        id: 2,
         text: 'Arrange these Python concepts from basic to advanced.',
         type: EQuestionType.ORDERING,
         options: ['Variables', 'Functions', 'Decorators', 'Metaclasses'],
@@ -546,7 +516,7 @@ export const dbQuiz: TQuiz[] = [
         points: 30,
       },
       {
-        id: 4,
+        id: 3,
         text: 'The ___ statement in Python is used to handle exceptions.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'try',
@@ -2189,20 +2159,6 @@ export const dbQuiz: TQuiz[] = [
       },
       {
         id: 4,
-        text: 'What does the following JavaScript code do? console.log(\'Hello\');',
-        type: EQuestionType.CODE_SNIPPET,
-        options: [
-          'Prints \'Hello\' to the console',
-          'Creates a variable',
-          'Defines a function',
-          'Returns \'Hello\'',
-        ],
-        correctAnswer: 'Prints \'Hello\' to the console',
-        providedAnswer: '',
-        points: 15,
-      },
-      {
-        id: 5,
         text: 'Match the web technologies with their purposes.',
         type: EQuestionType.MATCHING,
         leftOptions: ['HTML', 'CSS', 'JavaScript', 'SQL'],
