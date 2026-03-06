@@ -27,7 +27,7 @@
       </h3>
     </UiCard>
   </div>
-  <div
+  <UiCard
     v-if="edit"
     class="input--box"
   >
@@ -38,14 +38,13 @@
     <UiInputSelect
       :id="`correctAnswer--${question!.id}`"
       v-model="question!.correctAnswer as string"
-      input-class="bg-primary-900!"
       :options="question!.options!.map((option) => ({
         label: option,
         value: option,
       }))"
       :required="true"
     />
-  </div>
+  </UiCard>
 </template>
 
 <script setup lang="ts">
@@ -63,7 +62,7 @@ const model = defineModel<TQuestion>({
 const props = defineProps<Props>()
 
 if (props.edit) {
-  if (model.value && model.value.options!.length < 4) {
+  if (model.value && model.value.options!.length !== 4) {
     model.value.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']
   }
 }

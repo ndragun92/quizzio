@@ -1,11 +1,11 @@
 <template>
   <div class="grid grid-cols-2 gap-2">
     <UiCard
-      v-for="(option, index) in returnOptions"
+      v-for="(option, index) in question?.options"
       :key="option"
       class="flex items-center gap-4"
-      :clickable="true"
-      :selected="index === 1"
+      :clickable="!edit"
+      :selected="edit ? question?.correctAnswer === option : false"
       tabindex="0"
     >
       <div
@@ -18,6 +18,24 @@
       </h3>
     </UiCard>
   </div>
+  <UiCard
+    v-if="edit"
+    class="input--box"
+  >
+    <label
+      :for="`correctAnswer--${question!.id}`"
+      class="input--label"
+    >Correct answer</label>
+    <UiInputSelect
+      :id="`correctAnswer--${question!.id}`"
+      v-model="question!.correctAnswer as string"
+      :options="question!.options!.map((option) => ({
+        label: option,
+        value: option,
+      }))"
+      :required="true"
+    />
+  </UiCard>
 </template>
 
 <script setup lang="ts">
@@ -25,9 +43,18 @@ import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
   question: TQuestion | null
+  edit?: boolean
 }
 
-defineProps<Props>()
+const model = defineModel<TQuestion>({
+  required: false,
+})
 
-const returnOptions = ['True', 'False']
+const props = defineProps<Props>()
+
+if (props.edit) {
+  if (model.value && model.value.options!.length !== 2) {
+    model.value.options = ['True', 'False']
+  }
+}
 </script>
