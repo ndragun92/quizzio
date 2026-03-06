@@ -80,7 +80,7 @@ export enum EGameMode {
 }
 
 export type TQuiz = {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   creatorId: number;
@@ -100,8 +100,8 @@ export type TQuiz = {
     lives: number; // maximum attempts allowed
   };
   questions: TQuestion[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export const dbQuiz: TQuiz[] = [

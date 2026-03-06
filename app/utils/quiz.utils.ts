@@ -22,3 +22,5 @@ export const difficulties = Object.values(EDifficulty).map((diff) => ({
   label: diff.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
   value: diff,
 }));
+
+export const createRandomQuestionId = () => Math.random().toString(36).substring(2, 10);
