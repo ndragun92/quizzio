@@ -1,5 +1,8 @@
 <template>
-  <div class="grid grid-cols-2 gap-2">
+  <div
+    v-if="!edit"
+    class="grid grid-cols-2 gap-2"
+  >
     <UiCard
       v-for="(option, index) in question?.options"
       :key="option"

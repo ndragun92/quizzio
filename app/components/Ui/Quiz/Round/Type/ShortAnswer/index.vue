@@ -1,5 +1,5 @@
 <template>
-  <UiCard>
+  <UiCard v-if="!edit">
     <input
       v-model.trim="question!.providedAnswer"
       type="text"
@@ -21,6 +21,7 @@
       class="input--text"
       type="text"
       :required="true"
+      placeholder="Provide correct answer here..."
     >
   </UiCard>
 </template>

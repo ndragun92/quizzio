@@ -28,12 +28,12 @@
           v-for="(question, index) in questions"
           :key="question.id"
           :level="3"
-          class="space-y-4"
+          class="space-y-4 relative"
         >
-          <div class="flex items-center gap-4 justify-between">
-            <h5 class="font-semibold text-lg">
-              Question {{ parseInt(`${index}`) + 1 }}
-            </h5>
+          <h5 class="font-semibold text-base absolute top-0 left-0 bg-primary-950 px-4 py-1 border-r border-b border-primary-700 rounded-tl-lg rounded-br-lg">
+            Question {{ parseInt(`${index}`) + 1 }}
+          </h5>
+          <div class="flex items-center justify-end gap-4 pt-6">
             <div class="flex items-center gap-2">
               <div class="flex items-center gap-2">
                 <label
