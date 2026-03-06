@@ -6,7 +6,7 @@
       aria-modal="true"
       aria-label="Manage Quiz Modal"
     >
-      <div class="absolute inset-0 bg-primary-950/50 backdrop-blur-sm" />
+      <div class="fixed inset-0 bg-primary-950/50 backdrop-blur-sm" />
 
       <div class="relative z-40 flex min-h-full justify-center py-4 sm:py-8">
         <UiCard class="my-auto w-full max-w-11/12 xl:max-w-4xl p-6">
