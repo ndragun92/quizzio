@@ -4,11 +4,7 @@
       <div class="space-y-1">
         <h4 class="font-bold text-xl">Quiz Questions</h4>
         <p class="text--secondary">Create and manage quiz questions for your quiz.</p>
-        <div class="space-y-2">
-          <pre
-            class="h-52 overflow-auto p-8 rounded bg-primary-900 border border-primary-800 text-sm"
-            >{{ errors }}</pre
-          >
+        <div>
           <pre
             class="h-52 overflow-auto p-8 rounded bg-primary-900 border border-primary-800 text-sm"
             >{{ questions }}</pre
@@ -147,6 +143,17 @@ const validationSchema = toTypedSchema(
 const { handleSubmit, errors, isSubmitting } = useForm({
   validationSchema,
 });
+
+const toast = useToastStore();
+
+watch(errors, (newErrors) => {
+  const errorMessage = Object.values(newErrors).flat().join("\n");
+  console.log("Validation errors:", errorMessage);
+  toast.error({
+    text: errorMessage || "Please fix the errors in the form before proceeding.",
+  });
+});
+
 const { value: questions } = useField<TQuestion[]>("questions", undefined, {
   initialValue: [],
 });
