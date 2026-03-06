@@ -125,7 +125,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the capital of France?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Paris", "London", "Berlin", "Madrid"],
         correctAnswer: "Paris",
         points: 10,
@@ -134,28 +134,28 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Earth is flat.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
         points: 5,
       },
       {
         id: 3,
         text: "Who wrote 'To Kill a Mockingbird'?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Harper Lee",
         points: 15,
       },
       {
         id: 4,
         text: "The chemical symbol for water is ___.",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "H2O",
         points: 10,
       },
       {
         id: 5,
         text: "Match the following countries with their capitals.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["France", "Germany", "Spain", "Italy"],
         rightOptions: ["Paris", "Berlin", "Madrid", "Rome"],
         correctAnswer: "France - Paris, Germany - Berlin, Spain - Madrid, Italy - Rome",
@@ -164,7 +164,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 6,
         text: "Arrange the following historical events in chronological order.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["World War I", "American Revolution", "French Revolution", "World War II"],
         correctAnswer: "American Revolution, French Revolution, World War I, World War II",
         points: 20,
@@ -172,7 +172,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 7,
         text: "Identify the object in the image.",
-        type: "image-based",
+        type: EQuestionType.IMAGE_BASED,
         src: "https://cdn.britannica.com/89/187589-050-E8D5A657/Workers-Big-Ben-London.jpg",
         options: ["Eiffel Tower", "Statue of Liberty", "Big Ben", "Colosseum"],
         correctAnswer: "Eiffel Tower",
@@ -181,7 +181,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 8,
         text: "Listen to the audio and identify the song.",
-        type: "audio-based",
+        type: EQuestionType.AUDIO_BASED,
         src: "https://freepik-tunes.s3.amazonaws.com/tracks/950f1cb8_Audio_People.mp3",
         options: ["Song A", "Song B", "Song C", "Song D"],
         correctAnswer: "Song A",
@@ -190,7 +190,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 9,
         text: "Watch the video and answer the question.",
-        type: "video-based",
+        type: EQuestionType.VIDEO_BASED,
         src: "https://cdn.pixabay.com/video/2023/09/20/181458-866575785_large.mp4",
         options: ["Option 1", "Option 2", "Option 3", "Option 4"],
         correctAnswer: "Option 2",
@@ -199,7 +199,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 10,
         text: "What does the following code snippet output?",
-        type: "code-snippet",
+        type: EQuestionType.CODE_SNIPPET,
         options: ["Output A", "Output B", "Output C", "Output D"],
         correctAnswer: "Output C",
         points: 20,
@@ -207,7 +207,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 11,
         text: "Drag and drop the correct answers into the boxes.",
-        type: "drag-and-drop",
+        type: EQuestionType.DRAG_AND_DROP,
         options: ["Option A", "Option B", "Option C", "Option D"],
         correctAnswer: "Option A, Option C",
         points: 20,
@@ -215,14 +215,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 12,
         text: "Guess the number between 1 and 100.",
-        type: "guess-the-number",
+        type: EQuestionType.GUESS_THE_NUMBER,
         correctAnswer: "42",
         points: 25,
       },
       {
         id: 13,
         text: "Memorize the order of the following items and recall them.",
-        type: "memorize-the-order",
+        type: EQuestionType.MEMORIZE_THE_ORDER,
         options: ["Item A", "Item B", "Item C", "Item D"],
         correctAnswer: "Item B, Item D, Item A, Item C",
         points: 20,
@@ -230,7 +230,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 14,
         text: "Select the correct answer that is shared among multiple questions.",
-        type: "multiple-choice-shared-answers",
+        type: EQuestionType.MULTIPLE_CHOICE_SHARED_ANSWERS,
         options: ["Shared Answer A", "Shared Answer B", "Shared Answer C", "Shared Answer D"],
         correctAnswer: "Shared Answer B",
         points: 15,
@@ -259,7 +259,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What planet is known as the Red Planet?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Mars", "Venus", "Jupiter", "Saturn"],
         correctAnswer: "Mars",
         points: 10,
@@ -267,21 +267,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Water boils at 100°C at sea level.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 5,
       },
       {
         id: 3,
         text: "The center of an atom is called the ___.",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "nucleus",
         points: 10,
       },
       {
         id: 4,
         text: "How many bones are in the adult human body?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["206", "208", "195", "212"],
         correctAnswer: "206",
         points: 15,
@@ -310,7 +310,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "In what year did World War II begin?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["1939", "1940", "1938", "1941"],
         correctAnswer: "1939",
         points: 10,
@@ -318,7 +318,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Arrange these WWII events in chronological order.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: [
           "Pearl Harbor Attack",
           "D-Day Invasion",
@@ -333,21 +333,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 3,
         text: "Who was the Prime Minister of Britain during most of WWII?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Winston Churchill",
         points: 15,
       },
       {
         id: 4,
         text: "The Battle of Midway was fought in the Pacific Ocean.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 5,
         text: "Match the code names with their operations.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: [
           "Operation Overlord",
           "Operation Barbarossa",
@@ -383,7 +383,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What does the following code snippet output? console.log(typeof null);",
-        type: "code-snippet",
+        type: EQuestionType.CODE_SNIPPET,
         options: ["object", "null", "undefined", "error"],
         correctAnswer: "object",
         points: 20,
@@ -392,14 +392,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Event delegation works by utilizing event bubbling.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 15,
       },
       {
         id: 3,
         text: "What keyword is used to create a constant reference in JavaScript?",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "const",
         points: 10,
       },
@@ -427,7 +427,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Which movie won the Academy Award for Best Picture in 1994?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Forrest Gump", "The Shawshank Redemption", "Pulp Fiction", "The Lion King"],
         correctAnswer: "Forrest Gump",
         points: 15,
@@ -435,7 +435,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Identify the movie from this iconic scene.",
-        type: "image-based",
+        type: EQuestionType.IMAGE_BASED,
         src: "https://www.rollingstone.com/wp-content/uploads/2020/08/goodfellasc.jpg?w=1581&h=1054&crop=1",
         options: ["The Godfather", "Scarface", "Goodfellas", "Casino"],
         correctAnswer: "The Godfather",
@@ -444,7 +444,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 3,
         text: "Match the movies with their directors.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Inception", "The Grand Budapest Hotel", "Parasite", "Get Out"],
         rightOptions: ["Christopher Nolan", "Wes Anderson", "Bong Joon-ho", "Jordan Peele"],
         correctAnswer:
@@ -454,14 +454,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "Steven Spielberg directed Jurassic Park.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 5,
         text: "Who played Jack Dawson in Titanic?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Leonardo DiCaprio",
         points: 15,
       },
@@ -489,7 +489,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What does the following code output? print([i for i in range(5) if i % 2 == 0])",
-        type: "code-snippet",
+        type: EQuestionType.CODE_SNIPPET,
         options: ["[0, 2, 4]", "[1, 3]", "[0, 1, 2, 3, 4]", "[2, 4]"],
         correctAnswer: "[0, 2, 4]",
         points: 25,
@@ -498,14 +498,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "A decorator in Python is a function that takes another function and extends its behavior.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 20,
       },
       {
         id: 3,
         text: "Arrange these Python concepts from basic to advanced.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Variables", "Functions", "Decorators", "Metaclasses"],
         correctAnswer: "Variables, Functions, Decorators, Metaclasses",
         points: 30,
@@ -513,7 +513,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "The ___ statement in Python is used to handle exceptions.",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "try",
         points: 15,
       },
@@ -541,7 +541,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the largest continent by land area?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Asia", "Africa", "North America", "Europe"],
         correctAnswer: "Asia",
         points: 10,
@@ -549,21 +549,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Nile River is the longest river in the world.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 5,
       },
       {
         id: 3,
         text: "What is the capital of Australia?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Canberra",
         points: 15,
       },
       {
         id: 4,
         text: "Match the countries with their continents.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Brazil", "Egypt", "Japan", "Germany"],
         rightOptions: ["South America", "Africa", "Asia", "Europe"],
         correctAnswer: "Brazil - South America, Egypt - Africa, Japan - Asia, Germany - Europe",
@@ -593,7 +593,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Which athlete has won the most Olympic gold medals?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Michael Phelps", "Usain Bolt", "Simone Biles", "Carl Lewis"],
         correctAnswer: "Michael Phelps",
         points: 15,
@@ -601,14 +601,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The FIFA World Cup is held every four years.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 5,
       },
       {
         id: 3,
         text: "Arrange these sports events in the order they were first held.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Modern Olympics", "FIFA World Cup", "Super Bowl", "NBA Finals"],
         correctAnswer: "Modern Olympics, FIFA World Cup, NBA Finals, Super Bowl",
         points: 25,
@@ -616,14 +616,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "Who is known as 'The GOAT' in basketball?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Michael Jordan",
         points: 15,
       },
       {
         id: 5,
         text: "Match the sport with its championship trophy.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["NHL", "NFL", "NBA", "MLB"],
         rightOptions: [
           "Stanley Cup",
@@ -659,7 +659,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "How many notes are in a major scale?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["7", "8", "12", "5"],
         correctAnswer: "7",
         points: 10,
@@ -667,14 +667,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "A sharp symbol raises a note by one semitone.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 5,
       },
       {
         id: 3,
         text: "Listen to this audio clip and identify the instrument.",
-        type: "audio-based",
+        type: EQuestionType.AUDIO_BASED,
         src: "https://freepik-tunes.s3.amazonaws.com/tracks/cc1926f1_Twilight_Transit.mp3",
         options: ["Piano", "Guitar", "Violin", "Flute"],
         correctAnswer: "Piano",
@@ -683,7 +683,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "A time signature of 4/4 means there are ___ beats per measure.",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "4",
         points: 10,
       },
@@ -711,7 +711,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the main ingredient in guacamole?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Avocado", "Tomato", "Pepper", "Onion"],
         correctAnswer: "Avocado",
         points: 5,
@@ -719,14 +719,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Sushi originated in Japan.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 5,
       },
       {
         id: 3,
         text: "Match the dishes with their countries of origin.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Paella", "Pho", "Tacos", "Pasta"],
         rightOptions: ["Spain", "Vietnam", "Mexico", "Italy"],
         correctAnswer: "Paella - Spain, Pho - Vietnam, Tacos - Mexico, Pasta - Italy",
@@ -735,7 +735,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "What cooking method involves submerging food in hot oil?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "deep frying",
         points: 10,
       },
@@ -763,7 +763,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What year was the first Legend of Zelda game released?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["1986", "1985", "1987", "1984"],
         correctAnswer: "1986",
         points: 15,
@@ -771,7 +771,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Watch this video clip and identify the game.",
-        type: "video-based",
+        type: EQuestionType.VIDEO_BASED,
         src: "https://cdn.pixabay.com/video/2022/12/27/144469-784605709_large.mp4",
         options: ["Dark Souls", "Elden Ring", "Bloodborne", "Sekiro"],
         correctAnswer: "Dark Souls",
@@ -781,7 +781,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 3,
         text: "Arrange these gaming consoles in order of release.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Nintendo Entertainment System", "PlayStation", "Xbox", "Nintendo Switch"],
         correctAnswer: "Nintendo Entertainment System, PlayStation, Xbox, Nintendo Switch",
         points: 25,
@@ -789,21 +789,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "The protagonist of Half-Life is named Gordon ___.",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "Freeman",
         points: 15,
       },
       {
         id: 5,
         text: "Mario first appeared in Donkey Kong.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 6,
         text: "Match the game series with their developers.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["The Witcher", "Halo", "God of War", "Uncharted"],
         rightOptions: ["CD Projekt Red", "Bungie", "Santa Monica Studio", "Naughty Dog"],
         correctAnswer:
@@ -835,7 +835,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Which actress won Best Actress at the 2024 Oscars?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Emma Stone", "Margot Robbie", "Cate Blanchett", "Saoirse Ronan"],
         correctAnswer: "Emma Stone",
         points: 10,
@@ -843,21 +843,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Taylor Swift is a singer and actress.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 5,
       },
       {
         id: 3,
         text: "Who is known as the 'King of Pop'?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Michael Jackson",
         points: 15,
       },
       {
         id: 4,
         text: "Match the celebrity with their profession.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Dwayne Johnson", "The Weeknd", "Elon Musk", "Oprah Winfrey"],
         rightOptions: ["Actor", "Singer", "Entrepreneur", "Talk Show Host"],
         correctAnswer:
@@ -888,7 +888,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Who wrote 'Pride and Prejudice'?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Jane Austen", "Charlotte Brontë", "Emily Dickinson", "Mary Shelley"],
         correctAnswer: "Jane Austen",
         points: 15,
@@ -896,21 +896,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "'Moby Dick' is a novel about a whale.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the title of Fyodor Dostoevsky's most famous work?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Crime and Punishment",
         points: 15,
       },
       {
         id: 4,
         text: "Match the books with their authors.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["1984", "The Great Gatsby", "Jane Eyre", "Wuthering Heights"],
         rightOptions: ["George Orwell", "F. Scott Fitzgerald", "Charlotte Brontë", "Emily Brontë"],
         correctAnswer:
@@ -920,7 +920,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these literary genres from oldest to newest.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Epic Poetry", "Modernism", "Romanticism", "Contemporary Fiction"],
         correctAnswer: "Epic Poetry, Romanticism, Modernism, Contemporary Fiction",
         points: 20,
@@ -949,7 +949,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Who painted the Mona Lisa?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Leonardo da Vinci", "Michelangelo", "Raphael", "Donatello"],
         correctAnswer: "Leonardo da Vinci",
         points: 10,
@@ -957,7 +957,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Identify the artwork in the image.",
-        type: "image-based",
+        type: EQuestionType.IMAGE_BASED,
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/1280px-1665_Girl_with_a_Pearl_Earring.jpg",
         options: [
           "The Starry Night",
@@ -972,14 +972,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 3,
         text: "The technique of using small dots of paint to create images is called ___.",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "pointillism",
         points: 15,
       },
       {
         id: 4,
         text: "Match the artists with their art movements.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Vincent van Gogh", "Pablo Picasso", "Jackson Pollock", "Andy Warhol"],
         rightOptions: ["Post-Impressionism", "Cubism", "Abstract Expressionism", "Pop Art"],
         correctAnswer:
@@ -1010,7 +1010,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "How many seasons did Breaking Bad have?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["5", "6", "7", "8"],
         correctAnswer: "5",
         points: 15,
@@ -1018,21 +1018,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Game of Thrones is based on a book series.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the name of the coffee shop in Friends?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Central Perk",
         points: 15,
       },
       {
         id: 4,
         text: "Arrange these TV series by their premiere year.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["The Office", "Stranger Things", "The Crown", "Succession"],
         correctAnswer: "The Office, The Crown, Stranger Things, Succession",
         points: 20,
@@ -1040,7 +1040,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Match the TV show with the actor who plays the main role.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["House", "Sherlock", "The Wire", "The Sopranos"],
         rightOptions: ["Hugh Laurie", "Benedict Cumberbatch", "Dominic West", "James Gandolfini"],
         correctAnswer:
@@ -1071,7 +1071,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the fastest land animal?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Cheetah", "Lion", "Antelope", "Horse"],
         correctAnswer: "Cheetah",
         points: 10,
@@ -1079,21 +1079,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Dolphins are fish.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
         points: 5,
       },
       {
         id: 3,
         text: "How many legs does an insect have?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "6",
         points: 10,
       },
       {
         id: 4,
         text: "Match the animals with their diets.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Lion", "Cow", "Bear", "Parrot"],
         rightOptions: ["Carnivore", "Herbivore", "Omnivore", "Frugivore"],
         correctAnswer: "Lion - Carnivore, Cow - Herbivore, Bear - Omnivore, Parrot - Frugivore",
@@ -1102,7 +1102,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Identify the animal in the image.",
-        type: "image-based",
+        type: EQuestionType.IMAGE_BASED,
         src: "https://www.wwf.de/fileadmin/_processed_/b/c/csm_jaguar-WW1108826-c-Yves-Jacques-REY-MILLET-WWF_a50dfac362.jpg",
         options: ["Tiger", "Leopard", "Jaguar", "Cheetah"],
         correctAnswer: "Tiger",
@@ -1132,7 +1132,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the largest rainforest in the world?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: [
           "Amazon Rainforest",
           "Congo Rainforest",
@@ -1145,21 +1145,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Climate change is primarily caused by greenhouse gases.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the process by which plants convert sunlight into chemical energy?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "photosynthesis",
         points: 15,
       },
       {
         id: 4,
         text: "Match the biomes with their characteristics.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Desert", "Tundra", "Tropical", "Temperate"],
         rightOptions: ["Hot and dry", "Cold and frozen", "Hot and humid", "Moderate climate"],
         correctAnswer:
@@ -1169,7 +1169,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these conservation efforts from most to least recent.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: [
           "Paris Climate Agreement",
           "Montreal Protocol",
@@ -1204,7 +1204,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What year did humans first land on the moon?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["1969", "1970", "1972", "1968"],
         correctAnswer: "1969",
         points: 15,
@@ -1212,14 +1212,14 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Sun is the largest object in our solar system.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the name of the boundary around a black hole from which nothing can escape?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "event horizon",
         points: 20,
         doublePoints: true,
@@ -1227,7 +1227,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 4,
         text: "Match the planets with their characteristics.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Venus", "Mars", "Jupiter", "Saturn"],
         rightOptions: ["Hottest planet", "Red planet", "Largest planet", "Ring planet"],
         correctAnswer:
@@ -1237,7 +1237,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these space missions chronologically.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Apollo 11", "Voyager 1", "International Space Station", "SpaceX Falcon Heavy"],
         correctAnswer: "Apollo 11, Voyager 1, International Space Station, SpaceX Falcon Heavy",
         points: 25,
@@ -1266,7 +1266,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the value of pi rounded to two decimal places?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["3.14", "3.15", "3.16", "3.17"],
         correctAnswer: "3.14",
         points: 10,
@@ -1274,21 +1274,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The square root of 144 is 12.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the sum of angles in a triangle?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "180",
         points: 15,
       },
       {
         id: 4,
         text: "What is the value of 2^8?",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "256",
         points: 20,
         doublePoints: true,
@@ -1296,7 +1296,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Match the mathematical concepts with their definitions.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Prime Number", "Composite Number", "Perfect Square", "Integer"],
         rightOptions: [
           "Divisible only by 1 and itself",
@@ -1332,7 +1332,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "How many official languages are there in the United Nations?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["6", "7", "5", "8"],
         correctAnswer: "6",
         points: 15,
@@ -1340,21 +1340,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Mandarin Chinese is the most spoken language in the world by native speakers.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the term for a word that has the same spelling and pronunciation as another but different meaning?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "homonym",
         points: 15,
       },
       {
         id: 4,
         text: "Match the languages with their countries.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Portuguese", "Swahili", "Thai", "Polish"],
         rightOptions: ["Brazil", "Kenya", "Thailand", "Poland"],
         correctAnswer: "Portuguese - Brazil, Swahili - Kenya, Thai - Thailand, Polish - Poland",
@@ -1363,7 +1363,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these languages from oldest to newest in written form.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Greek", "Arabic", "English", "Mandarin"],
         correctAnswer: "Mandarin, Greek, Arabic, English",
         points: 20,
@@ -1392,7 +1392,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the capital of Australia?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Canberra", "Sydney", "Melbourne", "Brisbane"],
         correctAnswer: "Canberra",
         points: 10,
@@ -1400,21 +1400,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Great Wall of China is visible from space.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
         points: 5,
       },
       {
         id: 3,
         text: "How many days are in a leap year?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "366",
         points: 10,
       },
       {
         id: 4,
         text: "Match the landmarks with their locations.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Statue of Liberty", "Big Ben", "Taj Mahal", "Machu Picchu"],
         rightOptions: ["New York", "London", "India", "Peru"],
         correctAnswer:
@@ -1445,7 +1445,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the smallest country in the world by area?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Vatican City", "Monaco", "San Marino", "Liechtenstein"],
         correctAnswer: "Vatican City",
         points: 15,
@@ -1453,21 +1453,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Amazon River is the longest river in the world.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
         points: 10,
       },
       {
         id: 3,
         text: "What year did the Titanic sink?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "1912",
         points: 15,
       },
       {
         id: 4,
         text: "Match the inventions with their inventors.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Light Bulb", "Telephone", "Airplane", "Printing Press"],
         rightOptions: [
           "Thomas Edison",
@@ -1482,7 +1482,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these historical periods in chronological order.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Middle Ages", "Renaissance", "Industrial Revolution", "Information Age"],
         correctAnswer: "Middle Ages, Renaissance, Industrial Revolution, Information Age",
         points: 20,
@@ -1511,7 +1511,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the most abundant element in the human body?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Oxygen", "Carbon", "Hydrogen", "Nitrogen"],
         correctAnswer: "Oxygen",
         points: 15,
@@ -1519,21 +1519,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Photosynthesis produces oxygen and glucose from water and carbon dioxide.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the name of the protein that carries oxygen in the blood?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "hemoglobin",
         points: 15,
       },
       {
         id: 4,
         text: "Match the branches of science with their focus.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Physics", "Chemistry", "Biology", "Geology"],
         rightOptions: [
           "Study of matter and energy",
@@ -1548,7 +1548,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these scientific discoveries by year.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["DNA Structure", "Penicillin Discovery", "Newton's Laws", "Theory of Evolution"],
         correctAnswer: "Newton's Laws, Theory of Evolution, Penicillin Discovery, DNA Structure",
         points: 25,
@@ -1578,7 +1578,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "In what year did the Berlin Wall fall?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["1989", "1988", "1990", "1987"],
         correctAnswer: "1989",
         points: 15,
@@ -1586,21 +1586,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Cold War was a military conflict between the US and USSR.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
         points: 10,
       },
       {
         id: 3,
         text: "Who was the first President of the African National Congress after apartheid?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Nelson Mandela",
         points: 15,
       },
       {
         id: 4,
         text: "Match the historical events with their years.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Moon Landing", "Fall of Berlin Wall", "9/11 Attacks", "End of Cold War"],
         rightOptions: ["1969", "1989", "2001", "1991"],
         correctAnswer:
@@ -1610,7 +1610,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these Cold War events chronologically.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Cuban Missile Crisis", "Vietnam War", "Korean War", "Operation Desert Storm"],
         correctAnswer: "Korean War, Cuban Missile Crisis, Vietnam War, Operation Desert Storm",
         points: 20,
@@ -1639,7 +1639,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "In which year were the first modern Olympic Games held?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["1896", "1900", "1904", "1908"],
         correctAnswer: "1896",
         points: 15,
@@ -1647,21 +1647,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Ice Hockey is an Olympic sport.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "How many Olympic rings are there?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "5",
         points: 10,
       },
       {
         id: 4,
         text: "Match the Olympic athletes with their sports.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Serena Williams", "Usain Bolt", "Nadia Comaneci", "Mark Spitz"],
         rightOptions: ["Tennis", "Track and Field", "Gymnastics", "Swimming"],
         correctAnswer:
@@ -1671,7 +1671,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these Olympic host cities by year.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Tokyo", "London", "Beijing", "Sydney"],
         correctAnswer: "Sydney, Beijing, London, Tokyo",
         points: 20,
@@ -1700,7 +1700,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the capital of New Zealand?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Wellington", "Auckland", "Christchurch", "Dunedin"],
         correctAnswer: "Wellington",
         points: 15,
@@ -1708,21 +1708,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Budapest is the capital of Hungary.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What is the capital of Canada?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Ottawa",
         points: 15,
       },
       {
         id: 4,
         text: "Match the countries with their capitals.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Thailand", "South Korea", "Indonesia", "Malaysia"],
         rightOptions: ["Bangkok", "Seoul", "Jakarta", "Kuala Lumpur"],
         correctAnswer:
@@ -1733,7 +1733,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these European capitals from north to south.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Rome", "Stockholm", "Athens", "Dublin"],
         correctAnswer: "Stockholm, Dublin, Rome, Athens",
         points: 20,
@@ -1762,7 +1762,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Who has won the most Grammy Awards?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Beyoncé", "Taylor Swift", "Quincy Jones", "Georg Solti"],
         correctAnswer: "Beyoncé",
         points: 15,
@@ -1770,21 +1770,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The Beatles broke up in 1970.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "Which musician is known as the 'Queen of Soul'?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Aretha Franklin",
         points: 15,
       },
       {
         id: 4,
         text: "Match the artists with their iconic albums.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["The Beatles", "Pink Floyd", "David Bowie", "Prince"],
         rightOptions: ["Abbey Road", "The Dark Side of the Moon", "Ziggy Stardust", "Purple Rain"],
         correctAnswer:
@@ -1794,7 +1794,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these music genres by when they originated.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Rock", "Hip-Hop", "Jazz", "Electronic"],
         correctAnswer: "Jazz, Rock, Hip-Hop, Electronic",
         points: 20,
@@ -1823,28 +1823,28 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Complete the quote: 'May the ___ be with you.'",
-        type: "fill-in-the-blank",
+        type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: "Force",
         points: 15,
       },
       {
         id: 2,
         text: "'I'll be back' is a famous line from The Terminator.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "Who said 'I'm Batman'?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Batman",
         points: 15,
       },
       {
         id: 4,
         text: "Match the famous movie quotes with the films they're from.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: [
           "'You can't handle the truth!'",
           "'Here's looking at you, kid.'",
@@ -1859,7 +1859,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these iconic films by their release year.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Jaws", "E.T.", "Back to the Future", "Jurassic Park"],
         correctAnswer: "Jaws, E.T., Back to the Future, Jurassic Park",
         points: 20,
@@ -1888,7 +1888,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "Who is the founder of Microsoft?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Bill Gates", "Steve Jobs", "Mark Zuckerberg", "Larry Page"],
         correctAnswer: "Bill Gates",
         points: 15,
@@ -1896,21 +1896,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "The first iPhone was released in 2007.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What does AI stand for?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Artificial Intelligence",
         points: 10,
       },
       {
         id: 4,
         text: "Match the tech companies with their founders.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Apple", "Facebook", "Amazon", "Tesla"],
         rightOptions: ["Steve Jobs", "Mark Zuckerberg", "Jeff Bezos", "Elon Musk"],
         correctAnswer:
@@ -1920,7 +1920,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these technological innovations chronologically.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["The Internet", "Personal Computers", "Smartphones", "Cloud Computing"],
         correctAnswer: "Personal Computers, The Internet, Smartphones, Cloud Computing",
         points: 20,
@@ -1949,7 +1949,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What is the national dish of India?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: ["Butter Chicken", "Tikka Masala", "Samosa", "Tandoori Chicken"],
         correctAnswer: "Butter Chicken",
         points: 15,
@@ -1957,21 +1957,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "Kimchi is a traditional Korean fermented vegetable dish.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What ingredient is essential to Japanese miso soup?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "miso paste",
         points: 15,
       },
       {
         id: 4,
         text: "Match the cuisines with their signature dishes.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["Italian", "Thai", "French", "Greek"],
         rightOptions: ["Pasta", "Pad Thai", "Croissant", "Moussaka"],
         correctAnswer: "Italian - Pasta, Thai - Pad Thai, French - Croissant, Greek - Moussaka",
@@ -1980,7 +1980,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Arrange these cooking methods from healthiest to least healthy.",
-        type: "ordering",
+        type: EQuestionType.ORDERING,
         options: ["Grilling", "Steaming", "Deep Frying", "Baking"],
         correctAnswer: "Steaming, Grilling, Baking, Deep Frying",
         points: 20,
@@ -2009,7 +2009,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 1,
         text: "What does HTML stand for?",
-        type: "multiple-choice",
+        type: EQuestionType.MULTIPLE_CHOICE,
         options: [
           "HyperText Markup Language",
           "High Tech Modern Language",
@@ -2022,21 +2022,21 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 2,
         text: "CSS is used for styling web pages.",
-        type: "true-false",
+        type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
         points: 10,
       },
       {
         id: 3,
         text: "What does an API stand for?",
-        type: "short-answer",
+        type: EQuestionType.SHORT_ANSWER,
         correctAnswer: "Application Programming Interface",
         points: 15,
       },
       {
         id: 4,
         text: "What does the following JavaScript code do? console.log('Hello');",
-        type: "code-snippet",
+        type: EQuestionType.CODE_SNIPPET,
         options: [
           "Prints 'Hello' to the console",
           "Creates a variable",
@@ -2049,7 +2049,7 @@ export const dbQuiz: TQuiz[] = [
       {
         id: 5,
         text: "Match the web technologies with their purposes.",
-        type: "matching",
+        type: EQuestionType.MATCHING,
         leftOptions: ["HTML", "CSS", "JavaScript", "SQL"],
         rightOptions: ["Structure", "Styling", "Interactivity", "Database"],
         correctAnswer:
