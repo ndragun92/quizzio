@@ -191,11 +191,12 @@ const toast = useToastStore()
 
 watch(errors, (newErrors) => {
   const errorMessage = Object.values(newErrors).flat().join('\n')
-  console.debug('Validation errors:', errorMessage)
-  toast.error({
-    text:
-      errorMessage || 'Please fix the errors in the form before proceeding.',
-  })
+
+  if (errorMessage) {
+    toast.error({
+      text: errorMessage,
+    })
+  }
 })
 
 const { value: questions } = useField<TQuestion[]>('questions', undefined, {

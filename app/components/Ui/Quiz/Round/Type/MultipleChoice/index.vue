@@ -4,8 +4,8 @@
       v-for="(option, index) in question?.options"
       :key="index"
       class="flex items-center gap-4"
-      :clickable="true"
-      :selected="index === 2"
+      :clickable="!edit"
+      :selected="edit ? question?.correctAnswer === option : false"
       tabindex="0"
     >
       <div
@@ -27,12 +27,24 @@
       </h3>
     </UiCard>
   </div>
-  <div class="input--box">
-    <label>Correct answer</label>
-    <input
-      class="input--text"
-      placeholder="Type correct answer"
-    >
+  <div
+    v-if="edit"
+    class="input--box"
+  >
+    <label
+      :for="`correctAnswer--${question!.id}`"
+      class="input--label"
+    >Correct answer</label>
+    <UiInputSelect
+      :id="`correctAnswer--${question!.id}`"
+      v-model="question!.correctAnswer as string"
+      input-class="bg-primary-900!"
+      :options="question!.options!.map((option) => ({
+        label: option,
+        value: option,
+      }))"
+      :required="true"
+    />
   </div>
 </template>
 
