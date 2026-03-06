@@ -15,7 +15,12 @@
           >
         </div>
       </div>
-      <UiCard v-for="(question, index) in questions" :key="index" :level="3" class="space-y-4">
+      <UiCard
+        v-for="(question, index) in questions"
+        :key="question.id"
+        :level="3"
+        class="space-y-4"
+      >
         <div class="flex items-center gap-4 justify-between">
           <h5 class="font-semibold text-lg">Question {{ index + 1 }}</h5>
           <div class="flex items-center gap-2">
