@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((from) => {
   const userStore = useUserStore($pinia);
   const isAuthenticated = userStore.data?.id;
   const fromPath = from.fullPath;
-  const fromName = from.name;
+  const fromName = from.name as string;
   if (!isAuthenticated) {
     if (fromName.startsWith("@creator")) {
       return navigateTo({
