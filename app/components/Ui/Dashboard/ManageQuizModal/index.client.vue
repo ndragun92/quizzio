@@ -1,49 +1,53 @@
 <template>
   <Teleport to="body">
     <div
-      class="fixed inset-0 z-30 p-8 overflow-y-auto h-dvh"
+      class="fixed inset-0 z-30 overflow-y-auto p-4 sm:p-8"
       role="dialog"
       aria-modal="true"
       aria-label="Manage Quiz Modal"
     >
       <div class="absolute inset-0 bg-primary-950/50 backdrop-blur-sm" />
-      <UiCard
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-11/12 xl:max-w-4xl p-6 z-40"
-      >
-        <div class="space-y-8">
-          <div class="flex items-center gap-8">
-            <div>
-              <button
-                type="button"
-                class="button--default-outline button--icon border-primary-700!"
-                @click="emit('close')"
-              >
-                <Icon name="mi:close" size="20" />
-                <span class="sr-only">Close</span>
-              </button>
-            </div>
-            <div class="space-y-0.5 flex-1">
-              <h3 class="font-bold text-2xl">Create New Quiz</h3>
-              <p class="text--secondary">
-                Add questions, set answers and configure your quiz settings.
-              </p>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
+
+      <div class="relative z-40 flex min-h-full items-start justify-center py-4 sm:py-8">
+        <UiCard class="w-full max-w-11/12 xl:max-w-4xl p-6">
+          <div class="space-y-8">
+            <div class="flex items-center gap-8">
+              <div>
                 <button
-                  v-if="step === 2"
                   type="button"
-                  class="button--default button--compact whitespace-nowrap"
+                  class="button--default-outline button--icon border-primary-700!"
+                  @click="emit('close')"
                 >
-                  Create
+                  <Icon name="mi:close" size="20" />
+                  <span class="sr-only">Close</span>
                 </button>
               </div>
+
+              <div class="space-y-0.5 flex-1">
+                <h3 class="font-bold text-2xl">Create New Quiz</h3>
+                <p class="text--secondary">
+                  Add questions, set answers and configure your quiz settings.
+                </p>
+              </div>
+
+              <div>
+                <div class="flex items-center gap-2">
+                  <button
+                    v-if="step === 2"
+                    type="button"
+                    class="button--default button--compact whitespace-nowrap"
+                  >
+                    Create
+                  </button>
+                </div>
+              </div>
             </div>
+
+            <UiDashboardManageQuizModalStepOne v-if="step === 1" :form="form" @next="onNext" />
+            <UiDashboardManageQuizModalStepTwo v-else-if="step === 2" @back="step = 1" />
           </div>
-          <UiDashboardManageQuizModalStepOne v-if="step === 1" :form="form" @next="onNext" />
-          <UiDashboardManageQuizModalStepTwo v-else-if="step === 2" @back="step = 1" />
-        </div>
-      </UiCard>
+        </UiCard>
+      </div>
     </div>
   </Teleport>
 </template>
