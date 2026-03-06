@@ -8,8 +8,8 @@
     >
       <div class="absolute inset-0 bg-primary-950/50 backdrop-blur-sm" />
 
-      <div class="relative z-40 flex min-h-full items-start justify-center py-4 sm:py-8">
-        <UiCard class="w-full max-w-11/12 xl:max-w-4xl p-6">
+      <div class="relative z-40 flex min-h-full justify-center py-4 sm:py-8">
+        <UiCard class="my-auto w-full max-w-11/12 xl:max-w-4xl p-6">
           <div class="space-y-8">
             <div class="flex items-center gap-8">
               <div>
