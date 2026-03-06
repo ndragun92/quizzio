@@ -1,23 +1,26 @@
 import type { TApiUser } from "../types/user.type";
 
+export enum EQuestionType {
+  MULTIPLE_CHOICE = "multiple-choice", // Standard multiple-choice question with one correct answer
+  TRUE_FALSE = "true-false", // Standard true/false question
+  SHORT_ANSWER = "short-answer", // Open-ended question where players type their answer
+  FILL_IN_THE_BLANK = "fill-in-the-blank", // Question with a blank to fill in, e.g. "The capital of France is ___"
+  MATCHING = "matching", // Players match items from two lists, e.g. "Match the country with its capital"
+  ORDERING = "ordering", // Players arrange items in the correct order, e.g. "Arrange the historical events in chronological order"
+  IMAGE_BASED = "image-based", // Question that requires players to identify something in an image
+  AUDIO_BASED = "audio-based", // Question that requires players to identify something in an audio clip
+  VIDEO_BASED = "video-based", // Question that requires players to identify something in a video clip
+  CODE_SNIPPET = "code-snippet", // Question that requires players to analyze a code snippet and answer a question about it
+  DRAG_AND_DROP = "drag-and-drop", // Question that requires players to drag and drop answers into the correct positions
+  GUESS_THE_NUMBER = "guess-the-number", // Question that requires players to guess a number within a certain range
+  MEMORIZE_THE_ORDER = "memorize-the-order", // Question that requires players to memorize the order of items and recall them
+  MULTIPLE_CHOICE_SHARED_ANSWERS = "multiple-choice-shared-answers", // Answer locked once selected, shared among multiple questions
+}
+
 export type TQuestion = {
   id: number;
   text: string;
-  type:
-    | "multiple-choice" // Standard multiple-choice question with one correct answer
-    | "true-false" // Standard true/false question
-    | "short-answer" // Open-ended question where players type their answer
-    | "fill-in-the-blank" // Question with a blank to fill in, e.g. "The capital of France is ___"
-    | "matching" // Players match items from two lists, e.g. "Match the country with its capital"
-    | "ordering" // Players arrange items in the correct order, e.g. "Arrange the historical events in chronological order"
-    | "image-based" // Question that requires players to identify something in an image
-    | "audio-based" // Question that requires players to identify something in an audio clip
-    | "video-based" // Question that requires players to identify something in a video clip
-    | "code-snippet" // Question that requires players to analyze a code snippet and answer a question about it
-    | "drag-and-drop" // Question that requires players to drag and drop answers into the correct positions
-    | "guess-the-number" // Question that requires players to guess a number within a certain range
-    | "memorize-the-order" // Question that requires players to memorize the order of items and recall them
-    | "multiple-choice-shared-answers"; // Answer locked once selected, shared among multiple questions
+  type: EQuestionType;
   options?: string[]; // Only for multiple-choice questions
   leftOptions?: string[]; // For matching questions, the options on the left side
   rightOptions?: string[]; // For matching questions, the options on the right side

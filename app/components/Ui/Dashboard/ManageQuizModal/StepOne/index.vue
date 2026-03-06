@@ -322,8 +322,7 @@ const { value: lives } = useField(
 
 const emit = defineEmits(["next"]);
 
-const onSubmit = handleSubmit(async (values) => {
-  console.log("Form submitted with values:", values);
+const onSubmit = handleSubmit((values) => {
   emit("next", values);
 });
 </script>
