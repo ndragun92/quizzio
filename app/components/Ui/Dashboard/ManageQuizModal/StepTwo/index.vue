@@ -52,6 +52,16 @@
               </div>
               <div class="flex items-center gap-2">
                 <label
+                  :for="`doublePoints-${question.id}`"
+                  class="input--label"
+                >Double Points:</label>
+                <UiInputToggle
+                  :id="`doublePoints-${question.id}`"
+                  v-model="questions[index]!.doublePoints"
+                />
+              </div>
+              <div class="flex items-center gap-2">
+                <label
                   :for="`type-${question.id}`"
                   class="input--label sr-only"
                 >Type:</label>
@@ -77,6 +87,25 @@
                   <span class="sr-only">Delete question</span>
                 </button>
               </div>
+            </div>
+          </div>
+          <div
+            v-if="questions[index]?.doublePoints"
+            class="bg-yellow-500/10 border-2 border-yellow-400 rounded-lg p-4 flex items-start gap-4"
+          >
+            <div>
+              <Icon
+                name="mdi:lightbulb-on-outline"
+                size="24"
+                class="text-yellow-400"
+              />
+            </div>
+            <div class="space-y-2">
+              <p class="text-sm text-yellow-300">
+                This question is worth double points! Answering correctly will
+                earn you double the points, but be careful - answering
+                incorrectly will also deduct double the points!
+              </p>
             </div>
           </div>
           <div>
