@@ -186,30 +186,10 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 
 type Props = {
-  form: TForm;
+  form: TQuiz;
 };
 
 const props = defineProps<Props>();
-
-const statuses = Object.values(EStatus).map((cat) => ({
-  label: cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
-  value: cat,
-}));
-
-const gameModes = Object.values(EGameMode).map((cat) => ({
-  label: cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
-  value: cat,
-}));
-
-const categories = Object.values(ECategory).map((cat) => ({
-  label: cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
-  value: cat,
-}));
-
-const difficulties = Object.values(EDifficulty).map((diff) => ({
-  label: diff.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
-  value: diff,
-}));
 
 const validationSchema = toTypedSchema(
   z.object({

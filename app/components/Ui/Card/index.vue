@@ -3,7 +3,8 @@
     class="border border-primary-800 rounded-lg p-5"
     :class="{
       'bg-primary-900': level === 1,
-      'bg-primary-800/25': level === 2,
+      'border-primary-800! bg-primary-800/25': level === 2,
+      'border-primary-700! bg-primary-700/25': level === 3,
       'border-primary-700 hover:border-primary-600 transition-colors': hover,
       'border-dashed': placeholder,
       'border-2! hover:border-ascend-purple-dark cursor-pointer transition-all duration-200 group':
@@ -17,7 +18,7 @@
 
 <script lang="ts" setup>
 type Props = {
-  level?: 1 | 2;
+  level?: 1 | 2 | 3;
   hover?: boolean;
   clickable?: boolean;
   selected?: boolean;
@@ -29,5 +30,6 @@ withDefaults(defineProps<Props>(), {
   hover: false,
   clickable: false,
   selected: false,
+  placeholder: false,
 });
 </script>

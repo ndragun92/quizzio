@@ -1,34 +1,64 @@
 <template>
-  <UiQuizRoundTypeMultipleChoice v-if="question?.type === 'multiple-choice'" :question="question" />
-  <UiQuizRoundTypeTrueFalse v-else-if="question?.type === 'true-false'" :question="question" />
-  <UiQuizRoundTypeShortAnswer v-else-if="question?.type === 'short-answer'" :question="question" />
-  <UiQuizRoundTypeFillInTheBlank
-    v-else-if="question?.type === 'fill-in-the-blank'"
+  <UiQuizRoundTypeMultipleChoice
+    v-if="question?.type === EQuestionType.MULTIPLE_CHOICE"
     :question="question"
   />
-  <UiQuizRoundTypeMatching v-else-if="question?.type === 'matching'" :question="question" />
-  <UiQuizRoundTypeOrdering v-else-if="question?.type === 'ordering'" :question="question" />
-  <UiQuizRoundTypeImageBased v-else-if="question?.type === 'image-based'" :question="question" />
-  <UiQuizRoundTypeAudioBased v-else-if="question?.type === 'audio-based'" :question="question" />
-  <UiQuizRoundTypeVideoBased v-else-if="question?.type === 'video-based'" :question="question" />
-  <UiQuizRoundTypeCodeSnippet v-else-if="question?.type === 'code-snippet'" :question="question" />
-  <UiQuizRoundTypeDragAndDrop v-else-if="question?.type === 'drag-and-drop'" :question="question" />
+  <UiQuizRoundTypeTrueFalse
+    v-else-if="question?.type === EQuestionType.TRUE_FALSE"
+    :question="question"
+  />
+  <UiQuizRoundTypeShortAnswer
+    v-else-if="question?.type === EQuestionType.SHORT_ANSWER"
+    :question="question"
+  />
+  <UiQuizRoundTypeFillInTheBlank
+    v-else-if="question?.type === EQuestionType.FILL_IN_THE_BLANK"
+    :question="question"
+  />
+  <UiQuizRoundTypeMatching
+    v-else-if="question?.type === EQuestionType.MATCHING"
+    :question="question"
+  />
+  <UiQuizRoundTypeOrdering
+    v-else-if="question?.type === EQuestionType.ORDERING"
+    :question="question"
+  />
+  <UiQuizRoundTypeImageBased
+    v-else-if="question?.type === EQuestionType.IMAGE_BASED"
+    :question="question"
+  />
+  <UiQuizRoundTypeAudioBased
+    v-else-if="question?.type === EQuestionType.AUDIO_BASED"
+    :question="question"
+  />
+  <UiQuizRoundTypeVideoBased
+    v-else-if="question?.type === EQuestionType.VIDEO_BASED"
+    :question="question"
+  />
+  <UiQuizRoundTypeCodeSnippet
+    v-else-if="question?.type === EQuestionType.CODE_SNIPPET"
+    :question="question"
+  />
+  <UiQuizRoundTypeDragAndDrop
+    v-else-if="question?.type === EQuestionType.DRAG_AND_DROP"
+    :question="question"
+  />
   <UiQuizRoundTypeGuessTheNumber
-    v-else-if="question?.type === 'guess-the-number'"
+    v-else-if="question?.type === EQuestionType.GUESS_THE_NUMBER"
     :question="question"
   />
   <UiQuizRoundTypeMemorizeTheOrder
-    v-else-if="question?.type === 'memorize-the-order'"
+    v-else-if="question?.type === EQuestionType.MEMORIZE_THE_ORDER"
     :question="question"
   />
   <UiQuizRoundTypeMultipleChoiceSharedAnswers
-    v-else-if="question?.type === 'multiple-choice-shared-answers'"
+    v-else-if="question?.type === EQuestionType.MULTIPLE_CHOICE_SHARED_ANSWERS"
     :question="question"
   />
 </template>
 
 <script setup lang="ts">
-import type { TQuestion } from "~~/shared/utils/quiz.db";
+import { EQuestionType, type TQuestion } from "~~/shared/utils/quiz.db";
 
 type Props = {
   question: TQuestion | null;
