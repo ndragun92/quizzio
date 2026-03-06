@@ -107,7 +107,7 @@
       </div>
     </UiCard>
   </div>
-  <UiDashboardManageQuizModal v-if="showManageQuizModal" />
+  <UiDashboardManageQuizModal v-if="showManageQuizModal" @close="showManageQuizModal = false" />
 </template>
 
 <script lang="ts" setup>

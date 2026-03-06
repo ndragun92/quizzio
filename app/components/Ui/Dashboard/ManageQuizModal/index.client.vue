@@ -16,9 +16,10 @@
               <button
                 type="button"
                 class="button--default-outline button--icon border-primary-700!"
+                @click="emit('close')"
               >
-                <Icon name="mi:chevron-left" size="20" />
-                <span class="sr-only">Edit</span>
+                <Icon name="mi:close" size="20" />
+                <span class="sr-only">Close</span>
               </button>
             </div>
             <div class="space-y-0.5 flex-1">
@@ -29,16 +30,18 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <button type="button" class="button--primary button--compact whitespace-nowrap">
-                  Save Draft
-                </button>
-                <button type="button" class="button--default button--compact whitespace-nowrap">
-                  Preview
+                <button
+                  v-if="step === 2"
+                  type="button"
+                  class="button--default button--compact whitespace-nowrap"
+                >
+                  Create
                 </button>
               </div>
             </div>
           </div>
-          <UiDashboardManageQuizModalStepOne v-if="step === 1" @next="onNext" />
+          <UiDashboardManageQuizModalStepOne v-if="step === 1" :form="form" @next="onNext" />
+          <UiDashboardManageQuizModalStepTwo v-else-if="step === 2" @back="step = 1" />
         </div>
       </UiCard>
     </div>
@@ -47,6 +50,8 @@
 
 <script lang="ts" setup>
 const { userId } = useUser();
+
+const emit = defineEmits(["close"]);
 
 type TForm = Omit<TQuiz, "id" | "createdAt" | "updatedAt">;
 
@@ -68,10 +73,10 @@ const form = ref<TForm>({
   questions: [],
 });
 
-const step = ref(1);
+const step = ref(2);
 
 const onNext = (values: TForm) => {
-  form.value = { ...form.value, ...values };
+  form.value = { ...toRaw(form.value), ...values };
   step.value = 2;
 };
 </script>

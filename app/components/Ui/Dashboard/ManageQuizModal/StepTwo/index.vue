@@ -168,6 +168,14 @@
     <div class="flex justify-end">
       <div class="flex items-center gap-2">
         <button
+          type="button"
+          class="button--primary button--compact whitespace-nowrap"
+          @click="emit('back')"
+        >
+          <Icon name="lucide:chevron-left" size="16" />
+          <span>Prev</span>
+        </button>
+        <button
           type="submit"
           :disabled="isSubmitting"
           class="button--default button--compact whitespace-nowrap"
@@ -184,12 +192,6 @@
 import { useForm, useField } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
-
-type Props = {
-  form: TForm;
-};
-
-const props = defineProps<Props>();
 
 const statuses = Object.values(EStatus).map((cat) => ({
   label: cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // capitalize each word
@@ -236,7 +238,7 @@ const { value: title } = useField(
   "title",
   {},
   {
-    initialValue: props.form.title || "",
+    initialValue: "",
   }
 );
 
@@ -244,7 +246,7 @@ const { value: description } = useField(
   "description",
   {},
   {
-    initialValue: props.form.description || "",
+    initialValue: "",
   }
 );
 
@@ -252,7 +254,7 @@ const { value: status } = useField(
   "status",
   {},
   {
-    initialValue: props.form.status || EStatus.PUBLISHED,
+    initialValue: EStatus.PUBLISHED,
   }
 );
 
@@ -260,7 +262,7 @@ const { value: category } = useField(
   "category",
   {},
   {
-    initialValue: props.form.category || ECategory.GENERAL,
+    initialValue: "",
   }
 );
 
@@ -268,7 +270,7 @@ const { value: difficulty } = useField(
   "difficulty",
   {},
   {
-    initialValue: props.form.difficulty || EDifficulty.EASY,
+    initialValue: EDifficulty.EASY,
   }
 );
 
@@ -276,7 +278,7 @@ const { value: gameMode } = useField(
   "gameMode",
   {},
   {
-    initialValue: props.form.gameMode || EGameMode.SURVIVAL,
+    initialValue: EGameMode.SURVIVAL,
   }
 );
 
@@ -284,7 +286,7 @@ const { value: timeLimitPerRound } = useField(
   "settings.timeLimitPerRound",
   {},
   {
-    initialValue: props.form.settings.timeLimitPerRound || 30,
+    initialValue: 30,
   }
 );
 
@@ -292,7 +294,7 @@ const { value: passingScorePercentage } = useField(
   "settings.passingScorePercentage",
   {},
   {
-    initialValue: props.form.settings.passingScorePercentage || 70,
+    initialValue: 70,
   }
 );
 
@@ -300,7 +302,7 @@ const { value: shuffleQuestions } = useField(
   "settings.shuffleQuestions",
   {},
   {
-    initialValue: props.form.settings.shuffleQuestions || false,
+    initialValue: false,
   }
 );
 
@@ -308,7 +310,7 @@ const { value: immediateResults } = useField(
   "settings.immediateResults",
   {},
   {
-    initialValue: props.form.settings.immediateResults || false,
+    initialValue: false,
   }
 );
 
@@ -316,11 +318,11 @@ const { value: lives } = useField(
   "settings.lives",
   {},
   {
-    initialValue: props.form.settings.lives || 3,
+    initialValue: 3,
   }
 );
 
-const emit = defineEmits(["next"]);
+const emit = defineEmits(["back", "next"]);
 
 const onSubmit = handleSubmit(async (values) => {
   console.log("Form submitted with values:", values);
