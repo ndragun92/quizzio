@@ -37,7 +37,7 @@
     >Correct answer</label>
     <UiInputSelect
       :id="`correctAnswer--${question!.id}`"
-      v-model="question!.correctAnswer as string"
+      v-model="(question!.correctAnswer as string)"
       :options="question!.options!.map((option) => ({
         label: option,
         value: option,

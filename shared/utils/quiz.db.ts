@@ -26,6 +26,7 @@ export type TQuestion = {
   rightOptions?: string[] // For matching questions, the options on the right side
   src?: string // For image-based, audio-based, and video-based questions, the source URL of the media
   correctAnswer: string | boolean // String for multiple-choice, short-answer, and fill-in-the-blank, boolean for true-false
+  providedAnswer: string | boolean // The answer provided by the player, used for immediate results
   points: number
   doublePoints?: boolean // If true, points for this question are doubled if answered correctly and reduce by double if answered incorrectly
   answeredBy?: {
@@ -128,6 +129,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Paris', 'London', 'Berlin', 'Madrid'],
         correctAnswer: 'Paris',
+        providedAnswer: '',
         points: 10,
         doublePoints: true,
       },
@@ -136,6 +138,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Earth is flat.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -143,6 +146,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who wrote \'To Kill a Mockingbird\'?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Harper Lee',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -150,6 +154,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The chemical symbol for water is ___.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'H2O',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -159,6 +164,7 @@ export const dbQuiz: TQuiz[] = [
         leftOptions: ['France', 'Germany', 'Spain', 'Italy'],
         rightOptions: ['Paris', 'Berlin', 'Madrid', 'Rome'],
         correctAnswer: 'France - Paris, Germany - Berlin, Spain - Madrid, Italy - Rome',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -167,6 +173,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['World War I', 'American Revolution', 'French Revolution', 'World War II'],
         correctAnswer: 'American Revolution, French Revolution, World War I, World War II',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -176,6 +183,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://cdn.britannica.com/89/187589-050-E8D5A657/Workers-Big-Ben-London.jpg',
         options: ['Eiffel Tower', 'Statue of Liberty', 'Big Ben', 'Colosseum'],
         correctAnswer: 'Eiffel Tower',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -185,6 +193,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://freepik-tunes.s3.amazonaws.com/tracks/950f1cb8_Audio_People.mp3',
         options: ['Song A', 'Song B', 'Song C', 'Song D'],
         correctAnswer: 'Song A',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -194,6 +203,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://cdn.pixabay.com/video/2023/09/20/181458-866575785_large.mp4',
         options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
         correctAnswer: 'Option 2',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -202,6 +212,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.CODE_SNIPPET,
         options: ['Output A', 'Output B', 'Output C', 'Output D'],
         correctAnswer: 'Output C',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -210,6 +221,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.DRAG_AND_DROP,
         options: ['Option A', 'Option B', 'Option C', 'Option D'],
         correctAnswer: 'Option A, Option C',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -217,6 +229,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Guess the number between 1 and 100.',
         type: EQuestionType.GUESS_THE_NUMBER,
         correctAnswer: '42',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -225,6 +238,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MEMORIZE_THE_ORDER,
         options: ['Item A', 'Item B', 'Item C', 'Item D'],
         correctAnswer: 'Item B, Item D, Item A, Item C',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -233,6 +247,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE_SHARED_ANSWERS,
         options: ['Shared Answer A', 'Shared Answer B', 'Shared Answer C', 'Shared Answer D'],
         correctAnswer: 'Shared Answer B',
+        providedAnswer: '',
         points: 15,
       },
     ],
@@ -262,6 +277,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Mars', 'Venus', 'Jupiter', 'Saturn'],
         correctAnswer: 'Mars',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -269,6 +285,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Water boils at 100°C at sea level.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -276,6 +293,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The center of an atom is called the ___.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'nucleus',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -284,6 +302,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['206', '208', '195', '212'],
         correctAnswer: '206',
+        providedAnswer: '',
         points: 15,
       },
     ],
@@ -313,6 +332,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['1939', '1940', '1938', '1941'],
         correctAnswer: '1939',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -327,6 +347,7 @@ export const dbQuiz: TQuiz[] = [
         ],
         correctAnswer:
           'Pearl Harbor Attack, Battle of Stalingrad, D-Day Invasion, Hiroshima Bombing',
+        providedAnswer: '',
         points: 25,
         doublePoints: true,
       },
@@ -335,6 +356,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who was the Prime Minister of Britain during most of WWII?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Winston Churchill',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -342,6 +364,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Battle of Midway was fought in the Pacific Ocean.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -357,6 +380,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['D-Day', 'Invasion of USSR', 'Netherlands', 'North Africa'],
         correctAnswer:
           'Operation Overlord - D-Day, Operation Barbarossa - Invasion of USSR, Operation Market Garden - Netherlands, Operation Torch - North Africa',
+        providedAnswer: '',
         points: 30,
       },
     ],
@@ -386,6 +410,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.CODE_SNIPPET,
         options: ['object', 'null', 'undefined', 'error'],
         correctAnswer: 'object',
+        providedAnswer: '',
         points: 20,
         doublePoints: true,
       },
@@ -394,6 +419,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Event delegation works by utilizing event bubbling.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -401,6 +427,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What keyword is used to create a constant reference in JavaScript?',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'const',
+        providedAnswer: '',
         points: 10,
       },
     ],
@@ -430,6 +457,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Forrest Gump', 'The Shawshank Redemption', 'Pulp Fiction', 'The Lion King'],
         correctAnswer: 'Forrest Gump',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -439,6 +467,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://www.rollingstone.com/wp-content/uploads/2020/08/goodfellasc.jpg?w=1581&h=1054&crop=1',
         options: ['The Godfather', 'Scarface', 'Goodfellas', 'Casino'],
         correctAnswer: 'The Godfather',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -449,6 +478,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Christopher Nolan', 'Wes Anderson', 'Bong Joon-ho', 'Jordan Peele'],
         correctAnswer:
           'Inception - Christopher Nolan, The Grand Budapest Hotel - Wes Anderson, Parasite - Bong Joon-ho, Get Out - Jordan Peele',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -456,6 +486,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Steven Spielberg directed Jurassic Park.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -463,6 +494,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who played Jack Dawson in Titanic?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Leonardo DiCaprio',
+        providedAnswer: '',
         points: 15,
       },
     ],
@@ -492,6 +524,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.CODE_SNIPPET,
         options: ['[0, 2, 4]', '[1, 3]', '[0, 1, 2, 3, 4]', '[2, 4]'],
         correctAnswer: '[0, 2, 4]',
+        providedAnswer: '',
         points: 25,
         doublePoints: true,
       },
@@ -500,6 +533,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'A decorator in Python is a function that takes another function and extends its behavior.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -508,6 +542,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Variables', 'Functions', 'Decorators', 'Metaclasses'],
         correctAnswer: 'Variables, Functions, Decorators, Metaclasses',
+        providedAnswer: '',
         points: 30,
       },
       {
@@ -515,6 +550,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The ___ statement in Python is used to handle exceptions.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'try',
+        providedAnswer: '',
         points: 15,
       },
     ],
@@ -544,6 +580,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Asia', 'Africa', 'North America', 'Europe'],
         correctAnswer: 'Asia',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -551,6 +588,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Nile River is the longest river in the world.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -558,6 +596,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the capital of Australia?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Canberra',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -567,6 +606,7 @@ export const dbQuiz: TQuiz[] = [
         leftOptions: ['Brazil', 'Egypt', 'Japan', 'Germany'],
         rightOptions: ['South America', 'Africa', 'Asia', 'Europe'],
         correctAnswer: 'Brazil - South America, Egypt - Africa, Japan - Asia, Germany - Europe',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -596,6 +636,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Michael Phelps', 'Usain Bolt', 'Simone Biles', 'Carl Lewis'],
         correctAnswer: 'Michael Phelps',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -603,6 +644,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The FIFA World Cup is held every four years.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -611,6 +653,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Modern Olympics', 'FIFA World Cup', 'Super Bowl', 'NBA Finals'],
         correctAnswer: 'Modern Olympics, FIFA World Cup, NBA Finals, Super Bowl',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -618,6 +661,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who is known as \'The GOAT\' in basketball?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Michael Jordan',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -633,6 +677,7 @@ export const dbQuiz: TQuiz[] = [
         ],
         correctAnswer:
           'NHL - Stanley Cup, NFL - Lombardi Trophy, NBA - Larry O\'Brien Trophy, MLB - Commissioner\'s Trophy',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -662,6 +707,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['7', '8', '12', '5'],
         correctAnswer: '7',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -669,6 +715,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'A sharp symbol raises a note by one semitone.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -678,6 +725,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://freepik-tunes.s3.amazonaws.com/tracks/cc1926f1_Twilight_Transit.mp3',
         options: ['Piano', 'Guitar', 'Violin', 'Flute'],
         correctAnswer: 'Piano',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -685,6 +733,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'A time signature of 4/4 means there are ___ beats per measure.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: '4',
+        providedAnswer: '',
         points: 10,
       },
     ],
@@ -714,6 +763,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Avocado', 'Tomato', 'Pepper', 'Onion'],
         correctAnswer: 'Avocado',
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -721,6 +771,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Sushi originated in Japan.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -730,6 +781,7 @@ export const dbQuiz: TQuiz[] = [
         leftOptions: ['Paella', 'Pho', 'Tacos', 'Pasta'],
         rightOptions: ['Spain', 'Vietnam', 'Mexico', 'Italy'],
         correctAnswer: 'Paella - Spain, Pho - Vietnam, Tacos - Mexico, Pasta - Italy',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -737,6 +789,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What cooking method involves submerging food in hot oil?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'deep frying',
+        providedAnswer: '',
         points: 10,
       },
     ],
@@ -766,6 +819,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['1986', '1985', '1987', '1984'],
         correctAnswer: '1986',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -775,6 +829,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://cdn.pixabay.com/video/2022/12/27/144469-784605709_large.mp4',
         options: ['Dark Souls', 'Elden Ring', 'Bloodborne', 'Sekiro'],
         correctAnswer: 'Dark Souls',
+        providedAnswer: '',
         points: 20,
         doublePoints: true,
       },
@@ -784,6 +839,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Nintendo Entertainment System', 'PlayStation', 'Xbox', 'Nintendo Switch'],
         correctAnswer: 'Nintendo Entertainment System, PlayStation, Xbox, Nintendo Switch',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -791,6 +847,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The protagonist of Half-Life is named Gordon ___.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'Freeman',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -798,6 +855,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Mario first appeared in Donkey Kong.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -808,6 +866,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['CD Projekt Red', 'Bungie', 'Santa Monica Studio', 'Naughty Dog'],
         correctAnswer:
           'The Witcher - CD Projekt Red, Halo - Bungie, God of War - Santa Monica Studio, Uncharted - Naughty Dog',
+        providedAnswer: '',
         points: 30,
       },
     ],
@@ -838,6 +897,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Emma Stone', 'Margot Robbie', 'Cate Blanchett', 'Saoirse Ronan'],
         correctAnswer: 'Emma Stone',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -845,6 +905,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Taylor Swift is a singer and actress.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -852,6 +913,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who is known as the \'King of Pop\'?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Michael Jackson',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -862,6 +924,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Actor', 'Singer', 'Entrepreneur', 'Talk Show Host'],
         correctAnswer:
           'Dwayne Johnson - Actor, The Weeknd - Singer, Elon Musk - Entrepreneur, Oprah Winfrey - Talk Show Host',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -891,6 +954,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Jane Austen', 'Charlotte Brontë', 'Emily Dickinson', 'Mary Shelley'],
         correctAnswer: 'Jane Austen',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -898,6 +962,7 @@ export const dbQuiz: TQuiz[] = [
         text: '\'Moby Dick\' is a novel about a whale.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -905,6 +970,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the title of Fyodor Dostoevsky\'s most famous work?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Crime and Punishment',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -915,6 +981,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['George Orwell', 'F. Scott Fitzgerald', 'Charlotte Brontë', 'Emily Brontë'],
         correctAnswer:
           '1984 - George Orwell, The Great Gatsby - F. Scott Fitzgerald, Jane Eyre - Charlotte Brontë, Wuthering Heights - Emily Brontë',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -923,6 +990,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Epic Poetry', 'Modernism', 'Romanticism', 'Contemporary Fiction'],
         correctAnswer: 'Epic Poetry, Romanticism, Modernism, Contemporary Fiction',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -952,6 +1020,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Leonardo da Vinci', 'Michelangelo', 'Raphael', 'Donatello'],
         correctAnswer: 'Leonardo da Vinci',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -966,6 +1035,7 @@ export const dbQuiz: TQuiz[] = [
           'Girl with a Pearl Earring',
         ],
         correctAnswer: 'The Starry Night',
+        providedAnswer: '',
         points: 20,
         doublePoints: true,
       },
@@ -974,6 +1044,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The technique of using small dots of paint to create images is called ___.',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'pointillism',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -984,6 +1055,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Post-Impressionism', 'Cubism', 'Abstract Expressionism', 'Pop Art'],
         correctAnswer:
           'Vincent van Gogh - Post-Impressionism, Pablo Picasso - Cubism, Jackson Pollock - Abstract Expressionism, Andy Warhol - Pop Art',
+        providedAnswer: '',
         points: 25,
       },
     ],
@@ -1013,6 +1085,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['5', '6', '7', '8'],
         correctAnswer: '5',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1020,6 +1093,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Game of Thrones is based on a book series.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1027,6 +1101,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the name of the coffee shop in Friends?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Central Perk',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1035,6 +1110,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['The Office', 'Stranger Things', 'The Crown', 'Succession'],
         correctAnswer: 'The Office, The Crown, Stranger Things, Succession',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1045,6 +1121,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Hugh Laurie', 'Benedict Cumberbatch', 'Dominic West', 'James Gandolfini'],
         correctAnswer:
           'House - Hugh Laurie, Sherlock - Benedict Cumberbatch, The Wire - Dominic West, The Sopranos - James Gandolfini',
+        providedAnswer: '',
         points: 25,
       },
     ],
@@ -1074,6 +1151,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Cheetah', 'Lion', 'Antelope', 'Horse'],
         correctAnswer: 'Cheetah',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1081,6 +1159,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Dolphins are fish.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -1088,6 +1167,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'How many legs does an insect have?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: '6',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1097,6 +1177,7 @@ export const dbQuiz: TQuiz[] = [
         leftOptions: ['Lion', 'Cow', 'Bear', 'Parrot'],
         rightOptions: ['Carnivore', 'Herbivore', 'Omnivore', 'Frugivore'],
         correctAnswer: 'Lion - Carnivore, Cow - Herbivore, Bear - Omnivore, Parrot - Frugivore',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1106,6 +1187,7 @@ export const dbQuiz: TQuiz[] = [
         src: 'https://www.wwf.de/fileadmin/_processed_/b/c/csm_jaguar-WW1108826-c-Yves-Jacques-REY-MILLET-WWF_a50dfac362.jpg',
         options: ['Tiger', 'Leopard', 'Jaguar', 'Cheetah'],
         correctAnswer: 'Tiger',
+        providedAnswer: '',
         points: 15,
       },
     ],
@@ -1140,6 +1222,7 @@ export const dbQuiz: TQuiz[] = [
           'Daintree Rainforest',
         ],
         correctAnswer: 'Amazon Rainforest',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1147,6 +1230,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Climate change is primarily caused by greenhouse gases.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1154,6 +1238,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the process by which plants convert sunlight into chemical energy?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'photosynthesis',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1164,6 +1249,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Hot and dry', 'Cold and frozen', 'Hot and humid', 'Moderate climate'],
         correctAnswer:
           'Desert - Hot and dry, Tundra - Cold and frozen, Tropical - Hot and humid, Temperate - Moderate climate',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1178,6 +1264,7 @@ export const dbQuiz: TQuiz[] = [
         ],
         correctAnswer:
           'Rio Earth Summit, Montreal Protocol, Kyoto Protocol, Paris Climate Agreement',
+        providedAnswer: '',
         points: 25,
       },
     ],
@@ -1207,6 +1294,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['1969', '1970', '1972', '1968'],
         correctAnswer: '1969',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1214,6 +1302,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Sun is the largest object in our solar system.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1221,6 +1310,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the name of the boundary around a black hole from which nothing can escape?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'event horizon',
+        providedAnswer: '',
         points: 20,
         doublePoints: true,
       },
@@ -1232,6 +1322,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Hottest planet', 'Red planet', 'Largest planet', 'Ring planet'],
         correctAnswer:
           'Venus - Hottest planet, Mars - Red planet, Jupiter - Largest planet, Saturn - Ring planet',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -1240,6 +1331,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Apollo 11', 'Voyager 1', 'International Space Station', 'SpaceX Falcon Heavy'],
         correctAnswer: 'Apollo 11, Voyager 1, International Space Station, SpaceX Falcon Heavy',
+        providedAnswer: '',
         points: 25,
       },
     ],
@@ -1269,6 +1361,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['3.14', '3.15', '3.16', '3.17'],
         correctAnswer: '3.14',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1276,6 +1369,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The square root of 144 is 12.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1283,6 +1377,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the sum of angles in a triangle?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: '180',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1290,6 +1385,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the value of 2^8?',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: '256',
+        providedAnswer: '',
         points: 20,
         doublePoints: true,
       },
@@ -1306,6 +1402,7 @@ export const dbQuiz: TQuiz[] = [
         ],
         correctAnswer:
           'Prime Number - Divisible only by 1 and itself, Composite Number - Has more than two factors, Perfect Square - Result of multiplying a number by itself, Integer - Whole number',
+        providedAnswer: '',
         points: 30,
       },
     ],
@@ -1335,6 +1432,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['6', '7', '5', '8'],
         correctAnswer: '6',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1342,6 +1440,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Mandarin Chinese is the most spoken language in the world by native speakers.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1349,6 +1448,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the term for a word that has the same spelling and pronunciation as another but different meaning?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'homonym',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1358,6 +1458,7 @@ export const dbQuiz: TQuiz[] = [
         leftOptions: ['Portuguese', 'Swahili', 'Thai', 'Polish'],
         rightOptions: ['Brazil', 'Kenya', 'Thailand', 'Poland'],
         correctAnswer: 'Portuguese - Brazil, Swahili - Kenya, Thai - Thailand, Polish - Poland',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1366,6 +1467,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Greek', 'Arabic', 'English', 'Mandarin'],
         correctAnswer: 'Mandarin, Greek, Arabic, English',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1395,6 +1497,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Canberra', 'Sydney', 'Melbourne', 'Brisbane'],
         correctAnswer: 'Canberra',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1402,6 +1505,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Great Wall of China is visible from space.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
+        providedAnswer: '',
         points: 5,
       },
       {
@@ -1409,6 +1513,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'How many days are in a leap year?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: '366',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1419,6 +1524,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['New York', 'London', 'India', 'Peru'],
         correctAnswer:
           'Statue of Liberty - New York, Big Ben - London, Taj Mahal - India, Machu Picchu - Peru',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1448,6 +1554,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Vatican City', 'Monaco', 'San Marino', 'Liechtenstein'],
         correctAnswer: 'Vatican City',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1455,6 +1562,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Amazon River is the longest river in the world.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1462,6 +1570,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What year did the Titanic sink?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: '1912',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1477,6 +1586,7 @@ export const dbQuiz: TQuiz[] = [
         ],
         correctAnswer:
           'Light Bulb - Thomas Edison, Telephone - Alexander Graham Bell, Airplane - Wright Brothers, Printing Press - Johannes Gutenberg',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1485,6 +1595,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Middle Ages', 'Renaissance', 'Industrial Revolution', 'Information Age'],
         correctAnswer: 'Middle Ages, Renaissance, Industrial Revolution, Information Age',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1514,6 +1625,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Oxygen', 'Carbon', 'Hydrogen', 'Nitrogen'],
         correctAnswer: 'Oxygen',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1521,6 +1633,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Photosynthesis produces oxygen and glucose from water and carbon dioxide.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1528,6 +1641,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the name of the protein that carries oxygen in the blood?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'hemoglobin',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1543,6 +1657,7 @@ export const dbQuiz: TQuiz[] = [
         ],
         correctAnswer:
           'Physics - Study of matter and energy, Chemistry - Study of atoms and molecules, Biology - Study of living organisms, Geology - Study of rocks and Earth',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -1551,6 +1666,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['DNA Structure', 'Penicillin Discovery', 'Newton\'s Laws', 'Theory of Evolution'],
         correctAnswer: 'Newton\'s Laws, Theory of Evolution, Penicillin Discovery, DNA Structure',
+        providedAnswer: '',
         points: 25,
         doublePoints: true,
       },
@@ -1581,6 +1697,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['1989', '1988', '1990', '1987'],
         correctAnswer: '1989',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1588,6 +1705,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Cold War was a military conflict between the US and USSR.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: false,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1595,6 +1713,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who was the first President of the African National Congress after apartheid?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Nelson Mandela',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1605,6 +1724,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['1969', '1989', '2001', '1991'],
         correctAnswer:
           'Moon Landing - 1969, Fall of Berlin Wall - 1989, 9/11 Attacks - 2001, End of Cold War - 1991',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -1613,6 +1733,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Cuban Missile Crisis', 'Vietnam War', 'Korean War', 'Operation Desert Storm'],
         correctAnswer: 'Korean War, Cuban Missile Crisis, Vietnam War, Operation Desert Storm',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1642,6 +1763,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['1896', '1900', '1904', '1908'],
         correctAnswer: '1896',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1649,6 +1771,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Ice Hockey is an Olympic sport.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1656,6 +1779,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'How many Olympic rings are there?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: '5',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1666,6 +1790,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Tennis', 'Track and Field', 'Gymnastics', 'Swimming'],
         correctAnswer:
           'Serena Williams - Tennis, Usain Bolt - Track and Field, Nadia Comaneci - Gymnastics, Mark Spitz - Swimming',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1674,6 +1799,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Tokyo', 'London', 'Beijing', 'Sydney'],
         correctAnswer: 'Sydney, Beijing, London, Tokyo',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1703,6 +1829,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Wellington', 'Auckland', 'Christchurch', 'Dunedin'],
         correctAnswer: 'Wellington',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1710,6 +1837,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Budapest is the capital of Hungary.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1717,6 +1845,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What is the capital of Canada?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Ottawa',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1727,6 +1856,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Bangkok', 'Seoul', 'Jakarta', 'Kuala Lumpur'],
         correctAnswer:
           'Thailand - Bangkok, South Korea - Seoul, Indonesia - Jakarta, Malaysia - Kuala Lumpur',
+        providedAnswer: '',
         points: 25,
         doublePoints: true,
       },
@@ -1736,6 +1866,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Rome', 'Stockholm', 'Athens', 'Dublin'],
         correctAnswer: 'Stockholm, Dublin, Rome, Athens',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1765,6 +1896,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Beyoncé', 'Taylor Swift', 'Quincy Jones', 'Georg Solti'],
         correctAnswer: 'Beyoncé',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1772,6 +1904,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The Beatles broke up in 1970.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1779,6 +1912,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Which musician is known as the \'Queen of Soul\'?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Aretha Franklin',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1789,6 +1923,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Abbey Road', 'The Dark Side of the Moon', 'Ziggy Stardust', 'Purple Rain'],
         correctAnswer:
           'The Beatles - Abbey Road, Pink Floyd - The Dark Side of the Moon, David Bowie - Ziggy Stardust, Prince - Purple Rain',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -1797,6 +1932,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Rock', 'Hip-Hop', 'Jazz', 'Electronic'],
         correctAnswer: 'Jazz, Rock, Hip-Hop, Electronic',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1825,6 +1961,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Complete the quote: \'May the ___ be with you.\'',
         type: EQuestionType.FILL_IN_THE_BLANK,
         correctAnswer: 'Force',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1832,6 +1969,7 @@ export const dbQuiz: TQuiz[] = [
         text: '\'I\'ll be back\' is a famous line from The Terminator.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1839,6 +1977,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Who said \'I\'m Batman\'?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Batman',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1854,6 +1993,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['A Few Good Men', 'Casablanca', 'Gone with the Wind', 'Top Gun'],
         correctAnswer:
           '\'You can\'t handle the truth!\' - A Few Good Men, \'Here\'s looking at you, kid.\' - Casablanca, \'Frankly, my dear, I don\'t give a damn.\' - Gone with the Wind, \'I feel the need... the need for speed!\' - Top Gun',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -1862,6 +2002,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Jaws', 'E.T.', 'Back to the Future', 'Jurassic Park'],
         correctAnswer: 'Jaws, E.T., Back to the Future, Jurassic Park',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1891,6 +2032,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Bill Gates', 'Steve Jobs', 'Mark Zuckerberg', 'Larry Page'],
         correctAnswer: 'Bill Gates',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1898,6 +2040,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'The first iPhone was released in 2007.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1905,6 +2048,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What does AI stand for?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Artificial Intelligence',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1915,6 +2059,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Steve Jobs', 'Mark Zuckerberg', 'Jeff Bezos', 'Elon Musk'],
         correctAnswer:
           'Apple - Steve Jobs, Facebook - Mark Zuckerberg, Amazon - Jeff Bezos, Tesla - Elon Musk',
+        providedAnswer: '',
         points: 25,
       },
       {
@@ -1923,6 +2068,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['The Internet', 'Personal Computers', 'Smartphones', 'Cloud Computing'],
         correctAnswer: 'Personal Computers, The Internet, Smartphones, Cloud Computing',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -1952,6 +2098,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.MULTIPLE_CHOICE,
         options: ['Butter Chicken', 'Tikka Masala', 'Samosa', 'Tandoori Chicken'],
         correctAnswer: 'Butter Chicken',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1959,6 +2106,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'Kimchi is a traditional Korean fermented vegetable dish.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -1966,6 +2114,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What ingredient is essential to Japanese miso soup?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'miso paste',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -1975,6 +2124,7 @@ export const dbQuiz: TQuiz[] = [
         leftOptions: ['Italian', 'Thai', 'French', 'Greek'],
         rightOptions: ['Pasta', 'Pad Thai', 'Croissant', 'Moussaka'],
         correctAnswer: 'Italian - Pasta, Thai - Pad Thai, French - Croissant, Greek - Moussaka',
+        providedAnswer: '',
         points: 20,
       },
       {
@@ -1983,6 +2133,7 @@ export const dbQuiz: TQuiz[] = [
         type: EQuestionType.ORDERING,
         options: ['Grilling', 'Steaming', 'Deep Frying', 'Baking'],
         correctAnswer: 'Steaming, Grilling, Baking, Deep Frying',
+        providedAnswer: '',
         points: 20,
       },
     ],
@@ -2017,6 +2168,7 @@ export const dbQuiz: TQuiz[] = [
           'Hyperlinks and Text Markup Language',
         ],
         correctAnswer: 'HyperText Markup Language',
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -2024,6 +2176,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'CSS is used for styling web pages.',
         type: EQuestionType.TRUE_FALSE,
         correctAnswer: true,
+        providedAnswer: '',
         points: 10,
       },
       {
@@ -2031,6 +2184,7 @@ export const dbQuiz: TQuiz[] = [
         text: 'What does an API stand for?',
         type: EQuestionType.SHORT_ANSWER,
         correctAnswer: 'Application Programming Interface',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -2044,6 +2198,7 @@ export const dbQuiz: TQuiz[] = [
           'Returns \'Hello\'',
         ],
         correctAnswer: 'Prints \'Hello\' to the console',
+        providedAnswer: '',
         points: 15,
       },
       {
@@ -2054,6 +2209,7 @@ export const dbQuiz: TQuiz[] = [
         rightOptions: ['Structure', 'Styling', 'Interactivity', 'Database'],
         correctAnswer:
           'HTML - Structure, CSS - Styling, JavaScript - Interactivity, SQL - Database',
+        providedAnswer: '',
         points: 25,
         doublePoints: true,
       },

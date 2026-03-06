@@ -286,6 +286,7 @@ const onAddQuestion = () => {
     rightOptions: [],
     src: '',
     correctAnswer: '',
+    providedAnswer: '',
     points: 10,
     doublePoints: false,
   })
