@@ -51,6 +51,7 @@
     "@tailwindcss/vite": "^4.2.1",
     "@types/pg": "^8.18.0",
     "@vee-validate/zod": "^4.15.1",
+    "@vueuse/integrations": "^14.2.1",
     "@vueuse/nuxt": "^14.2.1",
     "canvas-confetti": "^1.9.4",
     "db0": "^0.3.4",

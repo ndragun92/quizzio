@@ -15,64 +15,72 @@
           >
         </div>
       </div>
-      <UiCard
-        v-for="(question, index) in questions"
-        :key="question.id"
-        :level="3"
-        class="space-y-4"
-      >
-        <div class="flex items-center gap-4 justify-between">
-          <h5 class="font-semibold text-lg">Question {{ index + 1 }}</h5>
-          <div class="flex items-center gap-2">
+      <div ref="el" class="space-y-4">
+        <UiCard
+          v-for="(question, index) in questions"
+          :key="question.id"
+          :level="3"
+          class="space-y-4"
+        >
+          <div class="flex items-center gap-4 justify-between">
+            <h5 class="font-semibold text-lg">Question {{ index + 1 }}</h5>
             <div class="flex items-center gap-2">
-              <label for="points" class="input--label">Points:</label>
-              <input
-                id="points"
-                v-model.number="questions[index]!.points"
-                type="number"
-                class="input--text bg-primary-900! w-20!"
-                placeholder="XX"
-              />
-            </div>
-            <div class="flex items-center gap-2">
-              <label for="type" class="input--label sr-only">Type:</label>
-              <UiInputSelect
-                v-model="questions[index]!.type"
-                input-class="bg-primary-900! w-auto!"
-                :options="questionTypeOptions"
-              />
-            </div>
-            <div>
-              <button
-                type="button"
-                class="button--default-outline button--icon text-red-500! border-transparent!"
-                @click="onDeleteQuestion(index)"
-              >
-                <Icon name="lucide:trash" size="20" />
-                <span class="sr-only">Delete question</span>
-              </button>
+              <div class="flex items-center gap-2">
+                <label :for="`points-${question.id}`" class="input--label">Points:</label>
+                <input
+                  :id="`points-${question.id}`"
+                  v-model.number="questions[index]!.points"
+                  :min="1"
+                  type="number"
+                  class="input--text bg-primary-900! w-20!"
+                  placeholder="XX"
+                  required
+                />
+              </div>
+              <div class="flex items-center gap-2">
+                <label :for="`type-${question.id}`" class="input--label sr-only">Type:</label>
+                <UiInputSelect
+                  :id="`type-${question.id}`"
+                  v-model="questions[index]!.type"
+                  input-class="bg-primary-900! w-auto!"
+                  :options="questionTypeOptions"
+                  :hide-default-option="true"
+                  :required="true"
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  class="button--default-outline button--icon text-red-500! border-transparent!"
+                  @click="onDeleteQuestion(index)"
+                >
+                  <Icon name="lucide:trash" size="20" />
+                  <span class="sr-only">Delete question</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
+          <div>
+            <div class="input--box">
+              <label :for="`text-${question.id}`" class="input--label">Question Text</label>
+              <textarea
+                :id="`text-${question.id}`"
+                v-model="questions[index]!.text"
+                class="input--text bg-primary-900! h-24!"
+                placeholder="Type your question here..."
+              ></textarea>
+            </div>
+          </div>
           <div class="input--box">
-            <label for="input--text" class="input--label">Question Text</label>
-            <textarea
-              id="input--text"
-              v-model="questions[index]!.text"
-              class="input--text bg-primary-900! h-24!"
-              placeholder="Type your question here..."
-            ></textarea>
+            <label :for="`options-${question.id}`" class="input--label">Answer Options</label>
+            <component
+              :is="getQuestionComponent(questions[index]!.type)"
+              :id="`options-${question.id}`"
+              :question="questions[index]"
+            />
           </div>
-        </div>
-        <div class="input--box">
-          <label for="input--text" class="input--label">Answer Options</label>
-          <component
-            :is="getQuestionComponent(questions[index]!.type)"
-            :question="questions[index]"
-          />
-        </div>
-      </UiCard>
+        </UiCard>
+      </div>
       <div>
         <button
           type="button"
@@ -112,6 +120,7 @@ import { useForm, useField } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 import { EQuestionType, type TQuestion } from "~~/shared/utils/quiz.db";
+import { useSortable } from "@vueuse/integrations/useSortable";
 
 const validationSchema = toTypedSchema(
   z.object({
@@ -141,6 +150,9 @@ const { handleSubmit, errors, isSubmitting } = useForm({
 const { value: questions } = useField<TQuestion[]>("questions", undefined, {
   initialValue: [],
 });
+
+const el = useTemplateRef("el");
+useSortable(el, questions);
 
 const emit = defineEmits(["back", "next"]);
 

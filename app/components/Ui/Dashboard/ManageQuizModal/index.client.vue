@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <div
-      class="fixed inset-0 z-30 p-8"
+      class="fixed inset-0 z-30 p-8 overflow-y-auto h-dvh"
       role="dialog"
       aria-modal="true"
       aria-label="Manage Quiz Modal"

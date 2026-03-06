@@ -7,8 +7,14 @@
         class="text-primary-500 absolute left-3 top-1/2 -translate-y-1/2"
       />
     </div>
-    <select :id="id" v-model="model" :class="`input--text appearance-none px-10! ${inputClass}`">
-      <option value="" class="bg-primary-950">{{ placeholder }}</option>
+    <select
+      :id="id"
+      v-model="model"
+      :disabled="disabled"
+      :required="required"
+      :class="`input--text appearance-none px-10! ${inputClass}`"
+    >
+      <option v-if="!hideDefaultOption" value="" class="bg-primary-950">{{ placeholder }}</option>
       <option
         v-for="option in options"
         :key="option.value"
@@ -35,6 +41,9 @@ type Props = {
   placeholder?: string;
   icon?: string;
   inputClass?: string;
+  hideDefaultOption?: boolean;
+  disabled?: boolean;
+  required?: boolean;
 };
 
 const model = defineModel<string>();
@@ -44,5 +53,8 @@ withDefaults(defineProps<Props>(), {
   placeholder: "Select an option",
   icon: "lucide:filter",
   inputClass: "",
+  hideDefaultOption: false,
+  disabled: false,
+  required: false,
 });
 </script>
