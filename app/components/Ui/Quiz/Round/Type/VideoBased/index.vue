@@ -27,19 +27,21 @@
         >
           {{ onReturnLetterFromIndex(index) }}
         </div>
-        <h3 class="font-bold text-base">{{ option }}</h3>
+        <h3 class="font-bold text-base">
+          {{ option }}
+        </h3>
       </UiCard>
     </div>
   </UiCard>
 </template>
 
 <script setup lang="ts">
-import { vi } from "zod/v4/locales";
-import type { TQuestion } from "~~/shared/utils/quiz.db";
+import { vi } from 'zod/v4/locales'
+import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
-  question: TQuestion | null;
-};
+  question: TQuestion | null
+}
 
-defineProps<Props>();
+defineProps<Props>()
 </script>

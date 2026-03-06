@@ -7,11 +7,15 @@
       >
         <div class="flex items-center gap-2">
           <strong>Online users:</strong>
-          <div class="text-green-400">{{ status?.total?.users || 0 }}</div>
+          <div class="text-green-400">
+            {{ status?.total?.users || 0 }}
+          </div>
         </div>
         <div class="flex items-center gap-2">
           <strong>Active rooms:</strong>
-          <div class="text-green-400">{{ status?.total?.quizRooms || 0 }}</div>
+          <div class="text-green-400">
+            {{ status?.total?.quizRooms || 0 }}
+          </div>
         </div>
         <div class="flex items-center gap-2">
           <strong>Socket connected:</strong>
@@ -25,11 +29,15 @@
         </div>
         <div class="flex items-center gap-2">
           <strong>Error:</strong>
-          <div v-if="!error" class="text-green-400">None</div>
+          <div
+            v-if="!error"
+            class="text-green-400"
+          >
+            None
+          </div>
           <pre v-else>
         {{ error }}
-      </pre
-          >
+      </pre>
         </div>
       </div>
     </UiDebug>
@@ -37,23 +45,23 @@
 </template>
 
 <script lang="ts" setup>
-import { useSocketStore } from "~/stores/socketStore";
+import { useSocketStore } from '~/stores/socketStore'
 
-const { onConnect, error, isConnected } = useSocket();
+const { onConnect, error, isConnected } = useSocket()
 
-const socketStore = useSocketStore();
+const socketStore = useSocketStore()
 
-const { data: status, execute } = useFetch("/api/status", {
-  key: "status",
-});
+const { data: status, execute } = useFetch('/api/status', {
+  key: 'status',
+})
 
 onMounted(async () => {
-  onConnect();
-  await nextTick();
-  await execute();
-});
+  onConnect()
+  await nextTick()
+  await execute()
+})
 
 onUnmounted(() => {
-  socketStore.socket?.close();
-});
+  socketStore.socket?.close()
+})
 </script>

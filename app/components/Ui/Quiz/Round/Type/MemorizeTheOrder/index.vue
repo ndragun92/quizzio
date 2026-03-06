@@ -12,18 +12,18 @@
         >
           {{ index + 1 }}
         </div>
-        {{ option }}</UiCard
-      >
+        {{ option }}
+      </UiCard>
     </div>
   </UiCard>
 </template>
 
 <script setup lang="ts">
-import type { TQuestion } from "~~/shared/utils/quiz.db";
+import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
-  question: TQuestion | null;
-};
+  question: TQuestion | null
+}
 
-defineProps<Props>();
+defineProps<Props>()
 </script>

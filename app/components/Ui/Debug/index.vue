@@ -5,5 +5,5 @@
 <script lang="ts" setup>
 const {
   public: { debugEnabled },
-} = useRuntimeConfig();
+} = useRuntimeConfig()
 </script>

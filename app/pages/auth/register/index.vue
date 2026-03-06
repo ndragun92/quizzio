@@ -1,6 +1,8 @@
 <template>
   <div class="w-full max-w-lg space-y-4">
-    <h2 class="font-semibold text-2xl">Create Account</h2>
+    <h2 class="font-semibold text-2xl">
+      Create Account
+    </h2>
     <p class="font-medium text-sm text-primary-500">
       Choose your account type and start your quiz journey with us.
     </p>
@@ -17,10 +19,15 @@
         >
           <div class="text-center">
             <div>
-              <Icon :name="item.icon" size="28" />
+              <Icon
+                :name="item.icon"
+                size="28"
+              />
             </div>
             <div class="space-y-2">
-              <h3 class="font-semibold text-base text-primary-500">{{ item.label }}</h3>
+              <h3 class="font-semibold text-base text-primary-500">
+                {{ item.label }}
+              </h3>
               <p class="text-xs text-primary-500">
                 {{ item.description }}
               </p>
@@ -30,10 +37,16 @@
       </div>
     </div>
     <div>
-      <form class="space-y-4" @submit.prevent="onSubmit">
+      <form
+        class="space-y-4"
+        @submit.prevent="onSubmit"
+      >
         <div class="form--container">
           <div class="input--box">
-            <label class="input--label text-primary-950!" for="username">Username</label>
+            <label
+              class="input--label text-primary-950!"
+              for="username"
+            >Username</label>
             <input
               id="username"
               v-model.trim="username"
@@ -43,14 +56,20 @@
               autocomplete="username"
               aria-describedby="username-help-text"
               class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
-            />
-            <small id="username-help-text" class="text-xs text-gray-400 sr-only">
+            >
+            <small
+              id="username-help-text"
+              class="text-xs text-gray-400 sr-only"
+            >
               We'll never share your email with anyone else.
             </small>
             <span class="text-red-500 text-sm">{{ errors.username }} </span>
           </div>
           <div>
-            <label class="input--label text-primary-950!" for="password">Password</label>
+            <label
+              class="input--label text-primary-950!"
+              for="password"
+            >Password</label>
             <input
               id="password"
               v-model.trim="password"
@@ -60,8 +79,11 @@
               autocomplete="current-password"
               aria-describedby="password-help-text"
               class="input--text bg-white! border-primary-300! text-primary-950! placeholder:text-primary-300!"
-            />
-            <small id="password-help-text" class="text-xs text-gray-400 sr-only">
+            >
+            <small
+              id="password-help-text"
+              class="text-xs text-gray-400 sr-only"
+            >
               We'll never share your password with anyone else.'
             </small>
             <span class="text-red-500 text-sm">{{ errors.password }} </span>
@@ -76,9 +98,16 @@
           >
             Back
           </NuxtLink>
-          <button type="submit" :disabled="isSubmitting" class="button--default">
+          <button
+            type="submit"
+            :disabled="isSubmitting"
+            class="button--default"
+          >
             {{ isSubmitting ? "Loading..." : "Sign Up" }}
-            <Icon name="material-symbols:arrow-forward-rounded" size="18" />
+            <Icon
+              name="material-symbols:arrow-forward-rounded"
+              size="18"
+            />
           </button>
         </div>
       </form>
@@ -89,106 +118,105 @@
             name: 'auth-login',
           }"
           class="text-ascend-purple font-semibold hover:text-ascend-purple-dark hover:underline focus:outline-none focus:underline"
-          >Sign in here!</NuxtLink
-        >
+        >Sign in here!</NuxtLink>
       </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useForm, useField } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import { z } from "zod";
+import { useField, useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { z } from 'zod'
 
 definePageMeta({
-  layout: "auth",
+  layout: 'auth',
   middleware: () => {
-    const userStore = useUserStore();
+    const userStore = useUserStore()
     if (userStore.data?.id) {
       return navigateTo({
-        name: "index",
-      });
+        name: 'index',
+      })
     }
   },
-});
+})
 
 const types = [
   {
-    label: "Player",
-    value: "player",
-    description: "Join as a player and challenge yourself with exciting quizzes.",
-    icon: "mdi:users",
+    label: 'Player',
+    value: 'player',
+    description: 'Join as a player and challenge yourself with exciting quizzes.',
+    icon: 'mdi:users',
   },
   {
-    label: "Quiz Creator",
-    value: "quiz_creator",
-    description: "Create and share your own quizzes with the community.",
-    icon: "mdi:account-tie",
+    label: 'Quiz Creator',
+    value: 'quiz_creator',
+    description: 'Create and share your own quizzes with the community.',
+    icon: 'mdi:account-tie',
   },
-];
+]
 
 const validationSchema = toTypedSchema(
   z.object({
-    type: z.enum(["player", "quiz_creator"], {
-      errorMap: () => ({ message: "Please select an account type" }),
+    type: z.enum(['player', 'quiz_creator'], {
+      errorMap: () => ({ message: 'Please select an account type' }),
     }),
-    username: z.string().min(1, "Username is required"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-  })
-);
+    username: z.string().min(1, 'Username is required'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+  }),
+)
 
 const { handleSubmit, errors, isSubmitting } = useForm({
   validationSchema,
-});
+})
 
 const { value: type } = useField(
-  "type",
+  'type',
   {},
   {
-    initialValue: "player",
-  }
-);
+    initialValue: 'player',
+  },
+)
 
 const { value: username } = useField(
-  "username",
+  'username',
   {},
   {
-    initialValue: "admin",
-  }
-);
+    initialValue: 'admin',
+  },
+)
 
-const { value: password } = useField("password", {}, { initialValue: "12345678" });
+const { value: password } = useField('password', {}, { initialValue: '12345678' })
 
-const authStore = useAuthStore();
-const userStore = useUserStore();
+const authStore = useAuthStore()
+const userStore = useUserStore()
 
 const onSubmit = handleSubmit(async (values) => {
   try {
     const response = await $fetch<{
-      token: string;
+      token: string
       user: {
-        id: string;
-        username: string;
-      };
-    }>("/api/auth/register", {
-      method: "POST",
+        id: string
+        username: string
+      }
+    }>('/api/auth/register', {
+      method: 'POST',
       body: values,
-    });
-    const { token } = response;
-    authStore.setToken(token);
-    useCookie("token", {
+    })
+    const { token } = response
+    authStore.setToken(token)
+    useCookie('token', {
       maxAge: 2629800, // 1 month
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      path: "/",
-    }).value = token;
-    await userStore.getUser();
+      secure: process.env.NODE_ENV !== 'development',
+      sameSite: 'strict',
+      path: '/',
+    }).value = token
+    await userStore.getUser()
     navigateTo({
-      name: "index",
-    });
+      name: 'index',
+    })
   } catch (error) {
-    console.error(`pages/auth/register/index.vue:onSubmit() ${JSON.stringify(error)}`);
+    console.error(`pages/auth/register/index.vue:onSubmit() ${JSON.stringify(error)}`)
   }
-});
+})
 </script>

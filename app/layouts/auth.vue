@@ -11,7 +11,9 @@
         class="w-full absolute bottom-0 left-0 right-0 h-96"
         alt="Homepage hero pattern bottom"
       />
-      <h1 class="text-6xl font-semibold text--gradient">Quizzio</h1>
+      <h1 class="text-6xl font-semibold text--gradient">
+        Quizzio
+      </h1>
     </div>
     <div class="bg-white text-primary-950 flex justify-center items-center py-12 px-6">
       <slot />

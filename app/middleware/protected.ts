@@ -1,20 +1,20 @@
 export default defineNuxtRouteMiddleware((from) => {
-  const { $pinia } = useNuxtApp();
-  const userStore = useUserStore($pinia);
-  const isAuthenticated = userStore.data?.id;
-  const fromPath = from.fullPath;
-  const fromName = from.name as string;
+  const { $pinia } = useNuxtApp()
+  const userStore = useUserStore($pinia)
+  const isAuthenticated = userStore.data?.id
+  const fromPath = from.fullPath
+  const fromName = from.name as string
   if (!isAuthenticated) {
-    if (fromName.startsWith("@creator")) {
+    if (fromName.startsWith('@creator')) {
       return navigateTo({
-        name: "auth-login",
+        name: 'auth-login',
         query: {
           redirect: fromPath,
         },
-      });
+      })
     }
     return navigateTo({
-      name: "index",
-    });
+      name: 'index',
+    })
   }
-});
+})

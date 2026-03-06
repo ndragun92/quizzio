@@ -1,39 +1,39 @@
-import { and, eq } from "drizzle-orm";
-import { getDatabase, schema } from "~~/server/utils/db/client";
-import { mapDbQuizToQuiz } from "~~/server/utils/db/seed";
+import { and, eq } from 'drizzle-orm'
+import { getDatabase, schema } from '~~/server/utils/db/client'
+import { mapDbQuizToQuiz } from '~~/server/utils/db/seed'
 
 export default defineEventHandler(async (event) => {
-  const user = event.context.user;
+  const user = event.context.user
 
   if (!user) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Unauthorized",
-    });
+      statusMessage: 'Unauthorized',
+    })
   }
 
-  const quizId = Number(event.context.params?.quizId);
+  const quizId = Number(event.context.params?.quizId)
 
   if (!Number.isInteger(quizId) || quizId < 1) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Invalid quiz id",
-    });
+      statusMessage: 'Invalid quiz id',
+    })
   }
 
-  const db = await getDatabase();
+  const db = await getDatabase()
   const [quiz] = await db
     .select()
     .from(schema.quizzes)
     .where(and(eq(schema.quizzes.id, quizId), eq(schema.quizzes.creatorId, user.id)))
-    .limit(1);
+    .limit(1)
 
   if (!quiz) {
     throw createError({
       statusCode: 404,
-      statusMessage: "Quiz not found",
-    });
+      statusMessage: 'Quiz not found',
+    })
   }
 
-  return mapDbQuizToQuiz(quiz);
-});
+  return mapDbQuizToQuiz(quiz)
+})

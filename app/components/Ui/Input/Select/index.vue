@@ -14,7 +14,13 @@
       :required="required"
       :class="`input--text appearance-none px-10! ${inputClass}`"
     >
-      <option v-if="!hideDefaultOption" value="" class="bg-primary-950">{{ placeholder }}</option>
+      <option
+        v-if="!hideDefaultOption"
+        value=""
+        class="bg-primary-950"
+      >
+        {{ placeholder }}
+      </option>
       <option
         v-for="option in options"
         :key="option.value"
@@ -36,25 +42,25 @@
 
 <script lang="ts" setup>
 type Props = {
-  id?: string;
-  options: { label: string; value: string }[];
-  placeholder?: string;
-  icon?: string;
-  inputClass?: string;
-  hideDefaultOption?: boolean;
-  disabled?: boolean;
-  required?: boolean;
-};
+  id?: string
+  options: { label: string, value: string }[]
+  placeholder?: string
+  icon?: string
+  inputClass?: string
+  hideDefaultOption?: boolean
+  disabled?: boolean
+  required?: boolean
+}
 
-const model = defineModel<string>();
+const model = defineModel<string>()
 
 withDefaults(defineProps<Props>(), {
-  id: "",
-  placeholder: "Select an option",
-  icon: "lucide:filter",
-  inputClass: "",
+  id: '',
+  placeholder: 'Select an option',
+  icon: 'lucide:filter',
+  inputClass: '',
   hideDefaultOption: false,
   disabled: false,
   required: false,
-});
+})
 </script>

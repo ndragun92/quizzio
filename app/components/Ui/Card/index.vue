@@ -18,12 +18,12 @@
 
 <script lang="ts" setup>
 type Props = {
-  level?: 1 | 2 | 3;
-  hover?: boolean;
-  clickable?: boolean;
-  selected?: boolean;
-  placeholder?: boolean;
-};
+  level?: 1 | 2 | 3
+  hover?: boolean
+  clickable?: boolean
+  selected?: boolean
+  placeholder?: boolean
+}
 
 withDefaults(defineProps<Props>(), {
   level: 1,
@@ -31,5 +31,5 @@ withDefaults(defineProps<Props>(), {
   clickable: false,
   selected: false,
   placeholder: false,
-});
+})
 </script>

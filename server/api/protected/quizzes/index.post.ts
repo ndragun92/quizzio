@@ -1,19 +1,19 @@
-import type { TCreateQuizRequest } from "~~/shared/types/api.type";
-import { EStatus } from "~~/shared/utils/quiz.db";
-import { getDatabase, schema } from "~~/server/utils/db/client";
-import { mapDbQuizToQuiz } from "~~/server/utils/db/seed";
+import type { TCreateQuizRequest } from '~~/shared/types/api.type'
+import { EStatus } from '~~/shared/utils/quiz.db'
+import { getDatabase, schema } from '~~/server/utils/db/client'
+import { mapDbQuizToQuiz } from '~~/server/utils/db/seed'
 
 export default defineEventHandler(async (event) => {
-  const user = event.context.user;
+  const user = event.context.user
 
   if (!user) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Unauthorized",
-    });
+      statusMessage: 'Unauthorized',
+    })
   }
 
-  const body = await readBody<TCreateQuizRequest>(event);
+  const body = await readBody<TCreateQuizRequest>(event)
 
   if (
     !body?.title ||
@@ -26,11 +26,11 @@ export default defineEventHandler(async (event) => {
   ) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Invalid quiz payload",
-    });
+      statusMessage: 'Invalid quiz payload',
+    })
   }
 
-  const db = await getDatabase();
+  const db = await getDatabase()
   const [quiz] = await db
     .insert(schema.quizzes)
     .values({
@@ -44,14 +44,14 @@ export default defineEventHandler(async (event) => {
       settings: body.settings,
       questions: body.questions,
     })
-    .returning();
+    .returning()
 
   if (!quiz) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to create quiz",
-    });
+      statusMessage: 'Failed to create quiz',
+    })
   }
 
-  return mapDbQuizToQuiz(quiz);
-});
+  return mapDbQuizToQuiz(quiz)
+})

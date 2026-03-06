@@ -13,33 +13,46 @@
       >
         {{ onReturnLetterFromIndex(index) }}
       </div>
-      <input v-if="edit" v-model.trim="question!.options![index]" type="text" class="input--text" />
-      <h3 v-else class="font-bold text-base">{{ option }}</h3>
+      <input
+        v-if="edit"
+        v-model.trim="question!.options![index]"
+        type="text"
+        class="input--text"
+      >
+      <h3
+        v-else
+        class="font-bold text-base"
+      >
+        {{ option }}
+      </h3>
     </UiCard>
   </div>
   <div class="input--box">
     <label>Correct answer</label>
-    <input class="input--text" placeholder="Type correct answer">
+    <input
+      class="input--text"
+      placeholder="Type correct answer"
+    >
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TQuestion } from "~~/shared/utils/quiz.db";
+import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
-  question: TQuestion | null;
-  edit?: boolean;
-};
+  question: TQuestion | null
+  edit?: boolean
+}
 
 const model = defineModel<TQuestion>({
   required: false,
-});
+})
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 if (props.edit) {
   if (model.value && model.value.options!.length < 4) {
-    model.value.options = ["Option 1", "Option 2", "Option 3", "Option 4"];
+    model.value.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']
   }
 }
 </script>

@@ -1,7 +1,12 @@
 <template>
   <UiCard class="space-y-4">
     <UiCard :level="2">
-      <audio v-if="question?.src" :src="question.src" controls class="w-full">
+      <audio
+        v-if="question?.src"
+        :src="question.src"
+        controls
+        class="w-full"
+      >
         Your browser does not support the audio element.
       </audio>
     </UiCard>
@@ -20,18 +25,20 @@
         >
           {{ onReturnLetterFromIndex(index) }}
         </div>
-        <h3 class="font-bold text-base">{{ option }}</h3>
+        <h3 class="font-bold text-base">
+          {{ option }}
+        </h3>
       </UiCard>
     </div>
   </UiCard>
 </template>
 
 <script setup lang="ts">
-import type { TQuestion } from "~~/shared/utils/quiz.db";
+import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
-  question: TQuestion | null;
-};
+  question: TQuestion | null
+}
 
-defineProps<Props>();
+defineProps<Props>()
 </script>

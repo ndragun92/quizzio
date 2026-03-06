@@ -25,76 +25,119 @@
           }}
         </template>
       </UiHeading>
-      <div v-if="isLoading" class="py-8">
+      <div
+        v-if="isLoading"
+        class="py-8"
+      >
         <div class="flex items-center gap-2 justify-center py-4">
-          <Icon name="svg-spinners:90-ring-with-bg" size="24" />
+          <Icon
+            name="svg-spinners:90-ring-with-bg"
+            size="24"
+          />
           <span class="font-bold">Loading... Please wait...</span>
         </div>
       </div>
-      <div v-else-if="!quiz" class="py-8">
+      <div
+        v-else-if="!quiz"
+        class="py-8"
+      >
         <div class="flex items-center gap-2 justify-center py-4">
           <span class="font-bold">Quiz not found.</span>
         </div>
       </div>
-      <div v-else class="space-y-4">
+      <div
+        v-else
+        class="space-y-4"
+      >
         <div class="flex items-center justify-between">
           <div class="space-x-2">
             <span
               class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:tag" size="16" class="text-orange-400 mr-1" />
-              {{ capitalizeFirstLetter(quiz.category) }}</span
-            >
+              <Icon
+                name="lucide:tag"
+                size="16"
+                class="text-orange-400 mr-1"
+              />
+              {{ capitalizeFirstLetter(quiz.category) }}</span>
             <span
               class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:sliders-horizontal" size="16" class="text-orange-400 mr-1" />
-              {{ capitalizeFirstLetter(quiz.difficulty) }}</span
-            >
+              <Icon
+                name="lucide:sliders-horizontal"
+                size="16"
+                class="text-orange-400 mr-1"
+              />
+              {{ capitalizeFirstLetter(quiz.difficulty) }}</span>
             <span
               class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-              ><Icon name="lucide:gamepad" size="16" class="text-orange-400 mr-1" />
-              {{ capitalizeFirstLetter(quiz.gameMode) }}</span
-            >
+            ><Icon
+               name="lucide:gamepad"
+               size="16"
+               class="text-orange-400 mr-1"
+             />
+              {{ capitalizeFirstLetter(quiz.gameMode) }}</span>
             <span
               class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:book-open" size="16" class="text-orange-400 mr-1" />
-              {{ quiz.questions.length }} questions</span
-            >
+              <Icon
+                name="lucide:book-open"
+                size="16"
+                class="text-orange-400 mr-1"
+              />
+              {{ quiz.questions.length }} questions</span>
           </div>
           <div>
             <div class="space-x-2">
               <span
                 class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:clock" size="16" class="text-orange-400 mr-1" /> Time limit per
-                round: {{ quiz.settings.timeLimitPerRound }} seconds</span
-              >
+              ><Icon
+                name="lucide:clock"
+                size="16"
+                class="text-orange-400 mr-1"
+              /> Time limit per
+                round: {{ quiz.settings.timeLimitPerRound }} seconds</span>
               <span
                 class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:check-circle" size="16" class="text-orange-400 mr-1" /> Passing
-                score: {{ quiz.settings.passingScorePercentage }}%</span
-              >
+              ><Icon
+                name="lucide:check-circle"
+                size="16"
+                class="text-orange-400 mr-1"
+              /> Passing
+                score: {{ quiz.settings.passingScorePercentage }}%</span>
               <span
                 class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:shuffle" size="16" class="text-orange-400 mr-1" /> Shuffle
-                questions: {{ quiz.settings.shuffleQuestions ? "Yes" : "No" }}</span
-              >
+              ><Icon
+                name="lucide:shuffle"
+                size="16"
+                class="text-orange-400 mr-1"
+              /> Shuffle
+                questions: {{ quiz.settings.shuffleQuestions ? "Yes" : "No" }}</span>
               <span
                 class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:refresh-cw" size="16" class="text-orange-400 mr-1" /> Immediate
-                results: {{ quiz.settings.immediateResults ? "Yes" : "No" }}</span
-              >
+              ><Icon
+                name="lucide:refresh-cw"
+                size="16"
+                class="text-orange-400 mr-1"
+              /> Immediate
+                results: {{ quiz.settings.immediateResults ? "Yes" : "No" }}</span>
               <span
                 v-if="quiz.gameMode === EGameMode.SURVIVAL"
                 class="inline-flex items-center gap-0.5 bg-orange-700 border-orange-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-                ><Icon name="lucide:heart" size="16" class="text-orange-400 mr-1" /> Number of
-                lives: {{ quiz.settings.lives }}</span
-              >
+              ><Icon
+                name="lucide:heart"
+                size="16"
+                class="text-orange-400 mr-1"
+              /> Number of
+                lives: {{ quiz.settings.lives }}</span>
             </div>
           </div>
         </div>
-        <UiCard v-for="question in quiz.questions" :key="question.id" class="space-y-4">
+        <UiCard
+          v-for="question in quiz.questions"
+          :key="question.id"
+          class="space-y-4"
+        >
           <h2 class="font-semibold text-2xl/7">
             {{ question?.text }}
           </h2>
@@ -102,19 +145,28 @@
             <span
               class="inline-flex items-center gap-0.5 bg-green-700 border-green-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
             >
-              <Icon name="lucide:tag" size="16" class="text-green-400 mr-1" />
-              {{ capitalizeFirstLetter(question.type.replace(/-/g, " ")) }}</span
-            >
+              <Icon
+                name="lucide:tag"
+                size="16"
+                class="text-green-400 mr-1"
+              />
+              {{ capitalizeFirstLetter(question.type.replace(/-/g, " ")) }}</span>
             <span
               class="inline-flex items-center gap-0.5 bg-yellow-700 border-yellow-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-              ><Icon name="lucide:award" size="16" class="text-yellow-400 mr-1" />
-              {{ question.points }} points</span
-            >
+            ><Icon
+               name="lucide:award"
+               size="16"
+               class="text-yellow-400 mr-1"
+             />
+              {{ question.points }} points</span>
             <span
               v-if="question.doublePoints"
               class="inline-flex items-center gap-0.5 bg-purple-700 border-purple-600 px-3 py-0.5 border text-xs rounded-full font-semibold"
-              ><Icon name="lucide:zap" size="16" class="text-purple-400 mr-1" /> Double points</span
-            >
+            ><Icon
+              name="lucide:zap"
+              size="16"
+              class="text-purple-400 mr-1"
+            /> Double points</span>
           </div>
           <UiCard :level="2">
             <UiQuizRound :question="question" />
@@ -122,8 +174,15 @@
         </UiCard>
       </div>
     </div>
-    <div v-if="quiz" class="fixed top-4 right-4 z-10">
-      <button class="button--secondary" type="button" @click="onCreateQuiz({ quiz })">
+    <div
+      v-if="quiz"
+      class="fixed top-4 right-4 z-10"
+    >
+      <button
+        class="button--secondary"
+        type="button"
+        @click="onCreateQuiz({ quiz })"
+      >
         Start Quiz
       </button>
     </div>
@@ -131,22 +190,22 @@
 </template>
 
 <script lang="ts" setup>
-import type { TQuiz } from "~~/shared/utils/quiz.db";
-import { capitalizeFirstLetter } from "~~/shared/utils/general.utils";
+import type { TQuiz } from '~~/shared/utils/quiz.db'
+import { capitalizeFirstLetter } from '~~/shared/utils/general.utils'
 
-const route = useRoute();
+const route = useRoute()
 
-const routeParams = computed(() => route.params as { creatorId: string; quizId: string });
+const routeParams = computed(() => route.params as { creatorId: string, quizId: string })
 
-const creatorId = computed(() => routeParams.value.creatorId);
-const quizId = computed(() => routeParams.value.quizId);
+const creatorId = computed(() => routeParams.value.creatorId)
+const quizId = computed(() => routeParams.value.quizId)
 
 const { data: quiz, status } = useFetch<TQuiz>(`/api/quizzes/${creatorId.value}/${quizId.value}`, {
   key: `quiz-${creatorId.value}-${quizId.value}`,
-});
+})
 
-const isLoading = computed(() => status.value === "pending");
-const hasError = computed(() => status.value === "error");
+const isLoading = computed(() => status.value === 'pending')
+const hasError = computed(() => status.value === 'error')
 
-const { onCreateQuiz } = useQuiz();
+const { onCreateQuiz } = useQuiz()
 </script>

@@ -5,20 +5,20 @@ export default defineNuxtPlugin(() => {
     retryDelay: 500,
 
     onRequest: ({ options }) => {
-      if (!options.headers.has("Authorization")) {
-        const { $pinia } = useNuxtApp();
-        const authStore = useAuthStore($pinia);
-        const token = authStore.token;
+      if (!options.headers.has('Authorization')) {
+        const { $pinia } = useNuxtApp()
+        const authStore = useAuthStore($pinia)
+        const token = authStore.token
         if (token) {
-          options.headers.set("Authorization", `Bearer ${token}`);
+          options.headers.set('Authorization', `Bearer ${token}`)
         }
       }
     },
-  });
+  })
 
   return {
     provide: {
       api,
     },
-  };
-});
+  }
+})

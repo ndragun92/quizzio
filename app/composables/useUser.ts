@@ -1,10 +1,10 @@
-export default function useUser() {
-  const userStore = useUserStore();
-  const authStore = useAuthStore();
+export default function useUser () {
+  const userStore = useUserStore()
+  const authStore = useAuthStore()
 
-  const id = computed(() => userStore.data?.id || null);
-  const username = computed(() => userStore.data?.username || "");
-  const nickname = computed(() => userStore.data?.nickname || "");
+  const id = computed(() => userStore.data?.id || null)
+  const username = computed(() => userStore.data?.username || '')
+  const nickname = computed(() => userStore.data?.nickname || '')
 
   return {
     id: readonly(id),
@@ -12,5 +12,5 @@ export default function useUser() {
     nickname: readonly(nickname),
     logout: authStore.logout,
     userId: readonly(id),
-  };
+  }
 }

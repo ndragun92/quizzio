@@ -1,5 +1,11 @@
-onlyBuiltDependencies:
+ignoredBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
-  - sharp
   - unrs-resolver
+
+onlyBuiltDependencies:
+  - sharp
+
+shellEmulator: true
+
+verifyDepsBeforeRun: install

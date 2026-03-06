@@ -18,13 +18,18 @@
                   class="button--default-outline button--icon border-primary-700!"
                   @click="emit('close')"
                 >
-                  <Icon name="mi:close" size="20" />
+                  <Icon
+                    name="mi:close"
+                    size="20"
+                  />
                   <span class="sr-only">Close</span>
                 </button>
               </div>
 
               <div class="space-y-0.5 flex-1">
-                <h3 class="font-bold text-2xl">Create New Quiz</h3>
+                <h3 class="font-bold text-2xl">
+                  Create New Quiz
+                </h3>
                 <p class="text--secondary">
                   Add questions, set answers and configure your quiz settings.
                 </p>
@@ -43,8 +48,15 @@
               </div>
             </div>
 
-            <UiDashboardManageQuizModalStepOne v-if="step === 1" :form="form" @next="onNext" />
-            <UiDashboardManageQuizModalStepTwo v-else-if="step === 2" @back="step = 1" />
+            <UiDashboardManageQuizModalStepOne
+              v-if="step === 1"
+              :form="form"
+              @next="onNext"
+            />
+            <UiDashboardManageQuizModalStepTwo
+              v-else-if="step === 2"
+              @back="step = 1"
+            />
           </div>
         </UiCard>
       </div>
@@ -53,15 +65,15 @@
 </template>
 
 <script lang="ts" setup>
-const { userId } = useUser();
+const { userId } = useUser()
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close'])
 
-type TForm = Omit<TQuiz, "id" | "createdAt" | "updatedAt">;
+type TForm = Omit<TQuiz, 'id' | 'createdAt' | 'updatedAt'>
 
 const form = ref<TForm>({
-  title: "",
-  description: "",
+  title: '',
+  description: '',
   creatorId: userId.value!,
   status: EStatus.PUBLISHED,
   category: ECategory.GENERAL,
@@ -75,12 +87,12 @@ const form = ref<TForm>({
     lives: 3,
   },
   questions: [],
-});
+})
 
-const step = ref(2);
+const step = ref(2)
 
 const onNext = (values: TForm) => {
-  form.value = { ...toRaw(form.value), ...values };
-  step.value = 2;
-};
+  form.value = { ...toRaw(form.value), ...values }
+  step.value = 2
+}
 </script>

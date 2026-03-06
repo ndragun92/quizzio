@@ -1,29 +1,29 @@
-import { defineStore } from "pinia";
-import type { TApiUser } from "#shared/types/user.type";
+import { defineStore } from 'pinia'
+import type { TApiUser } from '#shared/types/user.type'
 
-export const useUserStore = defineStore("user", () => {
-  const data = shallowRef<TApiUser | null>(null);
+export const useUserStore = defineStore('user', () => {
+  const data = shallowRef<TApiUser | null>(null)
 
-  const { $api } = useNuxtApp();
+  const { $api } = useNuxtApp()
 
   const setUser = (payload: TApiUser): void => {
-    data.value = payload;
-  };
+    data.value = payload
+  }
 
   const getUser = async (): Promise<void> => {
     try {
-      const response = await $api<TApiUser>("/api/user");
+      const response = await $api<TApiUser>('/api/user')
       if (response) {
-        setUser(response);
+        setUser(response)
       }
     } catch (error) {
-      console.error(`useUserStore:getUser() ${JSON.stringify(error)}`);
+      console.error(`useUserStore:getUser() ${JSON.stringify(error)}`)
     }
-  };
+  }
 
   const clearUser = (): void => {
-    data.value = null;
-  };
+    data.value = null
+  }
 
-  return { data, getUser, clearUser };
-});
+  return { data, getUser, clearUser }
+})

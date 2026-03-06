@@ -1,5 +1,5 @@
 export type TApiUser = {
-  id: number;
-  username: string;
-  nickname: string;
-};
+  id: number
+  username: string
+  nickname: string
+}

@@ -58,11 +58,11 @@
 </template>
 
 <script setup lang="ts">
-import { EQuestionType, type TQuestion } from "~~/shared/utils/quiz.db";
+import { EQuestionType, type TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
-  question: TQuestion | null;
-};
+  question: TQuestion | null
+}
 
-defineProps<Props>();
+defineProps<Props>()
 </script>

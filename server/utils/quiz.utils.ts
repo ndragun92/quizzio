@@ -1,62 +1,62 @@
-import type { TApiUser } from "~~/shared/types/user.type";
-import type { TQuestion, TQuiz } from "~~/shared/utils/quiz.db";
-import { getAllPeers, getSocketInfo } from "./ws.utils";
+import type { TApiUser } from '~~/shared/types/user.type'
+import type { TQuestion, TQuiz } from '~~/shared/utils/quiz.db'
+import { getAllPeers, getSocketInfo } from './ws.utils'
 
-export const localStorageSessionKey = "user:quiz:room:session";
+export const localStorageSessionKey = 'user:quiz:room:session'
 
-const quizRooms = new Map<TQuizRoom["quizRoomId"], TQuizRoom>();
+const quizRooms = new Map<TQuizRoom['quizRoomId'], TQuizRoom>()
 
-export const getQuizRooms = (): TQuizRoom[] => Array.from(quizRooms.values());
-export const getQuizRoom = (id: string): TQuizRoom | undefined => quizRooms.get(id);
+export const getQuizRooms = (): TQuizRoom[] => Array.from(quizRooms.values())
+export const getQuizRoom = (id: string): TQuizRoom | undefined => quizRooms.get(id)
 
 enum EQuizStatus {
-  LOBBY = "LOBBY",
-  ROUND_START = "ROUND_START",
-  COUNTDOWN = "COUNTDOWN",
-  PLAYING = "PLAYING",
-  ROUND_END = "ROUND_END",
-  FINISHED = "FINISHED",
+  LOBBY = 'LOBBY',
+  ROUND_START = 'ROUND_START',
+  COUNTDOWN = 'COUNTDOWN',
+  PLAYING = 'PLAYING',
+  ROUND_END = 'ROUND_END',
+  FINISHED = 'FINISHED',
 }
 
 export type TQuizPlayer = {
-  id: TApiUser["id"];
-  nickname: TApiUser["nickname"];
-  isHost: boolean;
-  score: number;
-  isOnline: boolean;
-  remainingLives: number;
-  skipCount: number;
+  id: TApiUser['id']
+  nickname: TApiUser['nickname']
+  isHost: boolean
+  score: number
+  isOnline: boolean
+  remainingLives: number
+  skipCount: number
   answers: {
-    skipped: TQuestion["id"][];
-    correct: TQuestion["id"][];
-    incorrect: TQuestion["id"][];
-  };
-};
+    skipped: TQuestion['id'][]
+    correct: TQuestion['id'][]
+    incorrect: TQuestion['id'][]
+  }
+}
 
 export type TQuizRoom = {
-  quizRoomId: string;
-  quizRoomName: string;
-  quiz: TQuiz;
-  status: EQuizStatus;
-  creator?: Pick<TQuizPlayer, "id" | "nickname" | "isOnline">;
-  players: TQuizPlayer[];
-  maxPlayers: number;
-  currentRound: number;
-  countdown: number;
-};
+  quizRoomId: string
+  quizRoomName: string
+  quiz: TQuiz
+  status: EQuizStatus
+  creator?: Pick<TQuizPlayer, 'id' | 'nickname' | 'isOnline'>
+  players: TQuizPlayer[]
+  maxPlayers: number
+  currentRound: number
+  countdown: number
+}
 
-export function createQuiz({
+export function createQuiz ({
   quizRoomId,
   quizRoomName,
   quiz,
   userId,
   nickname,
 }: {
-  quizRoomId: TQuizRoom["quizRoomId"];
-  quizRoomName: TQuizRoom["quizRoomName"];
-  quiz: TQuizRoom["quiz"];
-  userId: TApiUser["id"];
-  nickname: TApiUser["nickname"];
+  quizRoomId: TQuizRoom['quizRoomId']
+  quizRoomName: TQuizRoom['quizRoomName']
+  quiz: TQuizRoom['quiz']
+  userId: TApiUser['id']
+  nickname: TApiUser['nickname']
 }) {
   if (!quizRooms.has(quizRoomId)) {
     quizRooms.set(quizRoomId, {
@@ -83,39 +83,39 @@ export function createQuiz({
       maxPlayers: 8,
       currentRound: 1,
       countdown: 10,
-    });
+    })
 
-    return { quizRoomId, quiz };
+    return { quizRoomId, quiz }
   } else {
-    return "Quiz room already exists";
+    return 'Quiz room already exists'
   }
 }
 
-export function joinQuiz({
+export function joinQuiz ({
   quizRoomId,
   userId,
   nickname,
 }: {
-  quizRoomId: TQuizRoom["quizRoomId"];
-  userId: TApiUser["id"];
-  nickname: TApiUser["nickname"];
+  quizRoomId: TQuizRoom['quizRoomId']
+  userId: TApiUser['id']
+  nickname: TApiUser['nickname']
 }) {
   if (!quizRooms.has(quizRoomId)) {
-    return "Quiz not found";
+    return 'Quiz not found'
   }
 
-  const quizRoom = quizRooms.get(quizRoomId)!;
+  const quizRoom = quizRooms.get(quizRoomId)!
 
   if (quizRoom.status !== EQuizStatus.LOBBY) {
-    return "Quiz already started";
+    return 'Quiz already started'
   }
 
   if (quizRoom.players.length >= quizRoom.maxPlayers) {
-    return "Quiz room is full";
+    return 'Quiz room is full'
   }
 
-  if (quizRoom.players.some((p) => p.id === userId)) {
-    return "Player already in quiz";
+  if (quizRoom.players.some(p => p.id === userId)) {
+    return 'Player already in quiz'
   }
 
   if (quizRoom.quiz.creatorId === userId) {
@@ -123,7 +123,7 @@ export function joinQuiz({
       id: userId,
       nickname,
       isOnline: true,
-    };
+    }
   } else {
     quizRoom.players.push({
       id: userId,
@@ -138,69 +138,69 @@ export function joinQuiz({
         correct: [],
         incorrect: [],
       },
-    });
+    })
   }
 
-  return { quizRoom, userId };
+  return { quizRoom, userId }
 }
 
-export function leaveQuiz({
+export function leaveQuiz ({
   quizRoomId,
   userId,
 }: {
-  quizRoomId: TQuizRoom["quizRoomId"];
-  userId: TQuizPlayer["id"];
+  quizRoomId: TQuizRoom['quizRoomId']
+  userId: TQuizPlayer['id']
 }) {
   if (!quizRooms.has(quizRoomId)) {
-    return "Quiz not found";
+    return 'Quiz not found'
   }
 
-  const quizData = quizRooms.get(quizRoomId)!;
+  const quizData = quizRooms.get(quizRoomId)!
 
-  if (!quizData.players.some((p) => p.id === userId)) {
-    return "Player not in quiz";
+  if (!quizData.players.some(p => p.id === userId)) {
+    return 'Player not in quiz'
   }
 
-  const updatedPlayers = quizData.players.filter((p) => p.id !== userId);
+  const updatedPlayers = quizData.players.filter(p => p.id !== userId)
 
   if (updatedPlayers.length === 0) {
-    quizRooms.delete(quizRoomId);
-    return { roomId: quizRoomId };
+    quizRooms.delete(quizRoomId)
+    return { roomId: quizRoomId }
   }
 
   // If the leaving player is the host, assign a new host
-  if (quizData.players.find((p) => p.id === userId)?.isHost) {
-    updatedPlayers[0]!.isHost = true;
+  if (quizData.players.find(p => p.id === userId)?.isHost) {
+    updatedPlayers[0]!.isHost = true
   }
 
   if (quizData.creator?.id === userId) {
-    quizData.creator = undefined;
+    quizData.creator = undefined
   }
 
-  quizData.players = updatedPlayers;
+  quizData.players = updatedPlayers
 
-  return { roomId: quizRoomId };
+  return { roomId: quizRoomId }
 }
 
-const broadcastToPeers = (quizRoomId: TQuizRoom["quizRoomId"], message: string) => {
+const broadcastToPeers = (quizRoomId: TQuizRoom['quizRoomId'], message: string) => {
   for (const [peerId, peer] of getAllPeers()) {
-    const info = getSocketInfo(peerId);
+    const info = getSocketInfo(peerId)
     if (info && info.quizRoomId === quizRoomId) {
-      peer.send(message);
+      peer.send(message)
     }
   }
-};
+}
 
-export const broadcastQuizRoomUpdate = (quizRoomId: TQuizRoom["quizRoomId"]) => {
-  const room = getQuizRoom(quizRoomId);
-  if (!room) return;
+export const broadcastQuizRoomUpdate = (quizRoomId: TQuizRoom['quizRoomId']) => {
+  const room = getQuizRoom(quizRoomId)
+  if (!room) { return }
 
-  const message = JSON.stringify({ type: "update", data: room });
-  broadcastToPeers(quizRoomId, message);
-};
+  const message = JSON.stringify({ type: 'update', data: room })
+  broadcastToPeers(quizRoomId, message)
+}
 
 export const broadcastToAllPeers = (message: string) => {
   for (const [_, peer] of getAllPeers()) {
-    peer.send(message);
+    peer.send(message)
   }
-};
+}

@@ -14,21 +14,25 @@
         >
           {{ onReturnLetterFromIndex(index) }}
         </div>
-        <h3 class="font-bold text-base">{{ option }}</h3>
+        <h3 class="font-bold text-base">
+          {{ option }}
+        </h3>
       </UiCard>
     </div>
     <UiCard class="flex items-center text-center justify-center">
-      <p class="text-sm text-primary-300">Drag and drop correct answers into the box.</p>
+      <p class="text-sm text-primary-300">
+        Drag and drop correct answers into the box.
+      </p>
     </UiCard>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TQuestion } from "~~/shared/utils/quiz.db";
+import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
-  question: TQuestion | null;
-};
+  question: TQuestion | null
+}
 
-defineProps<Props>();
+defineProps<Props>()
 </script>

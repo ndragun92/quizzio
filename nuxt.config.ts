@@ -1,21 +1,40 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
+import process from 'node:process'
 
 export default defineNuxtConfig({
+  modules: [
+    '@nuxt/fonts', // https://pinia.vuejs.org/ssr/nuxt.html
+    '@pinia/nuxt',
+    '@nuxt/icon', // https://vueuse.org/guide/#nuxt
+    '@vueuse/nuxt', // https://image.nuxt.com
+    '@nuxt/image',
+    '@nuxt/a11y',
+  ],
+
+  imports: {
+    dirs: [
+      // support deep nested composables
+      'composables/**',
+    ],
+  },
   devtools: { enabled: true },
 
-  compatibilityDate: "2025-07-15",
+  css: ['~/assets/css/main.css'],
 
-  typescript: {
-    // Enables strict typeCheck for development environment
-    typeCheck: "build",
-    strict: process.env.NODE_ENV === "development",
+  runtimeConfig: {
+    public: {
+      // apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || '',
+      debugEnabled: process.env.NUXT_PUBLIC_DEBUG_ENABLED === 'true',
+    },
   },
+
+  sourcemap: process.env.NODE_ENV === 'development',
 
   experimental: {
     defaults: {
       nuxtLink: {
-        prefetchedClass: "link--prefetched",
+        prefetchedClass: 'link--prefetched',
       },
     },
     asyncContext: true,
@@ -26,18 +45,13 @@ export default defineNuxtConfig({
     // inlineRouteRules: true,
     sharedPrerenderData: true,
     cookieStore: true,
-    browserDevtoolsTiming: process.env.NODE_ENV === "development",
+    browserDevtoolsTiming: process.env.NODE_ENV === 'development',
     lazyHydration: true, // This feature intelligently determines when to hydrate lazy components based on visibility, idle time, or other triggers, improving performance by deferring hydration of components until they're needed.
     purgeCachedData: true, // Nuxt will automatically purge cached data from `useAsyncData` and `nuxtApp.static.data`. This helps prevent memory leaks and ensures fresh data is loaded when needed, but it is possible to disable it.
     typescriptPlugin: true,
   },
 
-  imports: {
-    dirs: [
-      // support deep nested composables
-      "composables/**",
-    ],
-  },
+  compatibilityDate: '2025-07-15',
 
   nitro: {
     experimental: {
@@ -45,58 +59,41 @@ export default defineNuxtConfig({
     },
     // compressPublicAssets: true,
     routeRules: {
-      "/game/*": { ssr: false },
-      "/quiz/*": { ssr: false },
+      '/game/*': { ssr: false },
+      '/quiz/*': { ssr: false },
       // "/_nuxt/**": { headers: { "cache-control": "max-age=31536000" } }, // Set generated files cache to 1 year
     },
   },
-
-  runtimeConfig: {
-    public: {
-      // apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || '',
-      debugEnabled: process.env.NUXT_PUBLIC_DEBUG_ENABLED === "true",
-    },
-  },
-
-  eslint: {
-    config: {
-      // stylistic: {
-      //   commaDangle: 'never',
-      //   braceStyle: '1tbs'
-      // }
-    },
-  },
-
-  css: ["~/assets/css/main.css"],
-
-  sourcemap: process.env.NODE_ENV === "development",
 
   vite: {
     plugins: [
       // Cast as any until Tailwindcss is updated to use Vite 6
       tailwindcss() as any,
       {
-        apply: "build",
-        name: "vite-plugin-ignore-sourcemap-warnings",
-        configResolved(config) {
-          const originalOnWarn = config.build.rollupOptions.onwarn;
-          config.build.rollupOptions.onwarn = (warning, warn) => {
+        apply: 'build',
+        name: 'vite-plugin-ignore-sourcemap-warnings',
+        configResolved (config: any) {
+          const originalOnWarn = config.build.rollupOptions.onwarn
+          config.build.rollupOptions.onwarn = (warning: any, warn: any) => {
             if (
-              warning.code === "SOURCEMAP_BROKEN" &&
-              warning.plugin === "@tailwindcss/vite:generate:build"
+              warning.code === 'SOURCEMAP_BROKEN' &&
+              warning.plugin === '@tailwindcss/vite:generate:build'
             ) {
-              return;
+              return
             }
-            if (warning.code === "PLUGIN_WARNING" && warning.plugin === "vite:reporter") {
-              return;
+            if (
+              warning.code === 'PLUGIN_WARNING' &&
+              warning.plugin === 'vite:reporter'
+            ) {
+              return
             }
 
             if (originalOnWarn) {
-              originalOnWarn(warning, warn);
+              originalOnWarn(warning, warn)
             } else {
-              warn(warning);
+              warn(warning)
             }
-          };
+          }
         },
       },
     ],
@@ -104,40 +101,39 @@ export default defineNuxtConfig({
       build: {
         rollupOptions: {
           output: {
-            entryFileNames: "_nuxt/[name].[hash].js",
-            chunkFileNames: "_nuxt/[name].[hash].js",
+            entryFileNames: '_nuxt/[name].[hash].js',
+            chunkFileNames: '_nuxt/[name].[hash].js',
           },
         },
       },
     },
   },
 
-  modules: [
-    // https://nuxt.com/modules/security
-    // "nuxt-security",
-    "@nuxt/eslint",
-    "@nuxt/fonts", // https://pinia.vuejs.org/ssr/nuxt.html
-    "@pinia/nuxt",
-    "@nuxt/icon", // https://vueuse.org/guide/#nuxt
-    "@vueuse/nuxt", // https://image.nuxt.com
-    "@nuxt/image",
-    "@nuxt/a11y",
-  ],
+  typescript: {
+    typeCheck: 'build', // Type checking will only occur during the build process, improving development speed while still ensuring type safety in production builds.
+    strict: process.env.NODE_ENV === 'development', // Enable strict mode only in development for better developer experience, while allowing more flexibility in production builds.
+    shim: true, // Enable shims to allow TypeScript to understand non-TypeScript files, improving compatibility with various assets and libraries.
+    hoist: ['vue-router'],
+  },
+
+  hooks: {
+    'build:before': () => {
+      console.time('Nuxt Build Time')
+    },
+    'build:done': () => {
+      console.timeEnd('Nuxt Build Time')
+    },
+  },
 
   fonts: {
     families: [
-      { name: "Geist", provider: "google", weights: [100, 200, 300, 400, 500, 600, 700, 800, 900] },
+      {
+        name: 'Geist',
+        provider: 'google',
+        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      },
     ],
   },
 
   image: {},
-
-  hooks: {
-    "build:before": () => {
-      console.time("Nuxt Build Time");
-    },
-    "build:done": () => {
-      console.timeEnd("Nuxt Build Time");
-    },
-  },
-});
+})

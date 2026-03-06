@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  middleware: "protected",
-  layout: "creator",
-});
+  middleware: 'protected',
+  layout: 'creator',
+})
 </script>

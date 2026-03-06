@@ -58,5 +58,5 @@
 </template>
 
 <script lang="ts" setup>
-const toastStore = useToastStore();
+const toastStore = useToastStore()
 </script>
