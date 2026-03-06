@@ -72,6 +72,8 @@
             <component
               :is="getQuestionComponent(questions[index]!.type)"
               :id="`options-${question.id}`"
+              v-model="questions[index]"
+              :edit="true"
               :question="questions[index]"
             />
           </div>
