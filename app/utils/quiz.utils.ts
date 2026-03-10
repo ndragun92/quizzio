@@ -35,3 +35,5 @@ export const createRandomQuestionId = (): number => {
 
   return Number(`${timestamp}${random}`)
 }
+
+export const quizSeparator = '\x1F' // Unit Separator character, unlikely to appear in user input

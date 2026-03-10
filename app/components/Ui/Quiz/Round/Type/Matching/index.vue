@@ -1,5 +1,8 @@
 <template>
   <UiCard>
+    <pre>
+     Test {{ returnMergedSelectedOptionsValue }}
+    </pre>
     <div class="grid grid-cols-2 gap-2">
       <div class="space-y-2">
         <UiCard
@@ -175,7 +178,7 @@ const returnMergedSelectedOptions = computed(() => {
 })
 
 const returnMergedSelectedOptionsValue = computed(() => {
-  return returnMergedSelectedOptions.value.join(', ')
+  return returnMergedSelectedOptions.value.join(quizSeparator)
 })
 
 const isSelectionValid = computed(() => {
