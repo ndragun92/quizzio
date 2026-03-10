@@ -200,7 +200,7 @@ const validationSchema = toTypedSchema(
           leftOptions: z.array(z.string()).optional(),
           rightOptions: z.array(z.string()).optional(),
           src: z.string().optional(),
-          correctAnswer: z.union([z.string(), z.boolean()]).optional(),
+          correctAnswer: z.string(),
           points: z
             .number()
             .min(0, 'Points must be a positive number')

@@ -24,8 +24,8 @@ export type TQuestion = {
   leftOptions?: string[] // For matching questions, the options on the left side
   rightOptions?: string[] // For matching questions, the options on the right side
   src?: string // For image-based, audio-based, and video-based questions, the source URL of the media
-  correctAnswer: string | boolean // String for multiple-choice, short-answer, and fill-in-the-blank, boolean for true-false
-  providedAnswer: string | boolean // The answer provided by the player, used for immediate results
+  correctAnswer: string // String for multiple-choice, short-answer, and fill-in-the-blank, boolean for true-false
+  providedAnswer: string // The answer provided by the player, used for immediate results
   points: number
   doublePoints?: boolean // If true, points for this question are doubled if answered correctly and reduce by double if answered incorrectly
   answeredBy?: {

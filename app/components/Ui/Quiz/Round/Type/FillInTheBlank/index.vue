@@ -17,7 +17,7 @@
     >Correct answer</label>
     <input
       :id="`correctAnswer--${question!.id}`"
-      v-model="(question!.correctAnswer as string)"
+      v-model.trim="model!.correctAnswer"
       class="input--text"
       type="text"
       :required="true"
