@@ -20,12 +20,13 @@
             v-if="edit"
             v-model.trim="question!.leftOptions![index]"
             type="text"
-            class="input--text"
+            class="input--text flex-1"
           >
 
-          <template v-else>
-            {{ option }}
-          </template>
+          <span
+            v-else
+            class="flex-1"
+          >{{ option }}</span>
         </UiCard>
       </div>
       <div class="space-y-2">
@@ -48,12 +49,13 @@
             v-if="edit"
             v-model.trim="question!.rightOptions![index]"
             type="text"
-            class="input--text"
+            class="input--text flex-1"
           >
 
-          <template v-else>
-            {{ option }}
-          </template>
+          <span
+            v-else
+            class="flex-1"
+          >{{ option }}</span>
         </UiCard>
       </div>
     </div>
@@ -66,14 +68,29 @@
       :for="`correctAnswer--${question!.id}`"
       class="input--label"
     >Correct answer</label>
-    <textarea
-      :id="`correctAnswer--${question!.id}`"
-      v-model="model!.correctAnswer"
-      class="input--text pointer-events-none"
-      :required="true"
-      rows="2"
-      placeholder="Select options from both sides to form the correct answer"
-    />
+    <div class="relative">
+      <textarea
+        :id="`correctAnswer--${question!.id}`"
+        v-model="model!.correctAnswer"
+        class="input--text pointer-events-none text-transparent!"
+        :required="true"
+        rows="2"
+        placeholder="Select options from both sides to form the correct answer"
+      />
+      <ul
+        v-if="isSelectionValid"
+        class="flex items-center gap-2 flex-wrap absolute top-2 left-2"
+      >
+        <li
+          v-for="(option, index) in returnMergedSelectedOptions"
+          :key="index"
+          class="text-white py-1 px-4 rounded-full text-xs font-semibold"
+          :class="colors[index]"
+        >
+          {{ option }}
+        </li>
+      </ul>
+    </div>
   </UiCard>
 </template>
 
@@ -154,7 +171,11 @@ const returnMergedSelectedOptions = computed(() => {
   return returnLeftSelectedOptions.value.map((leftOption, index) => {
     const rightOption = returnRightSelectedOptions.value[index] || ''
     return `${leftOption} - ${rightOption}`
-  }).join(', ')
+  })
+})
+
+const returnMergedSelectedOptionsValue = computed(() => {
+  return returnMergedSelectedOptions.value.join(', ')
 })
 
 const isSelectionValid = computed(() => {
@@ -166,7 +187,7 @@ const isSelectionValid = computed(() => {
 watch(isSelectionValid, (newValue) => {
   if (!props.edit) { return }
   if (newValue) {
-    model.value!.correctAnswer = returnMergedSelectedOptions.value
+    model.value!.correctAnswer = returnMergedSelectedOptionsValue.value
   } else {
     model.value!.correctAnswer = ''
   }
