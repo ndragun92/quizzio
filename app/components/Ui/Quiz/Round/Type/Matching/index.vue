@@ -13,7 +13,16 @@
           >
             {{ onReturnLetterFromIndex(index) }}
           </div>
-          {{ option }}
+          <input
+            v-if="edit"
+            v-model.trim="question!.leftOptions![index]"
+            type="text"
+            class="input--text"
+          >
+
+          <template v-else>
+            {{ option }}
+          </template>
         </UiCard>
       </div>
       <div class="space-y-2">
@@ -29,7 +38,16 @@
             {{ index + 1 }}
           </div>
 
-          {{ option }}
+          <input
+            v-if="edit"
+            v-model.trim="question!.rightOptions![index]"
+            type="text"
+            class="input--text"
+          >
+
+          <template v-else>
+            {{ option }}
+          </template>
         </UiCard>
       </div>
     </div>
@@ -41,7 +59,21 @@ import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
   question: TQuestion | null
+  edit?: boolean
 }
 
-defineProps<Props>()
+const model = defineModel<TQuestion>({
+  required: false,
+})
+
+const props = defineProps<Props>()
+
+if (props.edit) {
+  if (model.value && model.value.leftOptions!.length !== 4) {
+    model.value.leftOptions = ['Option 1', 'Option 2', 'Option 3', 'Option 4']
+  }
+  if (model.value && model.value.rightOptions!.length !== 4) {
+    model.value.rightOptions = ['Option 1', 'Option 2', 'Option 3', 'Option 4']
+  }
+}
 </script>
