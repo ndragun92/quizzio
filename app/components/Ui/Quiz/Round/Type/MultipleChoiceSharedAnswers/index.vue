@@ -2,10 +2,10 @@
   <div class="grid grid-cols-2 gap-2">
     <UiCard
       v-for="(option, index) in question?.options"
-      :key="option"
+      :key="index"
       class="flex items-center gap-4"
-      :clickable="true"
-      :selected="index === 2"
+      :clickable="!edit"
+      :selected="edit ? question?.correctAnswer === option : false"
       tabindex="0"
     >
       <div
@@ -13,11 +13,38 @@
       >
         {{ onReturnLetterFromIndex(index) }}
       </div>
-      <h3 class="font-bold text-base">
+      <input
+        v-if="edit"
+        v-model.trim="question!.options![index]"
+        type="text"
+        class="input--text"
+      >
+      <h3
+        v-else
+        class="font-bold text-base"
+      >
         {{ option }}
       </h3>
     </UiCard>
   </div>
+  <UiCard
+    v-if="edit"
+    class="input--box"
+  >
+    <label
+      :for="`correctAnswer--${question!.id}`"
+      class="input--label"
+    >Correct answer</label>
+    <UiInputSelect
+      :id="`correctAnswer--${question!.id}`"
+      v-model="(model!.correctAnswer as string)"
+      :options="question!.options!.map((option) => ({
+        label: option,
+        value: option,
+      }))"
+      :required="true"
+    />
+  </UiCard>
 </template>
 
 <script setup lang="ts">
@@ -25,7 +52,18 @@ import type { TQuestion } from '~~/shared/utils/quiz.db'
 
 type Props = {
   question: TQuestion | null
+  edit?: boolean
 }
 
-defineProps<Props>()
+const model = defineModel<TQuestion>({
+  required: false,
+})
+
+const props = defineProps<Props>()
+
+if (props.edit) {
+  if (model.value && model.value.options!.length !== 4) {
+    model.value.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']
+  }
+}
 </script>
