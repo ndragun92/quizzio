@@ -14,11 +14,6 @@
         <p class="text--secondary">
           Create and manage quiz questions for your quiz.
         </p>
-        <div>
-          <pre
-            class="h-52 overflow-auto p-8 rounded bg-primary-900 border border-primary-800 text-sm"
-          >{{ questions }}</pre>
-        </div>
       </div>
       <div
         ref="el"
@@ -187,6 +182,12 @@ import { z } from 'zod'
 import { EQuestionType, type TQuestion } from '~~/shared/utils/quiz.db'
 import { useSortable } from '@vueuse/integrations/useSortable'
 
+type Props = {
+  form: TQuiz
+}
+
+const props = defineProps<Props>()
+
 const validationSchema = toTypedSchema(
   z.object({
     questions: z
@@ -229,16 +230,16 @@ watch(errors, (newErrors) => {
 })
 
 const { value: questions } = useField<TQuestion[]>('questions', undefined, {
-  initialValue: [],
+  initialValue: props.form.questions as TQuestion[] || [],
 })
 
 const el = useTemplateRef('el')
 useSortable(el, questions)
 
-const emit = defineEmits(['back', 'next'])
+const emit = defineEmits(['back', 'finish'])
 
 const onSubmit = handleSubmit((values) => {
-  console.debug('Form submitted with values:', values)
+  emit('finish', values)
 })
 
 const getQuestionComponent = (type: EQuestionType) => {

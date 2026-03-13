@@ -37,13 +37,9 @@
 
               <div>
                 <div class="flex items-center gap-2">
-                  <button
-                    v-if="step === 2"
-                    type="button"
-                    class="button--default button--compact whitespace-nowrap"
-                  >
-                    Create
-                  </button>
+                  <UiPill>
+                    Step {{ step }} of 3
+                  </UiPill>
                 </div>
               </div>
             </div>
@@ -55,7 +51,16 @@
             />
             <UiDashboardManageQuizModalStepTwo
               v-else-if="step === 2"
+              :form="form"
               @back="step = 1"
+              @finish="onFinish"
+            />
+            <UiDashboardManageQuizModalSummary
+              v-else
+              :form="form"
+              :is-submitting="isCreating"
+              @back="step = 2"
+              @create="onCreate"
             />
           </div>
         </UiCard>
@@ -66,6 +71,8 @@
 
 <script lang="ts" setup>
 const { userId } = useUser()
+const { $api } = useNuxtApp()
+const toast = useToastStore()
 
 const emit = defineEmits(['close'])
 
@@ -89,10 +96,49 @@ const form = ref<TForm>({
   questions: [],
 })
 
-const step = ref(2)
+const step = ref(1)
+const isCreating = ref(false)
 
 const onNext = (values: TForm) => {
   form.value = { ...toRaw(form.value), ...values }
   step.value = 2
+}
+
+const onFinish = (values: TForm) => {
+  form.value = { ...toRaw(form.value), ...values }
+  step.value = 3
+}
+
+const onCreate = async () => {
+  isCreating.value = true
+
+  try {
+    const quiz = await $api<TQuiz>('/api/protected/quizzes', {
+      method: 'POST',
+      body: {
+        title: form.value.title,
+        description: form.value.description,
+        status: form.value.status,
+        category: form.value.category,
+        difficulty: form.value.difficulty,
+        gameMode: form.value.gameMode,
+        settings: form.value.settings,
+        questions: form.value.questions,
+      },
+    })
+
+    toast.success({
+      text: `Quiz "${quiz.title}" created successfully.`,
+    })
+    emit('close')
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to create quiz.'
+
+    toast.error({
+      text: message,
+    })
+  } finally {
+    isCreating.value = false
+  }
 }
 </script>
