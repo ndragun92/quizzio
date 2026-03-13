@@ -66,6 +66,9 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    optimizeDeps: {
+      include: [],
+    },
     plugins: [
       // Cast as any until Tailwindcss is updated to use Vite 6
       tailwindcss() as any,
