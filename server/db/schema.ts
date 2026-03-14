@@ -1,5 +1,5 @@
+// server/database/schema.ts
 import { integer, jsonb, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
-import type { TQuestion, TQuiz } from '~~/shared/utils/quiz.db'
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -25,9 +25,3 @@ export const quizzes = pgTable('quizzes', {
   createdAt: timestamp('createdAt', { mode: 'string', withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updatedAt', { mode: 'string', withTimezone: true }).defaultNow().notNull(),
 })
-
-export type TDbUser = typeof users.$inferSelect
-export type TNewUser = typeof users.$inferInsert
-
-export type TDbQuiz = typeof quizzes.$inferSelect
-export type TNewQuiz = typeof quizzes.$inferInsert

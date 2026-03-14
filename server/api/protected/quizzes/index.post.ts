@@ -1,7 +1,5 @@
-import type { TCreateQuizRequest } from '~~/shared/types/api.type'
 import { EStatus } from '~~/shared/utils/quiz.db'
-import { getDatabase, schema } from '~~/server/utils/db/client'
-import { mapDbQuizToQuiz } from '~~/server/utils/db/seed'
+import { db, schema } from '@nuxthub/db'
 
 export default defineEventHandler(async (event) => {
   const user = event.context.user
@@ -13,7 +11,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const body = await readBody<TCreateQuizRequest>(event)
+  const body = await readBody(event)
 
   if (
     !body?.title ||
@@ -30,8 +28,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const db = await getDatabase()
-  const [quiz] = await db
+  return await db
     .insert(schema.quizzes)
     .values({
       title: body.title,
@@ -43,15 +40,7 @@ export default defineEventHandler(async (event) => {
       gameMode: body.gameMode,
       settings: body.settings,
       questions: body.questions,
+      // createdAt: new Date(),
     })
     .returning()
-
-  if (!quiz) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Failed to create quiz',
-    })
-  }
-
-  return mapDbQuizToQuiz(quiz)
 })

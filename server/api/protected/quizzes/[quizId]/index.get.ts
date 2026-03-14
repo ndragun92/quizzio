@@ -1,6 +1,5 @@
 import { and, eq } from 'drizzle-orm'
-import { getDatabase, schema } from '~~/server/utils/db/client'
-import { mapDbQuizToQuiz } from '~~/server/utils/db/seed'
+import { db, schema } from '@nuxthub/db'
 
 export default defineEventHandler(async (event) => {
   const user = event.context.user
@@ -21,19 +20,9 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const db = await getDatabase()
-  const [quiz] = await db
+  return await db
     .select()
     .from(schema.quizzes)
     .where(and(eq(schema.quizzes.id, quizId), eq(schema.quizzes.creatorId, user.id)))
     .limit(1)
-
-  if (!quiz) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Quiz not found',
-    })
-  }
-
-  return mapDbQuizToQuiz(quiz)
 })

@@ -1,7 +1,5 @@
 import { and, eq } from 'drizzle-orm'
-import type { TUpdateQuizRequest } from '~~/shared/types/api.type'
-import { getDatabase, schema } from '~~/server/utils/db/client'
-import { mapDbQuizToQuiz } from '~~/server/utils/db/seed'
+import { db, schema } from '@nuxthub/db'
 
 export default defineEventHandler(async (event) => {
   const user = event.context.user
@@ -22,7 +20,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const body = await readBody<TUpdateQuizRequest>(event)
+  const body = await readBody(event)
 
   if (!body || Object.keys(body).length === 0) {
     throw createError({
@@ -51,19 +49,9 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const db = await getDatabase()
-  const [quiz] = await db
+  return await db
     .update(schema.quizzes)
     .set(updates)
     .where(and(eq(schema.quizzes.id, quizId), eq(schema.quizzes.creatorId, user.id)))
     .returning()
-
-  if (!quiz) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Quiz not found',
-    })
-  }
-
-  return mapDbQuizToQuiz(quiz)
 })

@@ -4,12 +4,13 @@ import process from 'node:process'
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/fonts', // https://pinia.vuejs.org/ssr/nuxt.html
+    '@nuxt/fonts',
     '@pinia/nuxt',
-    '@nuxt/icon', // https://vueuse.org/guide/#nuxt
-    '@vueuse/nuxt', // https://image.nuxt.com
+    '@nuxt/icon',
+    '@vueuse/nuxt',
     '@nuxt/image',
     '@nuxt/a11y',
+    '@nuxthub/core',
   ],
 
   imports: {
@@ -56,6 +57,7 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       websocket: true,
+      tasks: true,
     },
     // compressPublicAssets: true,
     routeRules: {
@@ -63,6 +65,10 @@ export default defineNuxtConfig({
       '/quiz/*': { ssr: false },
       // "/_nuxt/**": { headers: { "cache-control": "max-age=31536000" } }, // Set generated files cache to 1 year
     },
+  },
+
+  hub: {
+    db: 'postgresql',
   },
 
   vite: {

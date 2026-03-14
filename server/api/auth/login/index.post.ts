@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { eq } from 'drizzle-orm'
 import type { TLoginRequest, TLoginResponse } from '#shared/types/api.type'
-import { getDatabase, schema } from '~~/server/utils/db/client'
+import { db, schema } from '@nuxthub/db'
 import { hashPassword, isPasswordHash, verifyPassword } from '~~/server/utils/auth/password'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'
@@ -13,8 +13,7 @@ export default defineEventHandler(async (event): Promise<TLoginResponse | Respon
     return new Response('Unauthorized', { status: 401 })
   }
 
-  const db = await getDatabase()
-  const [user] = (await (db as any)
+  const [user] = (await db
     .select()
     .from(schema.users)
     .where(eq(schema.users.username, body.username))

@@ -1,6 +1,6 @@
 import { and, eq } from 'drizzle-orm'
 import type { TDeleteQuizResponse } from '~~/shared/types/api.type'
-import { getDatabase, schema } from '~~/server/utils/db/client'
+import { db, schema } from '@nuxthub/db'
 
 export default defineEventHandler(async (event): Promise<TDeleteQuizResponse> => {
   const user = event.context.user
@@ -21,7 +21,6 @@ export default defineEventHandler(async (event): Promise<TDeleteQuizResponse> =>
     })
   }
 
-  const db = await getDatabase()
   const deleted = await db
     .delete(schema.quizzes)
     .where(and(eq(schema.quizzes.id, quizId), eq(schema.quizzes.creatorId, user.id)))

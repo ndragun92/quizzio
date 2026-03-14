@@ -153,8 +153,9 @@
 
 <script lang="ts" setup>
 import { ECategory } from '~~/shared/utils/quiz.db'
+import type { Quiz } from '~~/shared/types/db.type'
 
-const { data: quizzes, status } = useFetch('/api/quizzes')
+const { data: quizzes, status } = useFetch<Quiz[]>('/api/quizzes')
 
 const isLoading = computed(() => status.value === 'pending')
 
